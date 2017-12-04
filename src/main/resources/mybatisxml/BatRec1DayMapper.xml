@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ipace.chaoJie.A002Dao.BatRec1DayMapper" >
+  <resultMap id="BaseResultMap" type="com.ipace.chaoJie.A004Dto.BatRec1Day" >
+    <id column="BAT_NO" property="batNo" jdbcType="VARCHAR" />
+    <id column="WH" property="wh" jdbcType="VARCHAR" />
+    <id column="DEP" property="dep" jdbcType="VARCHAR" />
+    <id column="PRD_NO" property="prdNo" jdbcType="VARCHAR" />
+    <id column="PRD_MARK" property="prdMark" jdbcType="VARCHAR" />
+    <id column="RK_DD" property="rkDd" jdbcType="TIMESTAMP" />
+    <result column="QTY_IN" property="qtyIn" jdbcType="NUMERIC" />
+    <result column="QTY_IN_UNSH" property="qtyInUnsh" jdbcType="NUMERIC" />
+    <result column="QTY_OUT" property="qtyOut" jdbcType="NUMERIC" />
+    <result column="QTY_OUT_UNSH" property="qtyOutUnsh" jdbcType="NUMERIC" />
+    <result column="QTY1_IN" property="qty1In" jdbcType="NUMERIC" />
+    <result column="QTY1_IN_UNSH" property="qty1InUnsh" jdbcType="NUMERIC" />
+    <result column="QTY1_OUT" property="qty1Out" jdbcType="NUMERIC" />
+    <result column="QTY1_OUT_UNSH" property="qty1OutUnsh" jdbcType="NUMERIC" />
+    <result column="VALID_DD" property="validDd" jdbcType="TIMESTAMP" />
+    <result column="LST_OTD" property="lstOtd" jdbcType="TIMESTAMP" />
+    <result column="LOCK_ID" property="lockId" jdbcType="VARCHAR" />
+    <result column="PRODU_DD" property="produDd" jdbcType="TIMESTAMP" />
+    <result column="REM" property="rem" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    BAT_NO, WH, DEP, PRD_NO, PRD_MARK, RK_DD, QTY_IN, QTY_IN_UNSH, QTY_OUT, QTY_OUT_UNSH, 
+    QTY1_IN, QTY1_IN_UNSH, QTY1_OUT, QTY1_OUT_UNSH, VALID_DD, LST_OTD, LOCK_ID, PRODU_DD, 
+    REM
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ipace.chaoJie.A004Dto.BatRec1DayExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from BAT_REC1_DAY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.ipace.chaoJie.A004Dto.BatRec1DayKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from BAT_REC1_DAY
+    where BAT_NO = #{batNo,jdbcType=VARCHAR}
+      and WH = #{wh,jdbcType=VARCHAR}
+      and DEP = #{dep,jdbcType=VARCHAR}
+      and PRD_NO = #{prdNo,jdbcType=VARCHAR}
+      and PRD_MARK = #{prdMark,jdbcType=VARCHAR}
+      and RK_DD = #{rkDd,jdbcType=TIMESTAMP}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.ipace.chaoJie.A004Dto.BatRec1DayKey" >
+    delete from BAT_REC1_DAY
+    where BAT_NO = #{batNo,jdbcType=VARCHAR}
+      and WH = #{wh,jdbcType=VARCHAR}
+      and DEP = #{dep,jdbcType=VARCHAR}
+      and PRD_NO = #{prdNo,jdbcType=VARCHAR}
+      and PRD_MARK = #{prdMark,jdbcType=VARCHAR}
+      and RK_DD = #{rkDd,jdbcType=TIMESTAMP}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ipace.chaoJie.A004Dto.BatRec1DayExample" >
+    delete from BAT_REC1_DAY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ipace.chaoJie.A004Dto.BatRec1Day" >
+    insert into BAT_REC1_DAY (BAT_NO, WH, DEP, 
+      PRD_NO, PRD_MARK, RK_DD, 
+      QTY_IN, QTY_IN_UNSH, QTY_OUT, 
+      QTY_OUT_UNSH, QTY1_IN, QTY1_IN_UNSH, 
+      QTY1_OUT, QTY1_OUT_UNSH, VALID_DD, 
+      LST_OTD, LOCK_ID, PRODU_DD, 
+      REM)
+    values (#{batNo,jdbcType=VARCHAR}, #{wh,jdbcType=VARCHAR}, #{dep,jdbcType=VARCHAR}, 
+      #{prdNo,jdbcType=VARCHAR}, #{prdMark,jdbcType=VARCHAR}, #{rkDd,jdbcType=TIMESTAMP}, 
+      #{qtyIn,jdbcType=NUMERIC}, #{qtyInUnsh,jdbcType=NUMERIC}, #{qtyOut,jdbcType=NUMERIC}, 
+      #{qtyOutUnsh,jdbcType=NUMERIC}, #{qty1In,jdbcType=NUMERIC}, #{qty1InUnsh,jdbcType=NUMERIC}, 
+      #{qty1Out,jdbcType=NUMERIC}, #{qty1OutUnsh,jdbcType=NUMERIC}, #{validDd,jdbcType=TIMESTAMP}, 
+      #{lstOtd,jdbcType=TIMESTAMP}, #{lockId,jdbcType=VARCHAR}, #{produDd,jdbcType=TIMESTAMP}, 
+      #{rem,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ipace.chaoJie.A004Dto.BatRec1Day" >
+    insert into BAT_REC1_DAY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="batNo != null" >
+        BAT_NO,
+      </if>
+      <if test="wh != null" >
+        WH,
+      </if>
+      <if test="dep != null" >
+        DEP,
+      </if>
+      <if test="prdNo != null" >
+        PRD_NO,
+      </if>
+      <if test="prdMark != null" >
+        PRD_MARK,
+      </if>
+      <if test="rkDd != null" >
+        RK_DD,
+      </if>
+      <if test="qtyIn != null" >
+        QTY_IN,
+      </if>
+      <if test="qtyInUnsh != null" >
+        QTY_IN_UNSH,
+      </if>
+      <if test="qtyOut != null" >
+        QTY_OUT,
+      </if>
+      <if test="qtyOutUnsh != null" >
+        QTY_OUT_UNSH,
+      </if>
+      <if test="qty1In != null" >
+        QTY1_IN,
+      </if>
+      <if test="qty1InUnsh != null" >
+        QTY1_IN_UNSH,
+      </if>
+      <if test="qty1Out != null" >
+        QTY1_OUT,
+      </if>
+      <if test="qty1OutUnsh != null" >
+        QTY1_OUT_UNSH,
+      </if>
+      <if test="validDd != null" >
+        VALID_DD,
+      </if>
+      <if test="lstOtd != null" >
+        LST_OTD,
+      </if>
+      <if test="lockId != null" >
+        LOCK_ID,
+      </if>
+      <if test="produDd != null" >
+        PRODU_DD,
+      </if>
+      <if test="rem != null" >
+        REM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="batNo != null" >
+        #{batNo,jdbcType=VARCHAR},
+      </if>
+      <if test="wh != null" >
+        #{wh,jdbcType=VARCHAR},
+      </if>
+      <if test="dep != null" >
+        #{dep,jdbcType=VARCHAR},
+      </if>
+      <if test="prdNo != null" >
+        #{prdNo,jdbcType=VARCHAR},
+      </if>
+      <if test="prdMark != null" >
+        #{prdMark,jdbcType=VARCHAR},
+      </if>
+      <if test="rkDd != null" >
+        #{rkDd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="qtyIn != null" >
+        #{qtyIn,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyInUnsh != null" >
+        #{qtyInUnsh,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyOut != null" >
+        #{qtyOut,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyOutUnsh != null" >
+        #{qtyOutUnsh,jdbcType=NUMERIC},
+      </if>
+      <if test="qty1In != null" >
+        #{qty1In,jdbcType=NUMERIC},
+      </if>
+      <if test="qty1InUnsh != null" >
+        #{qty1InUnsh,jdbcType=NUMERIC},
+      </if>
+      <if test="qty1Out != null" >
+        #{qty1Out,jdbcType=NUMERIC},
+      </if>
+      <if test="qty1OutUnsh != null" >
+        #{qty1OutUnsh,jdbcType=NUMERIC},
+      </if>
+      <if test="validDd != null" >
+        #{validDd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lstOtd != null" >
+        #{lstOtd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lockId != null" >
+        #{lockId,jdbcType=VARCHAR},
+      </if>
+      <if test="produDd != null" >
+        #{produDd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rem != null" >
+        #{rem,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ipace.chaoJie.A004Dto.BatRec1DayExample" resultType="java.lang.Integer" >
+    select count(*) from BAT_REC1_DAY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update BAT_REC1_DAY
+    <set >
+      <if test="record.batNo != null" >
+        BAT_NO = #{record.batNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wh != null" >
+        WH = #{record.wh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dep != null" >
+        DEP = #{record.dep,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prdNo != null" >
+        PRD_NO = #{record.prdNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prdMark != null" >
+        PRD_MARK = #{record.prdMark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rkDd != null" >
+        RK_DD = #{record.rkDd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.qtyIn != null" >
+        QTY_IN = #{record.qtyIn,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qtyInUnsh != null" >
+        QTY_IN_UNSH = #{record.qtyInUnsh,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qtyOut != null" >
+        QTY_OUT = #{record.qtyOut,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qtyOutUnsh != null" >
+        QTY_OUT_UNSH = #{record.qtyOutUnsh,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qty1In != null" >
+        QTY1_IN = #{record.qty1In,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qty1InUnsh != null" >
+        QTY1_IN_UNSH = #{record.qty1InUnsh,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qty1Out != null" >
+        QTY1_OUT = #{record.qty1Out,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qty1OutUnsh != null" >
+        QTY1_OUT_UNSH = #{record.qty1OutUnsh,jdbcType=NUMERIC},
+      </if>
+      <if test="record.validDd != null" >
+        VALID_DD = #{record.validDd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lstOtd != null" >
+        LST_OTD = #{record.lstOtd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lockId != null" >
+        LOCK_ID = #{record.lockId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.produDd != null" >
+        PRODU_DD = #{record.produDd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.rem != null" >
+        REM = #{record.rem,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update BAT_REC1_DAY
+    set BAT_NO = #{record.batNo,jdbcType=VARCHAR},
+      WH = #{record.wh,jdbcType=VARCHAR},
+      DEP = #{record.dep,jdbcType=VARCHAR},
+      PRD_NO = #{record.prdNo,jdbcType=VARCHAR},
+      PRD_MARK = #{record.prdMark,jdbcType=VARCHAR},
+      RK_DD = #{record.rkDd,jdbcType=TIMESTAMP},
+      QTY_IN = #{record.qtyIn,jdbcType=NUMERIC},
+      QTY_IN_UNSH = #{record.qtyInUnsh,jdbcType=NUMERIC},
+      QTY_OUT = #{record.qtyOut,jdbcType=NUMERIC},
+      QTY_OUT_UNSH = #{record.qtyOutUnsh,jdbcType=NUMERIC},
+      QTY1_IN = #{record.qty1In,jdbcType=NUMERIC},
+      QTY1_IN_UNSH = #{record.qty1InUnsh,jdbcType=NUMERIC},
+      QTY1_OUT = #{record.qty1Out,jdbcType=NUMERIC},
+      QTY1_OUT_UNSH = #{record.qty1OutUnsh,jdbcType=NUMERIC},
+      VALID_DD = #{record.validDd,jdbcType=TIMESTAMP},
+      LST_OTD = #{record.lstOtd,jdbcType=TIMESTAMP},
+      LOCK_ID = #{record.lockId,jdbcType=VARCHAR},
+      PRODU_DD = #{record.produDd,jdbcType=TIMESTAMP},
+      REM = #{record.rem,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ipace.chaoJie.A004Dto.BatRec1Day" >
+    update BAT_REC1_DAY
+    <set >
+      <if test="qtyIn != null" >
+        QTY_IN = #{qtyIn,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyInUnsh != null" >
+        QTY_IN_UNSH = #{qtyInUnsh,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyOut != null" >
+        QTY_OUT = #{qtyOut,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyOutUnsh != null" >
+        QTY_OUT_UNSH = #{qtyOutUnsh,jdbcType=NUMERIC},
+      </if>
+      <if test="qty1In != null" >
+        QTY1_IN = #{qty1In,jdbcType=NUMERIC},
+      </if>
+      <if test="qty1InUnsh != null" >
+        QTY1_IN_UNSH = #{qty1InUnsh,jdbcType=NUMERIC},
+      </if>
+      <if test="qty1Out != null" >
+        QTY1_OUT = #{qty1Out,jdbcType=NUMERIC},
+      </if>
+      <if test="qty1OutUnsh != null" >
+        QTY1_OUT_UNSH = #{qty1OutUnsh,jdbcType=NUMERIC},
+      </if>
+      <if test="validDd != null" >
+        VALID_DD = #{validDd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lstOtd != null" >
+        LST_OTD = #{lstOtd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lockId != null" >
+        LOCK_ID = #{lockId,jdbcType=VARCHAR},
+      </if>
+      <if test="produDd != null" >
+        PRODU_DD = #{produDd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rem != null" >
+        REM = #{rem,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where BAT_NO = #{batNo,jdbcType=VARCHAR}
+      and WH = #{wh,jdbcType=VARCHAR}
+      and DEP = #{dep,jdbcType=VARCHAR}
+      and PRD_NO = #{prdNo,jdbcType=VARCHAR}
+      and PRD_MARK = #{prdMark,jdbcType=VARCHAR}
+      and RK_DD = #{rkDd,jdbcType=TIMESTAMP}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ipace.chaoJie.A004Dto.BatRec1Day" >
+    update BAT_REC1_DAY
+    set QTY_IN = #{qtyIn,jdbcType=NUMERIC},
+      QTY_IN_UNSH = #{qtyInUnsh,jdbcType=NUMERIC},
+      QTY_OUT = #{qtyOut,jdbcType=NUMERIC},
+      QTY_OUT_UNSH = #{qtyOutUnsh,jdbcType=NUMERIC},
+      QTY1_IN = #{qty1In,jdbcType=NUMERIC},
+      QTY1_IN_UNSH = #{qty1InUnsh,jdbcType=NUMERIC},
+      QTY1_OUT = #{qty1Out,jdbcType=NUMERIC},
+      QTY1_OUT_UNSH = #{qty1OutUnsh,jdbcType=NUMERIC},
+      VALID_DD = #{validDd,jdbcType=TIMESTAMP},
+      LST_OTD = #{lstOtd,jdbcType=TIMESTAMP},
+      LOCK_ID = #{lockId,jdbcType=VARCHAR},
+      PRODU_DD = #{produDd,jdbcType=TIMESTAMP},
+      REM = #{rem,jdbcType=VARCHAR}
+    where BAT_NO = #{batNo,jdbcType=VARCHAR}
+      and WH = #{wh,jdbcType=VARCHAR}
+      and DEP = #{dep,jdbcType=VARCHAR}
+      and PRD_NO = #{prdNo,jdbcType=VARCHAR}
+      and PRD_MARK = #{prdMark,jdbcType=VARCHAR}
+      and RK_DD = #{rkDd,jdbcType=TIMESTAMP}
+  </update>
+</mapper>

@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ipace.chaoJie.A002Dao.A002ChaoJieBug002Mapper">
+    <!--<resultMap id="BaseResultMap" type=""></resultMap>-->
+    <resultMap id="BaseResultMap001" type="com.ipace.chaoJie.A004Dto.BatRec1Day" >
+        <id column="BAT_NO" property="batNo" jdbcType="VARCHAR" />
+        <id column="WH" property="wh" jdbcType="VARCHAR" />
+        <id column="DEP" property="dep" jdbcType="VARCHAR" />
+        <id column="PRD_NO" property="prdNo" jdbcType="VARCHAR" />
+        <id column="PRD_MARK" property="prdMark" jdbcType="VARCHAR" />
+        <id column="RK_DD" property="rkDd" jdbcType="TIMESTAMP" />
+        <result column="QTY_IN" property="qtyIn" jdbcType="NUMERIC" />
+        <result column="QTY_IN_UNSH" property="qtyInUnsh" jdbcType="NUMERIC" />
+        <result column="QTY_OUT" property="qtyOut" jdbcType="NUMERIC" />
+        <result column="QTY_OUT_UNSH" property="qtyOutUnsh" jdbcType="NUMERIC" />
+        <result column="QTY1_IN" property="qty1In" jdbcType="NUMERIC" />
+        <result column="QTY1_IN_UNSH" property="qty1InUnsh" jdbcType="NUMERIC" />
+        <result column="QTY1_OUT" property="qty1Out" jdbcType="NUMERIC" />
+        <result column="QTY1_OUT_UNSH" property="qty1OutUnsh" jdbcType="NUMERIC" />
+        <result column="VALID_DD" property="validDd" jdbcType="TIMESTAMP" />
+        <result column="LST_OTD" property="lstOtd" jdbcType="TIMESTAMP" />
+        <result column="LOCK_ID" property="lockId" jdbcType="VARCHAR" />
+        <result column="PRODU_DD" property="produDd" jdbcType="TIMESTAMP" />
+        <result column="REM" property="rem" jdbcType="VARCHAR" />
+    </resultMap>
+    <resultMap id="BaseResultMap002" type="com.ipace.chaoJie.A004Dto.MfBln" >
+        <id column="BL_ID" property="blId" jdbcType="VARCHAR" />
+        <id column="BL_NO" property="blNo" jdbcType="VARCHAR" />
+        <result column="BAT_NO" property="batNo" jdbcType="VARCHAR" />
+        <result column="BL_MOD" property="blMod" jdbcType="VARCHAR" />
+        <result column="BL_UP" property="blUp" jdbcType="NUMERIC" />
+        <result column="AMT_PLED" property="amtPled" jdbcType="NUMERIC" />
+        <result column="AMT_FINE" property="amtFine" jdbcType="NUMERIC" />
+        <result column="AMT_CPEN" property="amtCpen" jdbcType="NUMERIC" />
+        <result column="ACC_POINT" property="accPoint" jdbcType="SMALLINT" />
+        <result column="CUS_NO" property="cusNo" jdbcType="VARCHAR" />
+        <result column="BL_DD" property="blDd" jdbcType="TIMESTAMP" />
+        <result column="PAY_DD" property="payDd" jdbcType="TIMESTAMP" />
+        <result column="REP_BL_NO" property="repBlNo" jdbcType="VARCHAR" />
+        <result column="ARP_NO" property="arpNo" jdbcType="VARCHAR" />
+        <result column="VOH_ID" property="vohId" jdbcType="VARCHAR" />
+        <result column="VOH_NO" property="vohNo" jdbcType="VARCHAR" />
+        <result column="DEP" property="dep" jdbcType="VARCHAR" />
+        <result column="INV_NO" property="invNo" jdbcType="VARCHAR" />
+        <result column="TRAD_MTH" property="tradMth" jdbcType="VARCHAR" />
+        <result column="BUY_MTH" property="buyMth" jdbcType="VARCHAR" />
+        <result column="SEND_MTH" property="sendMth" jdbcType="VARCHAR" />
+        <result column="RP_NO" property="rpNo" jdbcType="VARCHAR" />
+        <result column="ZHANG_ID" property="zhangId" jdbcType="VARCHAR" />
+        <result column="CUR_ID" property="curId" jdbcType="VARCHAR" />
+        <result column="EXC_RTO" property="excRto" jdbcType="NUMERIC" />
+        <result column="SAL_NO" property="salNo" jdbcType="VARCHAR" />
+        <result column="BL_DAYS" property="blDays" jdbcType="SMALLINT" />
+        <result column="RTN_DD" property="rtnDd" jdbcType="TIMESTAMP" />
+        <result column="CLS_ID" property="clsId" jdbcType="VARCHAR" />
+        <result column="TAX" property="tax" jdbcType="NUMERIC" />
+        <result column="AMTN_NET" property="amtnNet" jdbcType="NUMERIC" />
+        <result column="AMT_NET" property="amtNet" jdbcType="NUMERIC" />
+        <result column="TAX_ID" property="taxId" jdbcType="VARCHAR" />
+        <result column="PAY_MTH" property="payMth" jdbcType="VARCHAR" />
+        <result column="PAY_DAYS" property="payDays" jdbcType="SMALLINT" />
+        <result column="CHK_DAYS" property="chkDays" jdbcType="SMALLINT" />
+        <result column="PAY_REM" property="payRem" jdbcType="VARCHAR" />
+        <result column="SEND_WH" property="sendWh" jdbcType="VARCHAR" />
+        <result column="END_DAYS" property="endDays" jdbcType="SMALLINT" />
+        <result column="CHK_DD" property="chkDd" jdbcType="TIMESTAMP" />
+        <result column="INT_DAYS" property="intDays" jdbcType="SMALLINT" />
+        <result column="EST_DD" property="estDd" jdbcType="TIMESTAMP" />
+        <result column="USR" property="usr" jdbcType="VARCHAR" />
+        <result column="CHK_MAN" property="chkMan" jdbcType="VARCHAR" />
+        <result column="PRT_SW" property="prtSw" jdbcType="VARCHAR" />
+        <result column="CPY_SW" property="cpySw" jdbcType="VARCHAR" />
+        <result column="BIL_NO" property="bilNo" jdbcType="VARCHAR" />
+        <result column="CLS_REM" property="clsRem" jdbcType="VARCHAR" />
+        <result column="BIL_ID" property="bilId" jdbcType="VARCHAR" />
+        <result column="CLS_DATE" property="clsDate" jdbcType="TIMESTAMP" />
+        <result column="CK_CLS_ID" property="ckClsId" jdbcType="VARCHAR" />
+        <result column="CB_ID" property="cbId" jdbcType="VARCHAR" />
+        <result column="BIL_TYPE" property="bilType" jdbcType="VARCHAR" />
+        <result column="CAS_NO" property="casNo" jdbcType="VARCHAR" />
+        <result column="CNTT_NO" property="cnttNo" jdbcType="VARCHAR" />
+        <result column="KP_ID" property="kpId" jdbcType="VARCHAR" />
+        <result column="LZ_CLS_ID" property="lzClsId" jdbcType="VARCHAR" />
+        <result column="MOB_ID" property="mobId" jdbcType="VARCHAR" />
+        <result column="LOCK_MAN" property="lockMan" jdbcType="VARCHAR" />
+        <result column="LOCK_DATE" property="lockDate" jdbcType="TIMESTAMP" />
+        <result column="FJ_NUM" property="fjNum" jdbcType="SMALLINT" />
+        <result column="SYS_DATE" property="sysDate" jdbcType="TIMESTAMP" />
+        <result column="INV_DD" property="invDd" jdbcType="TIMESTAMP" />
+        <result column="INV_YM" property="invYm" jdbcType="INTEGER" />
+        <result column="TITLE_BUY" property="titleBuy" jdbcType="VARCHAR" />
+        <result column="METH_ID" property="methId" jdbcType="VARCHAR" />
+        <result column="AMT_INV" property="amtInv" jdbcType="NUMERIC" />
+        <result column="TAX_INV" property="taxInv" jdbcType="NUMERIC" />
+        <result column="AMT_CLS" property="amtCls" jdbcType="NUMERIC" />
+        <result column="AMTN_NET_CLS" property="amtnNetCls" jdbcType="NUMERIC" />
+        <result column="TAX_CLS" property="taxCls" jdbcType="NUMERIC" />
+        <result column="TASK_ID" property="taskId" jdbcType="INTEGER" />
+        <result column="PRT_USR" property="prtUsr" jdbcType="VARCHAR" />
+        <result column="TURN_ID" property="turnId" jdbcType="VARCHAR" />
+        <result column="OS_ID" property="osId" jdbcType="VARCHAR" />
+        <result column="OS_NO" property="osNo" jdbcType="VARCHAR" />
+        <result column="PO_ID" property="poId" jdbcType="VARCHAR" />
+        <result column="SG_ID" property="sgId" jdbcType="VARCHAR" />
+        <result column="QTY_CLS" property="qtyCls" jdbcType="NUMERIC" />
+        <result column="CONTRACT" property="contract" jdbcType="VARCHAR" />
+        <result column="CANCEL_ID" property="cancelId" jdbcType="VARCHAR" />
+        <result column="TO_MJ" property="toMj" jdbcType="VARCHAR" />
+        <result column="TO_SB" property="toSb" jdbcType="VARCHAR" />
+        <result column="DIS_CNT" property="disCnt" jdbcType="NUMERIC" />
+        <result column="RTO_FQSK" property="rtoFqsk" jdbcType="NUMERIC" />
+        <result column="DATEFLAG_FQSK" property="dateflagFqsk" jdbcType="VARCHAR" />
+        <result column="DATE_FQSK" property="dateFqsk" jdbcType="TIMESTAMP" />
+        <result column="QS_FQSK" property="qsFqsk" jdbcType="INTEGER" />
+        <result column="CUS_OS_NO" property="cusOsNo" jdbcType="VARCHAR" />
+        <result column="CUR_ID_IFRS" property="curIdIfrs" jdbcType="VARCHAR" />
+        <result column="EXC_RTO_IFRS" property="excRtoIfrs" jdbcType="NUMERIC" />
+        <result column="PRT_DATE" property="prtDate" jdbcType="TIMESTAMP" />
+        <result column="QTY1_CLS" property="qty1Cls" jdbcType="NUMERIC" />
+        <result column="INV_BIL_ID" property="invBilId" jdbcType="VARCHAR" />
+        <result column="INV_BIL_NO" property="invBilNo" jdbcType="VARCHAR" />
+        <result column="CB_ID_IFRS" property="cbIdIfrs" jdbcType="VARCHAR" />
+        <result column="LZ_CLS_DD" property="lzClsDd" jdbcType="TIMESTAMP" />
+        <result column="MODIFY_DD" property="modifyDd" jdbcType="TIMESTAMP" />
+        <result column="MODIFY_MAN" property="modifyMan" jdbcType="VARCHAR" />
+        <result column="CLSID" property="clsid" jdbcType="VARCHAR" />
+        <result column="SCAN_ID" property="scanId" jdbcType="VARCHAR" />
+        <result column="SCAN_USR" property="scanUsr" jdbcType="VARCHAR" />
+        <result column="SCAN_DATE" property="scanDate" jdbcType="TIMESTAMP" />
+        <result column="DZ_USR" property="dzUsr" jdbcType="VARCHAR" />
+        <result column="DZ_DATE" property="dzDate" jdbcType="TIMESTAMP" />
+        <result column="GROUP_KEY" property="groupKey" jdbcType="VARCHAR" />
+    </resultMap>
+    <resultMap id="BaseResultMap003" type="com.ipace.chaoJie.A004Dto.TfIc">
+        <id column="IC_ID" jdbcType="VARCHAR" property="icId" />
+        <id column="IC_NO" jdbcType="VARCHAR" property="icNo" />
+        <id column="ITM" jdbcType="INTEGER" property="itm" />
+        <result column="IC_DD" jdbcType="TIMESTAMP" property="icDd" />
+        <result column="PRD_NO" jdbcType="VARCHAR" property="prdNo" />
+        <result column="PRD_NAME" jdbcType="VARCHAR" property="prdName" />
+        <result column="PRD_MARK" jdbcType="VARCHAR" property="prdMark" />
+        <result column="UNIT" jdbcType="VARCHAR" property="unit" />
+        <result column="QTY" jdbcType="NUMERIC" property="qty" />
+        <result column="QTY1" jdbcType="NUMERIC" property="qty1" />
+        <result column="WH1" jdbcType="VARCHAR" property="wh1" />
+        <result column="WH2" jdbcType="VARCHAR" property="wh2" />
+        <result column="CST" jdbcType="NUMERIC" property="cst" />
+        <result column="FIX_CST" jdbcType="VARCHAR" property="fixCst" />
+        <result column="BAT_NO" jdbcType="VARCHAR" property="batNo" />
+        <result column="REM" jdbcType="VARCHAR" property="rem" />
+        <result column="CST_STD" jdbcType="NUMERIC" property="cstStd" />
+        <result column="BAT_NO2" jdbcType="VARCHAR" property="batNo2" />
+        <result column="NAME" jdbcType="VARCHAR" property="name" />
+        <result column="UTNAME" jdbcType="VARCHAR" property="utname" />
+        <result column="UPR" jdbcType="NUMERIC" property="upr" />
+        <result column="RL_RECEV" jdbcType="NUMERIC" property="rlRecev" />
+        <result column="COMPOSE_IDNO" jdbcType="VARCHAR" property="composeIdno" />
+        <result column="PRE_ITM" jdbcType="INTEGER" property="preItm" />
+        <result column="QTY_FA" jdbcType="NUMERIC" property="qtyFa" />
+        <result column="RTN_ID" jdbcType="VARCHAR" property="rtnId" />
+        <result column="KEY_ITM" jdbcType="INTEGER" property="keyItm" />
+        <result column="UP" jdbcType="NUMERIC" property="up" />
+        <result column="AMTN_NET" jdbcType="NUMERIC" property="amtnNet" />
+        <result column="BOX_ITM" jdbcType="INTEGER" property="boxItm" />
+        <result column="AMTN_NET_FP" jdbcType="NUMERIC" property="amtnNetFp" />
+        <result column="AMT_FP" jdbcType="NUMERIC" property="amtFp" />
+        <result column="TAX_FP" jdbcType="NUMERIC" property="taxFp" />
+        <result column="QTY_FP" jdbcType="NUMERIC" property="qtyFp" />
+        <result column="BIL_ID" jdbcType="VARCHAR" property="bilId" />
+        <result column="BIL_NO" jdbcType="VARCHAR" property="bilNo" />
+        <result column="BIL_ITM" jdbcType="INTEGER" property="bilItm" />
+        <result column="UP_CST" jdbcType="NUMERIC" property="upCst" />
+        <result column="DIS_CNT" jdbcType="NUMERIC" property="disCnt" />
+        <result column="OS_ID" jdbcType="VARCHAR" property="osId" />
+        <result column="ID_NO" jdbcType="VARCHAR" property="idNo" />
+        <result column="EST_ITM" jdbcType="SMALLINT" property="estItm" />
+        <result column="AMTN_NET_FP2" jdbcType="NUMERIC" property="amtnNetFp2" />
+        <result column="AMT_FP2" jdbcType="NUMERIC" property="amtFp2" />
+        <result column="TAX_FP2" jdbcType="NUMERIC" property="taxFp2" />
+        <result column="QTY_FP2" jdbcType="NUMERIC" property="qtyFp2" />
+        <result column="VALID_DD" jdbcType="TIMESTAMP" property="validDd" />
+        <result column="RK_DD" jdbcType="TIMESTAMP" property="rkDd" />
+        <result column="DEP_RK1" jdbcType="VARCHAR" property="depRk1" />
+        <result column="DEP_RK2" jdbcType="VARCHAR" property="depRk2" />
+        <result column="MO_NO" jdbcType="VARCHAR" property="moNo" />
+        <result column="EP_ID" jdbcType="VARCHAR" property="epId" />
+        <result column="UP_IC" jdbcType="NUMERIC" property="upIc" />
+        <result column="AMTN_IC" jdbcType="NUMERIC" property="amtnIc" />
+        <result column="PW_ITM" jdbcType="INTEGER" property="pwItm" />
+        <result column="AMTN_EP" jdbcType="NUMERIC" property="amtnEp" />
+        <result column="QTY_CFM" jdbcType="NUMERIC" property="qtyCfm" />
+        <result column="QTY_LOST" jdbcType="NUMERIC" property="qtyLost" />
+        <result column="EST_DD" jdbcType="TIMESTAMP" property="estDd" />
+        <result column="QTY1_CFM" jdbcType="NUMERIC" property="qty1Cfm" />
+        <result column="QTY1_LOST" jdbcType="NUMERIC" property="qty1Lost" />
+        <result column="SUP_PRD_NO" jdbcType="VARCHAR" property="supPrdNo" />
+        <result column="UP_MAIN_I" jdbcType="NUMERIC" property="upMainI" />
+        <result column="UP_MAIN_O" jdbcType="NUMERIC" property="upMainO" />
+        <result column="PRD_MARK2" jdbcType="VARCHAR" property="prdMark2" />
+        <result column="QC_FLAG" jdbcType="VARCHAR" property="qcFlag" />
+        <result column="PAK_UNIT" jdbcType="VARCHAR" property="pakUnit" />
+        <result column="PAK_EXC" jdbcType="NUMERIC" property="pakExc" />
+        <result column="PAK_NW_N" jdbcType="NUMERIC" property="pakNwN" />
+        <result column="PAK_NW" jdbcType="NUMERIC" property="pakNw" />
+        <result column="PAK_WEIGHT_UNIT" jdbcType="VARCHAR" property="pakWeightUnit" />
+        <result column="PAK_GW_N" jdbcType="NUMERIC" property="pakGwN" />
+        <result column="PAK_GW" jdbcType="NUMERIC" property="pakGw" />
+        <result column="PAK_MEAST" jdbcType="NUMERIC" property="pakMeast" />
+        <result column="PAK_MEAST_UNIT" jdbcType="VARCHAR" property="pakMeastUnit" />
+        <result column="UP_QTY1" jdbcType="NUMERIC" property="upQty1" />
+        <result column="UP_QTY1_CST" jdbcType="NUMERIC" property="upQty1Cst" />
+        <result column="UP_STD" jdbcType="NUMERIC" property="upStd" />
+        <result column="QTY_CFM_UNSH" jdbcType="NUMERIC" property="qtyCfmUnsh" />
+        <result column="QTY_LOST_UNSH" jdbcType="NUMERIC" property="qtyLostUnsh" />
+        <result column="CST_O_IFRS" jdbcType="NUMERIC" property="cstOIfrs" />
+        <result column="CST_I_IFRS" jdbcType="NUMERIC" property="cstIIfrs" />
+        <result column="CST_STD_IFRS" jdbcType="NUMERIC" property="cstStdIfrs" />
+        <result column="UP_MAIN_I_IFRS" jdbcType="NUMERIC" property="upMainIIfrs" />
+        <result column="UP_MAIN_O_IFRS" jdbcType="NUMERIC" property="upMainOIfrs" />
+        <result column="UP_STD_IFRS" jdbcType="NUMERIC" property="upStdIfrs" />
+        <result column="AMTN_NET_IFRS" jdbcType="NUMERIC" property="amtnNetIfrs" />
+        <result column="CST_IFRS" jdbcType="NUMERIC" property="cstIfrs" />
+        <result column="SUP_PRD_MARK" jdbcType="VARCHAR" property="supPrdMark" />
+        <result column="FREE_ID" jdbcType="VARCHAR" property="freeId" />
+        <result column="DEF_NO" jdbcType="VARCHAR" property="defNo" />
+        <result column="FIX_CST1" jdbcType="VARCHAR" property="fixCst1" />
+        <result column="UP_SO" jdbcType="NUMERIC" property="upSo" />
+        <result column="AMT_SO" jdbcType="NUMERIC" property="amtSo" />
+        <result column="QTY1_FP" jdbcType="NUMERIC" property="qty1Fp" />
+        <result column="QTY1_FP2" jdbcType="NUMERIC" property="qty1Fp2" />
+        <result column="BZ_KND" jdbcType="VARCHAR" property="bzKnd" />
+        <result column="UP_QTY1_SO" jdbcType="NUMERIC" property="upQty1So" />
+        <result column="UP_IN" jdbcType="NUMERIC" property="upIn" />
+        <result column="AMTN_NET_IN" jdbcType="NUMERIC" property="amtnNetIn" />
+        <result column="UP_CST_OUT" jdbcType="NUMERIC" property="upCstOut" />
+        <result column="CST_OUT" jdbcType="NUMERIC" property="cstOut" />
+        <result column="MATRIX_ITM" jdbcType="INTEGER" property="matrixItm" />
+        <result column="TASK_NO" jdbcType="VARCHAR" property="taskNo" />
+        <result column="PRM_NO" jdbcType="VARCHAR" property="prmNo" />
+        <result column="SC_DD" jdbcType="TIMESTAMP" property="scDd" />
+        <result column="CHK_XZL" jdbcType="VARCHAR" property="chkXzl" />
+        <result column="CK_BIL_ID" jdbcType="VARCHAR" property="ckBilId" />
+        <result column="CK_BIL_NO" jdbcType="VARCHAR" property="ckBilNo" />
+        <result column="CK_EST_ITM" jdbcType="INTEGER" property="ckEstItm" />
+        <result column="NB_BOX_NO" jdbcType="VARCHAR" property="nbBoxNo" />
+        <result column="LST_IND2" jdbcType="TIMESTAMP" property="lstInd2" />
+    </resultMap>
+    <select id="getMfBln001" resultMap="BaseResultMap002">
+        Select
+            BL_ID, --AS 'blId',
+            CLS_DATE,-- AS 'clsDate',
+            SYS_DATE, ---AS 'sysDate',
+            BAT_NO, --AS 'batNo',
+            USR, --AS 'usr',
+            CHK_MAN,-- AS 'chkMan',
+            PRT_SW, --AS 'prtSw',
+            SAL_NO, --AS 'salNo',
+            DEP, ---AS 'dep',
+            BIL_TYPE, ---AS 'bilType',
+            CAS_NO, ---AS 'casNo',
+            SEND_MTH, ---AS 'sendMth',
+            CLS_ID, --AS 'clsId',
+            BL_NO --AS 'blNo'
+        from mf_bln where bl_no in
+            (
+                SELECT bl_no FROM MF_BLN_Z where CSDB='T' AND BL_NO NOT IN
+                (
+                  SELECT GL_NO FROM MF_IC WHERE GL_NO IS NOT NULL
+                )
+            )
+    </select>
+
+
+
+
+    <select id="getSamePrdNoBatNoWh_bat_rec1_day" resultMap="BaseResultMap001">
+        SELECT  TOP 1
+                DEP
+                ,
+                PRD_MARK--
+                ,
+                BAT_NO --AS 'batNo'--
+                ,
+                PRD_NO --AS 'prdNo'--
+                ,
+                RK_DD -- AS 'rkDd'
+                ,
+                QTY_IN --AS 'qtyIn'
+                ,
+                QTY_OUT --AS 'qtyOut'
+                ,
+                WH      --AS 'wh'---
+            FROM
+                BAT_REC1_DAY
+            WHERE
+                 ISNULL(QTY_IN,0)>0
+                AND ISNULL(QTY_IN,0)>ISNULL(QTY_OUT,0)
+               AND BAT_NO=#{batNo} AND PRD_NO=#{prdNo} AND WH=#{wh1}
+            ORDER BY RK_DD ASC
+    </select>
+
+
+    <select id="getSamePrdNoBatNoWh_bat_rec1_dayCount" resultType="java.lang.Integer">
+        SELECT COUNT(PRD_NO) FROM
+             BAT_REC1_DAY
+        WHERE
+            ISNULL(QTY_IN,0)>0
+            AND ISNULL(QTY_IN,0)-ISNULL(QTY_OUT,0)>0
+            AND BAT_NO=#{batNo} AND PRD_NO=#{prdNo} AND WH=#{wh1}
+        ---ORDER BY RK_DD ASC
+    </select>
+<select id="getItmOfLastOfTfIcOfICLN" resultMap="BaseResultMap003">
+	Select	 TOP 1
+				  IC_ID,
+				  IC_NO,
+				  ITM
+			from TF_IC		where IC_ID='IC'  and IC_NO=#{icNo}	 ORDER by itm desc
+
+
+</select>
+
+
+</mapper>

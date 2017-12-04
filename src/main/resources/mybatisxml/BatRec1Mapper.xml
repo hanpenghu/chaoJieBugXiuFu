@@ -1,0 +1,1070 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ipace.chaoJie.A002Dao.BatRec1Mapper" >
+  <resultMap id="BaseResultMap" type="com.ipace.chaoJie.A004Dto.BatRec1" >
+    <id column="BAT_NO" property="batNo" jdbcType="VARCHAR" />
+    <id column="PRD_NO" property="prdNo" jdbcType="VARCHAR" />
+    <id column="WH" property="wh" jdbcType="VARCHAR" />
+    <id column="PRD_MARK" property="prdMark" jdbcType="VARCHAR" />
+    <result column="QTY_IN" property="qtyIn" jdbcType="NUMERIC" />
+    <result column="QTY_OUT" property="qtyOut" jdbcType="NUMERIC" />
+    <result column="CST" property="cst" jdbcType="NUMERIC" />
+    <result column="QTY_LRN" property="qtyLrn" jdbcType="NUMERIC" />
+    <result column="QTY_BRW" property="qtyBrw" jdbcType="NUMERIC" />
+    <result column="QTY_ON_WAY" property="qtyOnWay" jdbcType="NUMERIC" />
+    <result column="QTY_ON_PRC" property="qtyOnPrc" jdbcType="NUMERIC" />
+    <result column="QTY_ON_RSV" property="qtyOnRsv" jdbcType="NUMERIC" />
+    <result column="QTY_ON_ODR" property="qtyOnOdr" jdbcType="NUMERIC" />
+    <result column="CLS_ID" property="clsId" jdbcType="VARCHAR" />
+    <result column="QTY1_IN" property="qty1In" jdbcType="NUMERIC" />
+    <result column="QTY1_OUT" property="qty1Out" jdbcType="NUMERIC" />
+    <result column="QTY1_LRN" property="qty1Lrn" jdbcType="NUMERIC" />
+    <result column="QTY1_BRW" property="qty1Brw" jdbcType="NUMERIC" />
+    <result column="PASS" property="pass" jdbcType="VARCHAR" />
+    <result column="USR" property="usr" jdbcType="VARCHAR" />
+    <result column="VALID_DD" property="validDd" jdbcType="TIMESTAMP" />
+    <result column="QTY_MAX" property="qtyMax" jdbcType="NUMERIC" />
+    <result column="QTY_MIN" property="qtyMin" jdbcType="NUMERIC" />
+    <result column="LST_OTD" property="lstOtd" jdbcType="TIMESTAMP" />
+    <result column="LST_IND" property="lstInd" jdbcType="TIMESTAMP" />
+    <result column="QTY_SA" property="qtySa" jdbcType="NUMERIC" />
+    <result column="QTY_RK" property="qtyRk" jdbcType="NUMERIC" />
+    <result column="QTY_ZG" property="qtyZg" jdbcType="NUMERIC" />
+    <result column="QTY_CK" property="qtyCk" jdbcType="NUMERIC" />
+    <result column="QTY_SQ" property="qtySq" jdbcType="NUMERIC" />
+    <result column="REM" property="rem" jdbcType="VARCHAR" />
+    <result column="CHQC_DD" property="chqcDd" jdbcType="TIMESTAMP" />
+    <result column="QTY_SW" property="qtySw" jdbcType="NUMERIC" />
+    <result column="QTY_WX" property="qtyWx" jdbcType="NUMERIC" />
+    <result column="QTY_WS" property="qtyWs" jdbcType="NUMERIC" />
+    <result column="QTY_WS_KC" property="qtyWsKc" jdbcType="NUMERIC" />
+    <result column="QTY_QL" property="qtyQl" jdbcType="NUMERIC" />
+    <result column="QTY_Q2" property="qtyQ2" jdbcType="NUMERIC" />
+    <result column="QTY_Q2_YL" property="qtyQ2Yl" jdbcType="NUMERIC" />
+    <result column="QTY_Q3" property="qtyQ3" jdbcType="NUMERIC" />
+    <result column="CST_BX" property="cstBx" jdbcType="NUMERIC" />
+    <result column="QTY_SQR" property="qtySqr" jdbcType="NUMERIC" />
+    <result column="QTY_SQC" property="qtySqc" jdbcType="NUMERIC" />
+    <result column="QTY_LOCK" property="qtyLock" jdbcType="NUMERIC" />
+    <result column="SC_DD" property="scDd" jdbcType="TIMESTAMP" />
+    <result column="QTY_JH" property="qtyJh" jdbcType="NUMERIC" />
+    <result column="LST_OTD_QC" property="lstOtdQc" jdbcType="TIMESTAMP" />
+    <result column="LST_IND_QC" property="lstIndQc" jdbcType="TIMESTAMP" />
+    <result column="QTY1_LOCK" property="qty1Lock" jdbcType="NUMERIC" />
+    <result column="QTY_T3" property="qtyT3" jdbcType="NUMERIC" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.ipace.chaoJie.A004Dto.BatRec1" extends="BaseResultMap" >
+    <result column="UP_DD" property="upDd" jdbcType="BINARY" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    BAT_NO, PRD_NO, WH, PRD_MARK, QTY_IN, QTY_OUT, CST, QTY_LRN, QTY_BRW, QTY_ON_WAY, 
+    QTY_ON_PRC, QTY_ON_RSV, QTY_ON_ODR, CLS_ID, QTY1_IN, QTY1_OUT, QTY1_LRN, QTY1_BRW, 
+    PASS, USR, VALID_DD, QTY_MAX, QTY_MIN, LST_OTD, LST_IND, QTY_SA, QTY_RK, QTY_ZG, 
+    QTY_CK, QTY_SQ, REM, CHQC_DD, QTY_SW, QTY_WX, QTY_WS, QTY_WS_KC, QTY_QL, QTY_Q2, 
+    QTY_Q2_YL, QTY_Q3, CST_BX, QTY_SQR, QTY_SQC, QTY_LOCK, SC_DD, QTY_JH, LST_OTD_QC, 
+    LST_IND_QC, QTY1_LOCK, QTY_T3
+  </sql>
+  <sql id="Blob_Column_List" >
+    UP_DD
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.ipace.chaoJie.A004Dto.BatRec1Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from BAT_REC1
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ipace.chaoJie.A004Dto.BatRec1Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from BAT_REC1
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="com.ipace.chaoJie.A004Dto.BatRec1Key" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from BAT_REC1
+    where BAT_NO = #{batNo,jdbcType=VARCHAR}
+      and PRD_NO = #{prdNo,jdbcType=VARCHAR}
+      and WH = #{wh,jdbcType=VARCHAR}
+      and PRD_MARK = #{prdMark,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.ipace.chaoJie.A004Dto.BatRec1Key" >
+    delete from BAT_REC1
+    where BAT_NO = #{batNo,jdbcType=VARCHAR}
+      and PRD_NO = #{prdNo,jdbcType=VARCHAR}
+      and WH = #{wh,jdbcType=VARCHAR}
+      and PRD_MARK = #{prdMark,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ipace.chaoJie.A004Dto.BatRec1Example" >
+    delete from BAT_REC1
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ipace.chaoJie.A004Dto.BatRec1" >
+    insert into BAT_REC1 (BAT_NO, PRD_NO, WH, 
+      PRD_MARK, QTY_IN, QTY_OUT, 
+      CST, QTY_LRN, QTY_BRW, 
+      QTY_ON_WAY, QTY_ON_PRC, QTY_ON_RSV, 
+      QTY_ON_ODR, CLS_ID, QTY1_IN, 
+      QTY1_OUT, QTY1_LRN, QTY1_BRW, 
+      PASS, USR, VALID_DD, 
+      QTY_MAX, QTY_MIN, LST_OTD, 
+      LST_IND, QTY_SA, QTY_RK, 
+      QTY_ZG, QTY_CK, QTY_SQ, 
+      REM, CHQC_DD, QTY_SW, 
+      QTY_WX, QTY_WS, QTY_WS_KC, 
+      QTY_QL, QTY_Q2, QTY_Q2_YL, 
+      QTY_Q3, CST_BX, QTY_SQR, 
+      QTY_SQC, QTY_LOCK, SC_DD, 
+      QTY_JH, LST_OTD_QC, LST_IND_QC, 
+      QTY1_LOCK, QTY_T3, UP_DD
+      )
+    values (#{batNo,jdbcType=VARCHAR}, #{prdNo,jdbcType=VARCHAR}, #{wh,jdbcType=VARCHAR}, 
+      #{prdMark,jdbcType=VARCHAR}, #{qtyIn,jdbcType=NUMERIC}, #{qtyOut,jdbcType=NUMERIC}, 
+      #{cst,jdbcType=NUMERIC}, #{qtyLrn,jdbcType=NUMERIC}, #{qtyBrw,jdbcType=NUMERIC}, 
+      #{qtyOnWay,jdbcType=NUMERIC}, #{qtyOnPrc,jdbcType=NUMERIC}, #{qtyOnRsv,jdbcType=NUMERIC}, 
+      #{qtyOnOdr,jdbcType=NUMERIC}, #{clsId,jdbcType=VARCHAR}, #{qty1In,jdbcType=NUMERIC}, 
+      #{qty1Out,jdbcType=NUMERIC}, #{qty1Lrn,jdbcType=NUMERIC}, #{qty1Brw,jdbcType=NUMERIC}, 
+      #{pass,jdbcType=VARCHAR}, #{usr,jdbcType=VARCHAR}, #{validDd,jdbcType=TIMESTAMP}, 
+      #{qtyMax,jdbcType=NUMERIC}, #{qtyMin,jdbcType=NUMERIC}, #{lstOtd,jdbcType=TIMESTAMP}, 
+      #{lstInd,jdbcType=TIMESTAMP}, #{qtySa,jdbcType=NUMERIC}, #{qtyRk,jdbcType=NUMERIC}, 
+      #{qtyZg,jdbcType=NUMERIC}, #{qtyCk,jdbcType=NUMERIC}, #{qtySq,jdbcType=NUMERIC}, 
+      #{rem,jdbcType=VARCHAR}, #{chqcDd,jdbcType=TIMESTAMP}, #{qtySw,jdbcType=NUMERIC}, 
+      #{qtyWx,jdbcType=NUMERIC}, #{qtyWs,jdbcType=NUMERIC}, #{qtyWsKc,jdbcType=NUMERIC}, 
+      #{qtyQl,jdbcType=NUMERIC}, #{qtyQ2,jdbcType=NUMERIC}, #{qtyQ2Yl,jdbcType=NUMERIC}, 
+      #{qtyQ3,jdbcType=NUMERIC}, #{cstBx,jdbcType=NUMERIC}, #{qtySqr,jdbcType=NUMERIC}, 
+      #{qtySqc,jdbcType=NUMERIC}, #{qtyLock,jdbcType=NUMERIC}, #{scDd,jdbcType=TIMESTAMP}, 
+      #{qtyJh,jdbcType=NUMERIC}, #{lstOtdQc,jdbcType=TIMESTAMP}, #{lstIndQc,jdbcType=TIMESTAMP}, 
+      #{qty1Lock,jdbcType=NUMERIC}, #{qtyT3,jdbcType=NUMERIC}, #{upDd,jdbcType=BINARY}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ipace.chaoJie.A004Dto.BatRec1" >
+    insert into BAT_REC1
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="batNo != null" >
+        BAT_NO,
+      </if>
+      <if test="prdNo != null" >
+        PRD_NO,
+      </if>
+      <if test="wh != null" >
+        WH,
+      </if>
+      <if test="prdMark != null" >
+        PRD_MARK,
+      </if>
+      <if test="qtyIn != null" >
+        QTY_IN,
+      </if>
+      <if test="qtyOut != null" >
+        QTY_OUT,
+      </if>
+      <if test="cst != null" >
+        CST,
+      </if>
+      <if test="qtyLrn != null" >
+        QTY_LRN,
+      </if>
+      <if test="qtyBrw != null" >
+        QTY_BRW,
+      </if>
+      <if test="qtyOnWay != null" >
+        QTY_ON_WAY,
+      </if>
+      <if test="qtyOnPrc != null" >
+        QTY_ON_PRC,
+      </if>
+      <if test="qtyOnRsv != null" >
+        QTY_ON_RSV,
+      </if>
+      <if test="qtyOnOdr != null" >
+        QTY_ON_ODR,
+      </if>
+      <if test="clsId != null" >
+        CLS_ID,
+      </if>
+      <if test="qty1In != null" >
+        QTY1_IN,
+      </if>
+      <if test="qty1Out != null" >
+        QTY1_OUT,
+      </if>
+      <if test="qty1Lrn != null" >
+        QTY1_LRN,
+      </if>
+      <if test="qty1Brw != null" >
+        QTY1_BRW,
+      </if>
+      <if test="pass != null" >
+        PASS,
+      </if>
+      <if test="usr != null" >
+        USR,
+      </if>
+      <if test="validDd != null" >
+        VALID_DD,
+      </if>
+      <if test="qtyMax != null" >
+        QTY_MAX,
+      </if>
+      <if test="qtyMin != null" >
+        QTY_MIN,
+      </if>
+      <if test="lstOtd != null" >
+        LST_OTD,
+      </if>
+      <if test="lstInd != null" >
+        LST_IND,
+      </if>
+      <if test="qtySa != null" >
+        QTY_SA,
+      </if>
+      <if test="qtyRk != null" >
+        QTY_RK,
+      </if>
+      <if test="qtyZg != null" >
+        QTY_ZG,
+      </if>
+      <if test="qtyCk != null" >
+        QTY_CK,
+      </if>
+      <if test="qtySq != null" >
+        QTY_SQ,
+      </if>
+      <if test="rem != null" >
+        REM,
+      </if>
+      <if test="chqcDd != null" >
+        CHQC_DD,
+      </if>
+      <if test="qtySw != null" >
+        QTY_SW,
+      </if>
+      <if test="qtyWx != null" >
+        QTY_WX,
+      </if>
+      <if test="qtyWs != null" >
+        QTY_WS,
+      </if>
+      <if test="qtyWsKc != null" >
+        QTY_WS_KC,
+      </if>
+      <if test="qtyQl != null" >
+        QTY_QL,
+      </if>
+      <if test="qtyQ2 != null" >
+        QTY_Q2,
+      </if>
+      <if test="qtyQ2Yl != null" >
+        QTY_Q2_YL,
+      </if>
+      <if test="qtyQ3 != null" >
+        QTY_Q3,
+      </if>
+      <if test="cstBx != null" >
+        CST_BX,
+      </if>
+      <if test="qtySqr != null" >
+        QTY_SQR,
+      </if>
+      <if test="qtySqc != null" >
+        QTY_SQC,
+      </if>
+      <if test="qtyLock != null" >
+        QTY_LOCK,
+      </if>
+      <if test="scDd != null" >
+        SC_DD,
+      </if>
+      <if test="qtyJh != null" >
+        QTY_JH,
+      </if>
+      <if test="lstOtdQc != null" >
+        LST_OTD_QC,
+      </if>
+      <if test="lstIndQc != null" >
+        LST_IND_QC,
+      </if>
+      <if test="qty1Lock != null" >
+        QTY1_LOCK,
+      </if>
+      <if test="qtyT3 != null" >
+        QTY_T3,
+      </if>
+      <if test="upDd != null" >
+        UP_DD,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="batNo != null" >
+        #{batNo,jdbcType=VARCHAR},
+      </if>
+      <if test="prdNo != null" >
+        #{prdNo,jdbcType=VARCHAR},
+      </if>
+      <if test="wh != null" >
+        #{wh,jdbcType=VARCHAR},
+      </if>
+      <if test="prdMark != null" >
+        #{prdMark,jdbcType=VARCHAR},
+      </if>
+      <if test="qtyIn != null" >
+        #{qtyIn,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyOut != null" >
+        #{qtyOut,jdbcType=NUMERIC},
+      </if>
+      <if test="cst != null" >
+        #{cst,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyLrn != null" >
+        #{qtyLrn,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyBrw != null" >
+        #{qtyBrw,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyOnWay != null" >
+        #{qtyOnWay,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyOnPrc != null" >
+        #{qtyOnPrc,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyOnRsv != null" >
+        #{qtyOnRsv,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyOnOdr != null" >
+        #{qtyOnOdr,jdbcType=NUMERIC},
+      </if>
+      <if test="clsId != null" >
+        #{clsId,jdbcType=VARCHAR},
+      </if>
+      <if test="qty1In != null" >
+        #{qty1In,jdbcType=NUMERIC},
+      </if>
+      <if test="qty1Out != null" >
+        #{qty1Out,jdbcType=NUMERIC},
+      </if>
+      <if test="qty1Lrn != null" >
+        #{qty1Lrn,jdbcType=NUMERIC},
+      </if>
+      <if test="qty1Brw != null" >
+        #{qty1Brw,jdbcType=NUMERIC},
+      </if>
+      <if test="pass != null" >
+        #{pass,jdbcType=VARCHAR},
+      </if>
+      <if test="usr != null" >
+        #{usr,jdbcType=VARCHAR},
+      </if>
+      <if test="validDd != null" >
+        #{validDd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="qtyMax != null" >
+        #{qtyMax,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyMin != null" >
+        #{qtyMin,jdbcType=NUMERIC},
+      </if>
+      <if test="lstOtd != null" >
+        #{lstOtd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lstInd != null" >
+        #{lstInd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="qtySa != null" >
+        #{qtySa,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyRk != null" >
+        #{qtyRk,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyZg != null" >
+        #{qtyZg,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyCk != null" >
+        #{qtyCk,jdbcType=NUMERIC},
+      </if>
+      <if test="qtySq != null" >
+        #{qtySq,jdbcType=NUMERIC},
+      </if>
+      <if test="rem != null" >
+        #{rem,jdbcType=VARCHAR},
+      </if>
+      <if test="chqcDd != null" >
+        #{chqcDd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="qtySw != null" >
+        #{qtySw,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyWx != null" >
+        #{qtyWx,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyWs != null" >
+        #{qtyWs,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyWsKc != null" >
+        #{qtyWsKc,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyQl != null" >
+        #{qtyQl,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyQ2 != null" >
+        #{qtyQ2,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyQ2Yl != null" >
+        #{qtyQ2Yl,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyQ3 != null" >
+        #{qtyQ3,jdbcType=NUMERIC},
+      </if>
+      <if test="cstBx != null" >
+        #{cstBx,jdbcType=NUMERIC},
+      </if>
+      <if test="qtySqr != null" >
+        #{qtySqr,jdbcType=NUMERIC},
+      </if>
+      <if test="qtySqc != null" >
+        #{qtySqc,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyLock != null" >
+        #{qtyLock,jdbcType=NUMERIC},
+      </if>
+      <if test="scDd != null" >
+        #{scDd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="qtyJh != null" >
+        #{qtyJh,jdbcType=NUMERIC},
+      </if>
+      <if test="lstOtdQc != null" >
+        #{lstOtdQc,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lstIndQc != null" >
+        #{lstIndQc,jdbcType=TIMESTAMP},
+      </if>
+      <if test="qty1Lock != null" >
+        #{qty1Lock,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyT3 != null" >
+        #{qtyT3,jdbcType=NUMERIC},
+      </if>
+      <if test="upDd != null" >
+        #{upDd,jdbcType=BINARY},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ipace.chaoJie.A004Dto.BatRec1Example" resultType="java.lang.Integer" >
+    select count(*) from BAT_REC1
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update BAT_REC1
+    <set >
+      <if test="record.batNo != null" >
+        BAT_NO = #{record.batNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prdNo != null" >
+        PRD_NO = #{record.prdNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wh != null" >
+        WH = #{record.wh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prdMark != null" >
+        PRD_MARK = #{record.prdMark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qtyIn != null" >
+        QTY_IN = #{record.qtyIn,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qtyOut != null" >
+        QTY_OUT = #{record.qtyOut,jdbcType=NUMERIC},
+      </if>
+      <if test="record.cst != null" >
+        CST = #{record.cst,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qtyLrn != null" >
+        QTY_LRN = #{record.qtyLrn,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qtyBrw != null" >
+        QTY_BRW = #{record.qtyBrw,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qtyOnWay != null" >
+        QTY_ON_WAY = #{record.qtyOnWay,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qtyOnPrc != null" >
+        QTY_ON_PRC = #{record.qtyOnPrc,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qtyOnRsv != null" >
+        QTY_ON_RSV = #{record.qtyOnRsv,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qtyOnOdr != null" >
+        QTY_ON_ODR = #{record.qtyOnOdr,jdbcType=NUMERIC},
+      </if>
+      <if test="record.clsId != null" >
+        CLS_ID = #{record.clsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qty1In != null" >
+        QTY1_IN = #{record.qty1In,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qty1Out != null" >
+        QTY1_OUT = #{record.qty1Out,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qty1Lrn != null" >
+        QTY1_LRN = #{record.qty1Lrn,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qty1Brw != null" >
+        QTY1_BRW = #{record.qty1Brw,jdbcType=NUMERIC},
+      </if>
+      <if test="record.pass != null" >
+        PASS = #{record.pass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usr != null" >
+        USR = #{record.usr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.validDd != null" >
+        VALID_DD = #{record.validDd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.qtyMax != null" >
+        QTY_MAX = #{record.qtyMax,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qtyMin != null" >
+        QTY_MIN = #{record.qtyMin,jdbcType=NUMERIC},
+      </if>
+      <if test="record.lstOtd != null" >
+        LST_OTD = #{record.lstOtd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lstInd != null" >
+        LST_IND = #{record.lstInd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.qtySa != null" >
+        QTY_SA = #{record.qtySa,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qtyRk != null" >
+        QTY_RK = #{record.qtyRk,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qtyZg != null" >
+        QTY_ZG = #{record.qtyZg,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qtyCk != null" >
+        QTY_CK = #{record.qtyCk,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qtySq != null" >
+        QTY_SQ = #{record.qtySq,jdbcType=NUMERIC},
+      </if>
+      <if test="record.rem != null" >
+        REM = #{record.rem,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chqcDd != null" >
+        CHQC_DD = #{record.chqcDd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.qtySw != null" >
+        QTY_SW = #{record.qtySw,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qtyWx != null" >
+        QTY_WX = #{record.qtyWx,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qtyWs != null" >
+        QTY_WS = #{record.qtyWs,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qtyWsKc != null" >
+        QTY_WS_KC = #{record.qtyWsKc,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qtyQl != null" >
+        QTY_QL = #{record.qtyQl,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qtyQ2 != null" >
+        QTY_Q2 = #{record.qtyQ2,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qtyQ2Yl != null" >
+        QTY_Q2_YL = #{record.qtyQ2Yl,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qtyQ3 != null" >
+        QTY_Q3 = #{record.qtyQ3,jdbcType=NUMERIC},
+      </if>
+      <if test="record.cstBx != null" >
+        CST_BX = #{record.cstBx,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qtySqr != null" >
+        QTY_SQR = #{record.qtySqr,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qtySqc != null" >
+        QTY_SQC = #{record.qtySqc,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qtyLock != null" >
+        QTY_LOCK = #{record.qtyLock,jdbcType=NUMERIC},
+      </if>
+      <if test="record.scDd != null" >
+        SC_DD = #{record.scDd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.qtyJh != null" >
+        QTY_JH = #{record.qtyJh,jdbcType=NUMERIC},
+      </if>
+      <if test="record.lstOtdQc != null" >
+        LST_OTD_QC = #{record.lstOtdQc,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lstIndQc != null" >
+        LST_IND_QC = #{record.lstIndQc,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.qty1Lock != null" >
+        QTY1_LOCK = #{record.qty1Lock,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qtyT3 != null" >
+        QTY_T3 = #{record.qtyT3,jdbcType=NUMERIC},
+      </if>
+      <if test="record.upDd != null" >
+        UP_DD = #{record.upDd,jdbcType=BINARY},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update BAT_REC1
+    set BAT_NO = #{record.batNo,jdbcType=VARCHAR},
+      PRD_NO = #{record.prdNo,jdbcType=VARCHAR},
+      WH = #{record.wh,jdbcType=VARCHAR},
+      PRD_MARK = #{record.prdMark,jdbcType=VARCHAR},
+      QTY_IN = #{record.qtyIn,jdbcType=NUMERIC},
+      QTY_OUT = #{record.qtyOut,jdbcType=NUMERIC},
+      CST = #{record.cst,jdbcType=NUMERIC},
+      QTY_LRN = #{record.qtyLrn,jdbcType=NUMERIC},
+      QTY_BRW = #{record.qtyBrw,jdbcType=NUMERIC},
+      QTY_ON_WAY = #{record.qtyOnWay,jdbcType=NUMERIC},
+      QTY_ON_PRC = #{record.qtyOnPrc,jdbcType=NUMERIC},
+      QTY_ON_RSV = #{record.qtyOnRsv,jdbcType=NUMERIC},
+      QTY_ON_ODR = #{record.qtyOnOdr,jdbcType=NUMERIC},
+      CLS_ID = #{record.clsId,jdbcType=VARCHAR},
+      QTY1_IN = #{record.qty1In,jdbcType=NUMERIC},
+      QTY1_OUT = #{record.qty1Out,jdbcType=NUMERIC},
+      QTY1_LRN = #{record.qty1Lrn,jdbcType=NUMERIC},
+      QTY1_BRW = #{record.qty1Brw,jdbcType=NUMERIC},
+      PASS = #{record.pass,jdbcType=VARCHAR},
+      USR = #{record.usr,jdbcType=VARCHAR},
+      VALID_DD = #{record.validDd,jdbcType=TIMESTAMP},
+      QTY_MAX = #{record.qtyMax,jdbcType=NUMERIC},
+      QTY_MIN = #{record.qtyMin,jdbcType=NUMERIC},
+      LST_OTD = #{record.lstOtd,jdbcType=TIMESTAMP},
+      LST_IND = #{record.lstInd,jdbcType=TIMESTAMP},
+      QTY_SA = #{record.qtySa,jdbcType=NUMERIC},
+      QTY_RK = #{record.qtyRk,jdbcType=NUMERIC},
+      QTY_ZG = #{record.qtyZg,jdbcType=NUMERIC},
+      QTY_CK = #{record.qtyCk,jdbcType=NUMERIC},
+      QTY_SQ = #{record.qtySq,jdbcType=NUMERIC},
+      REM = #{record.rem,jdbcType=VARCHAR},
+      CHQC_DD = #{record.chqcDd,jdbcType=TIMESTAMP},
+      QTY_SW = #{record.qtySw,jdbcType=NUMERIC},
+      QTY_WX = #{record.qtyWx,jdbcType=NUMERIC},
+      QTY_WS = #{record.qtyWs,jdbcType=NUMERIC},
+      QTY_WS_KC = #{record.qtyWsKc,jdbcType=NUMERIC},
+      QTY_QL = #{record.qtyQl,jdbcType=NUMERIC},
+      QTY_Q2 = #{record.qtyQ2,jdbcType=NUMERIC},
+      QTY_Q2_YL = #{record.qtyQ2Yl,jdbcType=NUMERIC},
+      QTY_Q3 = #{record.qtyQ3,jdbcType=NUMERIC},
+      CST_BX = #{record.cstBx,jdbcType=NUMERIC},
+      QTY_SQR = #{record.qtySqr,jdbcType=NUMERIC},
+      QTY_SQC = #{record.qtySqc,jdbcType=NUMERIC},
+      QTY_LOCK = #{record.qtyLock,jdbcType=NUMERIC},
+      SC_DD = #{record.scDd,jdbcType=TIMESTAMP},
+      QTY_JH = #{record.qtyJh,jdbcType=NUMERIC},
+      LST_OTD_QC = #{record.lstOtdQc,jdbcType=TIMESTAMP},
+      LST_IND_QC = #{record.lstIndQc,jdbcType=TIMESTAMP},
+      QTY1_LOCK = #{record.qty1Lock,jdbcType=NUMERIC},
+      QTY_T3 = #{record.qtyT3,jdbcType=NUMERIC},
+      UP_DD = #{record.upDd,jdbcType=BINARY}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update BAT_REC1
+    set BAT_NO = #{record.batNo,jdbcType=VARCHAR},
+      PRD_NO = #{record.prdNo,jdbcType=VARCHAR},
+      WH = #{record.wh,jdbcType=VARCHAR},
+      PRD_MARK = #{record.prdMark,jdbcType=VARCHAR},
+      QTY_IN = #{record.qtyIn,jdbcType=NUMERIC},
+      QTY_OUT = #{record.qtyOut,jdbcType=NUMERIC},
+      CST = #{record.cst,jdbcType=NUMERIC},
+      QTY_LRN = #{record.qtyLrn,jdbcType=NUMERIC},
+      QTY_BRW = #{record.qtyBrw,jdbcType=NUMERIC},
+      QTY_ON_WAY = #{record.qtyOnWay,jdbcType=NUMERIC},
+      QTY_ON_PRC = #{record.qtyOnPrc,jdbcType=NUMERIC},
+      QTY_ON_RSV = #{record.qtyOnRsv,jdbcType=NUMERIC},
+      QTY_ON_ODR = #{record.qtyOnOdr,jdbcType=NUMERIC},
+      CLS_ID = #{record.clsId,jdbcType=VARCHAR},
+      QTY1_IN = #{record.qty1In,jdbcType=NUMERIC},
+      QTY1_OUT = #{record.qty1Out,jdbcType=NUMERIC},
+      QTY1_LRN = #{record.qty1Lrn,jdbcType=NUMERIC},
+      QTY1_BRW = #{record.qty1Brw,jdbcType=NUMERIC},
+      PASS = #{record.pass,jdbcType=VARCHAR},
+      USR = #{record.usr,jdbcType=VARCHAR},
+      VALID_DD = #{record.validDd,jdbcType=TIMESTAMP},
+      QTY_MAX = #{record.qtyMax,jdbcType=NUMERIC},
+      QTY_MIN = #{record.qtyMin,jdbcType=NUMERIC},
+      LST_OTD = #{record.lstOtd,jdbcType=TIMESTAMP},
+      LST_IND = #{record.lstInd,jdbcType=TIMESTAMP},
+      QTY_SA = #{record.qtySa,jdbcType=NUMERIC},
+      QTY_RK = #{record.qtyRk,jdbcType=NUMERIC},
+      QTY_ZG = #{record.qtyZg,jdbcType=NUMERIC},
+      QTY_CK = #{record.qtyCk,jdbcType=NUMERIC},
+      QTY_SQ = #{record.qtySq,jdbcType=NUMERIC},
+      REM = #{record.rem,jdbcType=VARCHAR},
+      CHQC_DD = #{record.chqcDd,jdbcType=TIMESTAMP},
+      QTY_SW = #{record.qtySw,jdbcType=NUMERIC},
+      QTY_WX = #{record.qtyWx,jdbcType=NUMERIC},
+      QTY_WS = #{record.qtyWs,jdbcType=NUMERIC},
+      QTY_WS_KC = #{record.qtyWsKc,jdbcType=NUMERIC},
+      QTY_QL = #{record.qtyQl,jdbcType=NUMERIC},
+      QTY_Q2 = #{record.qtyQ2,jdbcType=NUMERIC},
+      QTY_Q2_YL = #{record.qtyQ2Yl,jdbcType=NUMERIC},
+      QTY_Q3 = #{record.qtyQ3,jdbcType=NUMERIC},
+      CST_BX = #{record.cstBx,jdbcType=NUMERIC},
+      QTY_SQR = #{record.qtySqr,jdbcType=NUMERIC},
+      QTY_SQC = #{record.qtySqc,jdbcType=NUMERIC},
+      QTY_LOCK = #{record.qtyLock,jdbcType=NUMERIC},
+      SC_DD = #{record.scDd,jdbcType=TIMESTAMP},
+      QTY_JH = #{record.qtyJh,jdbcType=NUMERIC},
+      LST_OTD_QC = #{record.lstOtdQc,jdbcType=TIMESTAMP},
+      LST_IND_QC = #{record.lstIndQc,jdbcType=TIMESTAMP},
+      QTY1_LOCK = #{record.qty1Lock,jdbcType=NUMERIC},
+      QTY_T3 = #{record.qtyT3,jdbcType=NUMERIC}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ipace.chaoJie.A004Dto.BatRec1" >
+    update BAT_REC1
+    <set >
+      <if test="qtyIn != null" >
+        QTY_IN = #{qtyIn,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyOut != null" >
+        QTY_OUT = #{qtyOut,jdbcType=NUMERIC},
+      </if>
+      <if test="cst != null" >
+        CST = #{cst,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyLrn != null" >
+        QTY_LRN = #{qtyLrn,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyBrw != null" >
+        QTY_BRW = #{qtyBrw,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyOnWay != null" >
+        QTY_ON_WAY = #{qtyOnWay,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyOnPrc != null" >
+        QTY_ON_PRC = #{qtyOnPrc,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyOnRsv != null" >
+        QTY_ON_RSV = #{qtyOnRsv,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyOnOdr != null" >
+        QTY_ON_ODR = #{qtyOnOdr,jdbcType=NUMERIC},
+      </if>
+      <if test="clsId != null" >
+        CLS_ID = #{clsId,jdbcType=VARCHAR},
+      </if>
+      <if test="qty1In != null" >
+        QTY1_IN = #{qty1In,jdbcType=NUMERIC},
+      </if>
+      <if test="qty1Out != null" >
+        QTY1_OUT = #{qty1Out,jdbcType=NUMERIC},
+      </if>
+      <if test="qty1Lrn != null" >
+        QTY1_LRN = #{qty1Lrn,jdbcType=NUMERIC},
+      </if>
+      <if test="qty1Brw != null" >
+        QTY1_BRW = #{qty1Brw,jdbcType=NUMERIC},
+      </if>
+      <if test="pass != null" >
+        PASS = #{pass,jdbcType=VARCHAR},
+      </if>
+      <if test="usr != null" >
+        USR = #{usr,jdbcType=VARCHAR},
+      </if>
+      <if test="validDd != null" >
+        VALID_DD = #{validDd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="qtyMax != null" >
+        QTY_MAX = #{qtyMax,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyMin != null" >
+        QTY_MIN = #{qtyMin,jdbcType=NUMERIC},
+      </if>
+      <if test="lstOtd != null" >
+        LST_OTD = #{lstOtd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lstInd != null" >
+        LST_IND = #{lstInd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="qtySa != null" >
+        QTY_SA = #{qtySa,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyRk != null" >
+        QTY_RK = #{qtyRk,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyZg != null" >
+        QTY_ZG = #{qtyZg,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyCk != null" >
+        QTY_CK = #{qtyCk,jdbcType=NUMERIC},
+      </if>
+      <if test="qtySq != null" >
+        QTY_SQ = #{qtySq,jdbcType=NUMERIC},
+      </if>
+      <if test="rem != null" >
+        REM = #{rem,jdbcType=VARCHAR},
+      </if>
+      <if test="chqcDd != null" >
+        CHQC_DD = #{chqcDd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="qtySw != null" >
+        QTY_SW = #{qtySw,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyWx != null" >
+        QTY_WX = #{qtyWx,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyWs != null" >
+        QTY_WS = #{qtyWs,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyWsKc != null" >
+        QTY_WS_KC = #{qtyWsKc,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyQl != null" >
+        QTY_QL = #{qtyQl,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyQ2 != null" >
+        QTY_Q2 = #{qtyQ2,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyQ2Yl != null" >
+        QTY_Q2_YL = #{qtyQ2Yl,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyQ3 != null" >
+        QTY_Q3 = #{qtyQ3,jdbcType=NUMERIC},
+      </if>
+      <if test="cstBx != null" >
+        CST_BX = #{cstBx,jdbcType=NUMERIC},
+      </if>
+      <if test="qtySqr != null" >
+        QTY_SQR = #{qtySqr,jdbcType=NUMERIC},
+      </if>
+      <if test="qtySqc != null" >
+        QTY_SQC = #{qtySqc,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyLock != null" >
+        QTY_LOCK = #{qtyLock,jdbcType=NUMERIC},
+      </if>
+      <if test="scDd != null" >
+        SC_DD = #{scDd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="qtyJh != null" >
+        QTY_JH = #{qtyJh,jdbcType=NUMERIC},
+      </if>
+      <if test="lstOtdQc != null" >
+        LST_OTD_QC = #{lstOtdQc,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lstIndQc != null" >
+        LST_IND_QC = #{lstIndQc,jdbcType=TIMESTAMP},
+      </if>
+      <if test="qty1Lock != null" >
+        QTY1_LOCK = #{qty1Lock,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyT3 != null" >
+        QTY_T3 = #{qtyT3,jdbcType=NUMERIC},
+      </if>
+      <if test="upDd != null" >
+        UP_DD = #{upDd,jdbcType=BINARY},
+      </if>
+    </set>
+    where BAT_NO = #{batNo,jdbcType=VARCHAR}
+      and PRD_NO = #{prdNo,jdbcType=VARCHAR}
+      and WH = #{wh,jdbcType=VARCHAR}
+      and PRD_MARK = #{prdMark,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ipace.chaoJie.A004Dto.BatRec1" >
+    update BAT_REC1
+    set QTY_IN = #{qtyIn,jdbcType=NUMERIC},
+      QTY_OUT = #{qtyOut,jdbcType=NUMERIC},
+      CST = #{cst,jdbcType=NUMERIC},
+      QTY_LRN = #{qtyLrn,jdbcType=NUMERIC},
+      QTY_BRW = #{qtyBrw,jdbcType=NUMERIC},
+      QTY_ON_WAY = #{qtyOnWay,jdbcType=NUMERIC},
+      QTY_ON_PRC = #{qtyOnPrc,jdbcType=NUMERIC},
+      QTY_ON_RSV = #{qtyOnRsv,jdbcType=NUMERIC},
+      QTY_ON_ODR = #{qtyOnOdr,jdbcType=NUMERIC},
+      CLS_ID = #{clsId,jdbcType=VARCHAR},
+      QTY1_IN = #{qty1In,jdbcType=NUMERIC},
+      QTY1_OUT = #{qty1Out,jdbcType=NUMERIC},
+      QTY1_LRN = #{qty1Lrn,jdbcType=NUMERIC},
+      QTY1_BRW = #{qty1Brw,jdbcType=NUMERIC},
+      PASS = #{pass,jdbcType=VARCHAR},
+      USR = #{usr,jdbcType=VARCHAR},
+      VALID_DD = #{validDd,jdbcType=TIMESTAMP},
+      QTY_MAX = #{qtyMax,jdbcType=NUMERIC},
+      QTY_MIN = #{qtyMin,jdbcType=NUMERIC},
+      LST_OTD = #{lstOtd,jdbcType=TIMESTAMP},
+      LST_IND = #{lstInd,jdbcType=TIMESTAMP},
+      QTY_SA = #{qtySa,jdbcType=NUMERIC},
+      QTY_RK = #{qtyRk,jdbcType=NUMERIC},
+      QTY_ZG = #{qtyZg,jdbcType=NUMERIC},
+      QTY_CK = #{qtyCk,jdbcType=NUMERIC},
+      QTY_SQ = #{qtySq,jdbcType=NUMERIC},
+      REM = #{rem,jdbcType=VARCHAR},
+      CHQC_DD = #{chqcDd,jdbcType=TIMESTAMP},
+      QTY_SW = #{qtySw,jdbcType=NUMERIC},
+      QTY_WX = #{qtyWx,jdbcType=NUMERIC},
+      QTY_WS = #{qtyWs,jdbcType=NUMERIC},
+      QTY_WS_KC = #{qtyWsKc,jdbcType=NUMERIC},
+      QTY_QL = #{qtyQl,jdbcType=NUMERIC},
+      QTY_Q2 = #{qtyQ2,jdbcType=NUMERIC},
+      QTY_Q2_YL = #{qtyQ2Yl,jdbcType=NUMERIC},
+      QTY_Q3 = #{qtyQ3,jdbcType=NUMERIC},
+      CST_BX = #{cstBx,jdbcType=NUMERIC},
+      QTY_SQR = #{qtySqr,jdbcType=NUMERIC},
+      QTY_SQC = #{qtySqc,jdbcType=NUMERIC},
+      QTY_LOCK = #{qtyLock,jdbcType=NUMERIC},
+      SC_DD = #{scDd,jdbcType=TIMESTAMP},
+      QTY_JH = #{qtyJh,jdbcType=NUMERIC},
+      LST_OTD_QC = #{lstOtdQc,jdbcType=TIMESTAMP},
+      LST_IND_QC = #{lstIndQc,jdbcType=TIMESTAMP},
+      QTY1_LOCK = #{qty1Lock,jdbcType=NUMERIC},
+      QTY_T3 = #{qtyT3,jdbcType=NUMERIC},
+      UP_DD = #{upDd,jdbcType=BINARY}
+    where BAT_NO = #{batNo,jdbcType=VARCHAR}
+      and PRD_NO = #{prdNo,jdbcType=VARCHAR}
+      and WH = #{wh,jdbcType=VARCHAR}
+      and PRD_MARK = #{prdMark,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ipace.chaoJie.A004Dto.BatRec1" >
+    update BAT_REC1
+    set QTY_IN = #{qtyIn,jdbcType=NUMERIC},
+      QTY_OUT = #{qtyOut,jdbcType=NUMERIC},
+      CST = #{cst,jdbcType=NUMERIC},
+      QTY_LRN = #{qtyLrn,jdbcType=NUMERIC},
+      QTY_BRW = #{qtyBrw,jdbcType=NUMERIC},
+      QTY_ON_WAY = #{qtyOnWay,jdbcType=NUMERIC},
+      QTY_ON_PRC = #{qtyOnPrc,jdbcType=NUMERIC},
+      QTY_ON_RSV = #{qtyOnRsv,jdbcType=NUMERIC},
+      QTY_ON_ODR = #{qtyOnOdr,jdbcType=NUMERIC},
+      CLS_ID = #{clsId,jdbcType=VARCHAR},
+      QTY1_IN = #{qty1In,jdbcType=NUMERIC},
+      QTY1_OUT = #{qty1Out,jdbcType=NUMERIC},
+      QTY1_LRN = #{qty1Lrn,jdbcType=NUMERIC},
+      QTY1_BRW = #{qty1Brw,jdbcType=NUMERIC},
+      PASS = #{pass,jdbcType=VARCHAR},
+      USR = #{usr,jdbcType=VARCHAR},
+      VALID_DD = #{validDd,jdbcType=TIMESTAMP},
+      QTY_MAX = #{qtyMax,jdbcType=NUMERIC},
+      QTY_MIN = #{qtyMin,jdbcType=NUMERIC},
+      LST_OTD = #{lstOtd,jdbcType=TIMESTAMP},
+      LST_IND = #{lstInd,jdbcType=TIMESTAMP},
+      QTY_SA = #{qtySa,jdbcType=NUMERIC},
+      QTY_RK = #{qtyRk,jdbcType=NUMERIC},
+      QTY_ZG = #{qtyZg,jdbcType=NUMERIC},
+      QTY_CK = #{qtyCk,jdbcType=NUMERIC},
+      QTY_SQ = #{qtySq,jdbcType=NUMERIC},
+      REM = #{rem,jdbcType=VARCHAR},
+      CHQC_DD = #{chqcDd,jdbcType=TIMESTAMP},
+      QTY_SW = #{qtySw,jdbcType=NUMERIC},
+      QTY_WX = #{qtyWx,jdbcType=NUMERIC},
+      QTY_WS = #{qtyWs,jdbcType=NUMERIC},
+      QTY_WS_KC = #{qtyWsKc,jdbcType=NUMERIC},
+      QTY_QL = #{qtyQl,jdbcType=NUMERIC},
+      QTY_Q2 = #{qtyQ2,jdbcType=NUMERIC},
+      QTY_Q2_YL = #{qtyQ2Yl,jdbcType=NUMERIC},
+      QTY_Q3 = #{qtyQ3,jdbcType=NUMERIC},
+      CST_BX = #{cstBx,jdbcType=NUMERIC},
+      QTY_SQR = #{qtySqr,jdbcType=NUMERIC},
+      QTY_SQC = #{qtySqc,jdbcType=NUMERIC},
+      QTY_LOCK = #{qtyLock,jdbcType=NUMERIC},
+      SC_DD = #{scDd,jdbcType=TIMESTAMP},
+      QTY_JH = #{qtyJh,jdbcType=NUMERIC},
+      LST_OTD_QC = #{lstOtdQc,jdbcType=TIMESTAMP},
+      LST_IND_QC = #{lstIndQc,jdbcType=TIMESTAMP},
+      QTY1_LOCK = #{qty1Lock,jdbcType=NUMERIC},
+      QTY_T3 = #{qtyT3,jdbcType=NUMERIC}
+    where BAT_NO = #{batNo,jdbcType=VARCHAR}
+      and PRD_NO = #{prdNo,jdbcType=VARCHAR}
+      and WH = #{wh,jdbcType=VARCHAR}
+      and PRD_MARK = #{prdMark,jdbcType=VARCHAR}
+  </update>
+</mapper>

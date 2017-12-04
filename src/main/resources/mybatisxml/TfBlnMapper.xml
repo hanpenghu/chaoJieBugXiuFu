@@ -1,0 +1,1504 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ipace.chaoJie.A002Dao.TfBlnMapper" >
+  <resultMap id="BaseResultMap" type="com.ipace.chaoJie.A004Dto.TfBln" >
+    <id column="BL_ID" property="blId" jdbcType="VARCHAR" />
+    <id column="BL_NO" property="blNo" jdbcType="VARCHAR" />
+    <id column="ITM" property="itm" jdbcType="INTEGER" />
+    <result column="BL_DD" property="blDd" jdbcType="TIMESTAMP" />
+    <result column="WH" property="wh" jdbcType="VARCHAR" />
+    <result column="PRD_NO" property="prdNo" jdbcType="VARCHAR" />
+    <result column="PRD_NAME" property="prdName" jdbcType="VARCHAR" />
+    <result column="PRD_MARK" property="prdMark" jdbcType="VARCHAR" />
+    <result column="UNIT" property="unit" jdbcType="VARCHAR" />
+    <result column="QTY" property="qty" jdbcType="NUMERIC" />
+    <result column="QTY1" property="qty1" jdbcType="NUMERIC" />
+    <result column="CST" property="cst" jdbcType="NUMERIC" />
+    <result column="AMT_RNT" property="amtRnt" jdbcType="NUMERIC" />
+    <result column="AMTN_RNT_NET" property="amtnRntNet" jdbcType="NUMERIC" />
+    <result column="TAX_RNT" property="taxRnt" jdbcType="NUMERIC" />
+    <result column="UP" property="up" jdbcType="NUMERIC" />
+    <result column="AMT" property="amt" jdbcType="NUMERIC" />
+    <result column="AMTN" property="amtn" jdbcType="NUMERIC" />
+    <result column="QTY_RTN" property="qtyRtn" jdbcType="NUMERIC" />
+    <result column="QTY_RTN_UNSH" property="qtyRtnUnsh" jdbcType="NUMERIC" />
+    <result column="QTY1_RTN" property="qty1Rtn" jdbcType="NUMERIC" />
+    <result column="QTY1_RTN_UNSH" property="qty1RtnUnsh" jdbcType="NUMERIC" />
+    <result column="PRE_BL_NO" property="preBlNo" jdbcType="VARCHAR" />
+    <result column="PRE_ITM" property="preItm" jdbcType="INTEGER" />
+    <result column="PAK_UNIT" property="pakUnit" jdbcType="VARCHAR" />
+    <result column="PAK_EXC" property="pakExc" jdbcType="NUMERIC" />
+    <result column="PAK_NW" property="pakNw" jdbcType="NUMERIC" />
+    <result column="PAK_WEIGHT_UNIT" property="pakWeightUnit" jdbcType="VARCHAR" />
+    <result column="PAK_GW" property="pakGw" jdbcType="NUMERIC" />
+    <result column="PAK_MEAST" property="pakMeast" jdbcType="NUMERIC" />
+    <result column="PAK_MEAST_UNIT" property="pakMeastUnit" jdbcType="VARCHAR" />
+    <result column="VALID_DD" property="validDd" jdbcType="TIMESTAMP" />
+    <result column="REM" property="rem" jdbcType="VARCHAR" />
+    <result column="AMTN_COM" property="amtnCom" jdbcType="NUMERIC" />
+    <result column="EST_DD" property="estDd" jdbcType="TIMESTAMP" />
+    <result column="CST_STD" property="cstStd" jdbcType="NUMERIC" />
+    <result column="UP_QTY1" property="upQty1" jdbcType="NUMERIC" />
+    <result column="EST_ITM" property="estItm" jdbcType="INTEGER" />
+    <result column="BAT_NO" property="batNo" jdbcType="VARCHAR" />
+    <result column="QTY_CK" property="qtyCk" jdbcType="NUMERIC" />
+    <result column="QTY_CK_UNSH" property="qtyCkUnsh" jdbcType="NUMERIC" />
+    <result column="SUP_PRD_NO" property="supPrdNo" jdbcType="VARCHAR" />
+    <result column="CNTT_NO" property="cnttNo" jdbcType="VARCHAR" />
+    <result column="ID_NO" property="idNo" jdbcType="VARCHAR" />
+    <result column="COMPOSE_IDNO" property="composeIdno" jdbcType="VARCHAR" />
+    <result column="TAX" property="tax" jdbcType="NUMERIC" />
+    <result column="AMT_FP" property="amtFp" jdbcType="NUMERIC" />
+    <result column="AMTN_NET_FP" property="amtnNetFp" jdbcType="NUMERIC" />
+    <result column="TAX_FP" property="taxFp" jdbcType="NUMERIC" />
+    <result column="QTY_FP" property="qtyFp" jdbcType="NUMERIC" />
+    <result column="RK_NO" property="rkNo" jdbcType="VARCHAR" />
+    <result column="CK_NO" property="ckNo" jdbcType="VARCHAR" />
+    <result column="TI_ITM" property="tiItm" jdbcType="INTEGER" />
+    <result column="QC_FLAG" property="qcFlag" jdbcType="VARCHAR" />
+    <result column="QC_ITM" property="qcItm" jdbcType="INTEGER" />
+    <result column="OS_ID" property="osId" jdbcType="VARCHAR" />
+    <result column="OS_NO" property="osNo" jdbcType="VARCHAR" />
+    <result column="OS_ITM" property="osItm" jdbcType="INTEGER" />
+    <result column="TAX_RTO" property="taxRto" jdbcType="NUMERIC" />
+    <result column="RK_DD" property="rkDd" jdbcType="TIMESTAMP" />
+    <result column="DEP_RK" property="depRk" jdbcType="VARCHAR" />
+    <result column="TRD_ID" property="trdId" jdbcType="VARCHAR" />
+    <result column="TRD_NO" property="trdNo" jdbcType="VARCHAR" />
+    <result column="TRD_ITM" property="trdItm" jdbcType="INTEGER" />
+    <result column="BZ_KND" property="bzKnd" jdbcType="VARCHAR" />
+    <result column="UP_MAIN" property="upMain" jdbcType="NUMERIC" />
+    <result column="DIS_CNT" property="disCnt" jdbcType="NUMERIC" />
+    <result column="UP_STD" property="upStd" jdbcType="NUMERIC" />
+    <result column="CST_IFRS" property="cstIfrs" jdbcType="NUMERIC" />
+    <result column="CST_STD_IFRS" property="cstStdIfrs" jdbcType="NUMERIC" />
+    <result column="AMTN_IFRS" property="amtnIfrs" jdbcType="NUMERIC" />
+    <result column="AMTN_NET_IFRS" property="amtnNetIfrs" jdbcType="NUMERIC" />
+    <result column="TAX_IFRS" property="taxIfrs" jdbcType="NUMERIC" />
+    <result column="UP_MAIN_IFRS" property="upMainIfrs" jdbcType="NUMERIC" />
+    <result column="UP_STD_IFRS" property="upStdIfrs" jdbcType="NUMERIC" />
+    <result column="SUP_PRD_MARK" property="supPrdMark" jdbcType="VARCHAR" />
+    <result column="CUS_OS_NO" property="cusOsNo" jdbcType="VARCHAR" />
+    <result column="QTY1_FP" property="qty1Fp" jdbcType="NUMERIC" />
+    <result column="IS_SP" property="isSp" jdbcType="VARCHAR" />
+    <result column="DZ_USR" property="dzUsr" jdbcType="VARCHAR" />
+    <result column="DZ_DATE" property="dzDate" jdbcType="TIMESTAMP" />
+    <result column="SC_DD" property="scDd" jdbcType="TIMESTAMP" />
+    <result column="XPM_NO" property="xpmNo" jdbcType="VARCHAR" />
+    <result column="XPM_NO1" property="xpmNo1" jdbcType="VARCHAR" />
+    <result column="CHK_XZL" property="chkXzl" jdbcType="VARCHAR" />
+    <result column="QTY_FA" property="qtyFa" jdbcType="NUMERIC" />
+    <result column="QTY_FA_UNSH" property="qtyFaUnsh" jdbcType="NUMERIC" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    BL_ID, BL_NO, ITM, BL_DD, WH, PRD_NO, PRD_NAME, PRD_MARK, UNIT, QTY, QTY1, CST, AMT_RNT, 
+    AMTN_RNT_NET, TAX_RNT, UP, AMT, AMTN, QTY_RTN, QTY_RTN_UNSH, QTY1_RTN, QTY1_RTN_UNSH, 
+    PRE_BL_NO, PRE_ITM, PAK_UNIT, PAK_EXC, PAK_NW, PAK_WEIGHT_UNIT, PAK_GW, PAK_MEAST, 
+    PAK_MEAST_UNIT, VALID_DD, REM, AMTN_COM, EST_DD, CST_STD, UP_QTY1, EST_ITM, BAT_NO, 
+    QTY_CK, QTY_CK_UNSH, SUP_PRD_NO, CNTT_NO, ID_NO, COMPOSE_IDNO, TAX, AMT_FP, AMTN_NET_FP, 
+    TAX_FP, QTY_FP, RK_NO, CK_NO, TI_ITM, QC_FLAG, QC_ITM, OS_ID, OS_NO, OS_ITM, TAX_RTO, 
+    RK_DD, DEP_RK, TRD_ID, TRD_NO, TRD_ITM, BZ_KND, UP_MAIN, DIS_CNT, UP_STD, CST_IFRS, 
+    CST_STD_IFRS, AMTN_IFRS, AMTN_NET_IFRS, TAX_IFRS, UP_MAIN_IFRS, UP_STD_IFRS, SUP_PRD_MARK, 
+    CUS_OS_NO, QTY1_FP, IS_SP, DZ_USR, DZ_DATE, SC_DD, XPM_NO, XPM_NO1, CHK_XZL, QTY_FA, 
+    QTY_FA_UNSH
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ipace.chaoJie.A004Dto.TfBlnExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TF_BLN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.ipace.chaoJie.A004Dto.TfBlnKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from TF_BLN
+    where BL_ID = #{blId,jdbcType=VARCHAR}
+      and BL_NO = #{blNo,jdbcType=VARCHAR}
+      and ITM = #{itm,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.ipace.chaoJie.A004Dto.TfBlnKey" >
+    delete from TF_BLN
+    where BL_ID = #{blId,jdbcType=VARCHAR}
+      and BL_NO = #{blNo,jdbcType=VARCHAR}
+      and ITM = #{itm,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ipace.chaoJie.A004Dto.TfBlnExample" >
+    delete from TF_BLN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ipace.chaoJie.A004Dto.TfBln" >
+    insert into TF_BLN (BL_ID, BL_NO, ITM, 
+      BL_DD, WH, PRD_NO, 
+      PRD_NAME, PRD_MARK, UNIT, 
+      QTY, QTY1, CST, AMT_RNT, 
+      AMTN_RNT_NET, TAX_RNT, UP, 
+      AMT, AMTN, QTY_RTN, 
+      QTY_RTN_UNSH, QTY1_RTN, QTY1_RTN_UNSH, 
+      PRE_BL_NO, PRE_ITM, PAK_UNIT, 
+      PAK_EXC, PAK_NW, PAK_WEIGHT_UNIT, 
+      PAK_GW, PAK_MEAST, PAK_MEAST_UNIT, 
+      VALID_DD, REM, AMTN_COM, 
+      EST_DD, CST_STD, UP_QTY1, 
+      EST_ITM, BAT_NO, QTY_CK, 
+      QTY_CK_UNSH, SUP_PRD_NO, CNTT_NO, 
+      ID_NO, COMPOSE_IDNO, TAX, 
+      AMT_FP, AMTN_NET_FP, TAX_FP, 
+      QTY_FP, RK_NO, CK_NO, 
+      TI_ITM, QC_FLAG, QC_ITM, 
+      OS_ID, OS_NO, OS_ITM, 
+      TAX_RTO, RK_DD, DEP_RK, 
+      TRD_ID, TRD_NO, TRD_ITM, 
+      BZ_KND, UP_MAIN, DIS_CNT, 
+      UP_STD, CST_IFRS, CST_STD_IFRS, 
+      AMTN_IFRS, AMTN_NET_IFRS, TAX_IFRS, 
+      UP_MAIN_IFRS, UP_STD_IFRS, SUP_PRD_MARK, 
+      CUS_OS_NO, QTY1_FP, IS_SP, 
+      DZ_USR, DZ_DATE, SC_DD, 
+      XPM_NO, XPM_NO1, CHK_XZL, 
+      QTY_FA, QTY_FA_UNSH)
+    values (#{blId,jdbcType=VARCHAR}, #{blNo,jdbcType=VARCHAR}, #{itm,jdbcType=INTEGER}, 
+      #{blDd,jdbcType=TIMESTAMP}, #{wh,jdbcType=VARCHAR}, #{prdNo,jdbcType=VARCHAR}, 
+      #{prdName,jdbcType=VARCHAR}, #{prdMark,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, 
+      #{qty,jdbcType=NUMERIC}, #{qty1,jdbcType=NUMERIC}, #{cst,jdbcType=NUMERIC}, #{amtRnt,jdbcType=NUMERIC}, 
+      #{amtnRntNet,jdbcType=NUMERIC}, #{taxRnt,jdbcType=NUMERIC}, #{up,jdbcType=NUMERIC}, 
+      #{amt,jdbcType=NUMERIC}, #{amtn,jdbcType=NUMERIC}, #{qtyRtn,jdbcType=NUMERIC}, 
+      #{qtyRtnUnsh,jdbcType=NUMERIC}, #{qty1Rtn,jdbcType=NUMERIC}, #{qty1RtnUnsh,jdbcType=NUMERIC}, 
+      #{preBlNo,jdbcType=VARCHAR}, #{preItm,jdbcType=INTEGER}, #{pakUnit,jdbcType=VARCHAR}, 
+      #{pakExc,jdbcType=NUMERIC}, #{pakNw,jdbcType=NUMERIC}, #{pakWeightUnit,jdbcType=VARCHAR}, 
+      #{pakGw,jdbcType=NUMERIC}, #{pakMeast,jdbcType=NUMERIC}, #{pakMeastUnit,jdbcType=VARCHAR}, 
+      #{validDd,jdbcType=TIMESTAMP}, #{rem,jdbcType=VARCHAR}, #{amtnCom,jdbcType=NUMERIC}, 
+      #{estDd,jdbcType=TIMESTAMP}, #{cstStd,jdbcType=NUMERIC}, #{upQty1,jdbcType=NUMERIC}, 
+      #{estItm,jdbcType=INTEGER}, #{batNo,jdbcType=VARCHAR}, #{qtyCk,jdbcType=NUMERIC}, 
+      #{qtyCkUnsh,jdbcType=NUMERIC}, #{supPrdNo,jdbcType=VARCHAR}, #{cnttNo,jdbcType=VARCHAR}, 
+      #{idNo,jdbcType=VARCHAR}, #{composeIdno,jdbcType=VARCHAR}, #{tax,jdbcType=NUMERIC}, 
+      #{amtFp,jdbcType=NUMERIC}, #{amtnNetFp,jdbcType=NUMERIC}, #{taxFp,jdbcType=NUMERIC}, 
+      #{qtyFp,jdbcType=NUMERIC}, #{rkNo,jdbcType=VARCHAR}, #{ckNo,jdbcType=VARCHAR}, 
+      #{tiItm,jdbcType=INTEGER}, #{qcFlag,jdbcType=VARCHAR}, #{qcItm,jdbcType=INTEGER}, 
+      #{osId,jdbcType=VARCHAR}, #{osNo,jdbcType=VARCHAR}, #{osItm,jdbcType=INTEGER}, 
+      #{taxRto,jdbcType=NUMERIC}, #{rkDd,jdbcType=TIMESTAMP}, #{depRk,jdbcType=VARCHAR}, 
+      #{trdId,jdbcType=VARCHAR}, #{trdNo,jdbcType=VARCHAR}, #{trdItm,jdbcType=INTEGER}, 
+      #{bzKnd,jdbcType=VARCHAR}, #{upMain,jdbcType=NUMERIC}, #{disCnt,jdbcType=NUMERIC}, 
+      #{upStd,jdbcType=NUMERIC}, #{cstIfrs,jdbcType=NUMERIC}, #{cstStdIfrs,jdbcType=NUMERIC}, 
+      #{amtnIfrs,jdbcType=NUMERIC}, #{amtnNetIfrs,jdbcType=NUMERIC}, #{taxIfrs,jdbcType=NUMERIC}, 
+      #{upMainIfrs,jdbcType=NUMERIC}, #{upStdIfrs,jdbcType=NUMERIC}, #{supPrdMark,jdbcType=VARCHAR}, 
+      #{cusOsNo,jdbcType=VARCHAR}, #{qty1Fp,jdbcType=NUMERIC}, #{isSp,jdbcType=VARCHAR}, 
+      #{dzUsr,jdbcType=VARCHAR}, #{dzDate,jdbcType=TIMESTAMP}, #{scDd,jdbcType=TIMESTAMP}, 
+      #{xpmNo,jdbcType=VARCHAR}, #{xpmNo1,jdbcType=VARCHAR}, #{chkXzl,jdbcType=VARCHAR}, 
+      #{qtyFa,jdbcType=NUMERIC}, #{qtyFaUnsh,jdbcType=NUMERIC})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ipace.chaoJie.A004Dto.TfBln" >
+    insert into TF_BLN
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="blId != null" >
+        BL_ID,
+      </if>
+      <if test="blNo != null" >
+        BL_NO,
+      </if>
+      <if test="itm != null" >
+        ITM,
+      </if>
+      <if test="blDd != null" >
+        BL_DD,
+      </if>
+      <if test="wh != null" >
+        WH,
+      </if>
+      <if test="prdNo != null" >
+        PRD_NO,
+      </if>
+      <if test="prdName != null" >
+        PRD_NAME,
+      </if>
+      <if test="prdMark != null" >
+        PRD_MARK,
+      </if>
+      <if test="unit != null" >
+        UNIT,
+      </if>
+      <if test="qty != null" >
+        QTY,
+      </if>
+      <if test="qty1 != null" >
+        QTY1,
+      </if>
+      <if test="cst != null" >
+        CST,
+      </if>
+      <if test="amtRnt != null" >
+        AMT_RNT,
+      </if>
+      <if test="amtnRntNet != null" >
+        AMTN_RNT_NET,
+      </if>
+      <if test="taxRnt != null" >
+        TAX_RNT,
+      </if>
+      <if test="up != null" >
+        UP,
+      </if>
+      <if test="amt != null" >
+        AMT,
+      </if>
+      <if test="amtn != null" >
+        AMTN,
+      </if>
+      <if test="qtyRtn != null" >
+        QTY_RTN,
+      </if>
+      <if test="qtyRtnUnsh != null" >
+        QTY_RTN_UNSH,
+      </if>
+      <if test="qty1Rtn != null" >
+        QTY1_RTN,
+      </if>
+      <if test="qty1RtnUnsh != null" >
+        QTY1_RTN_UNSH,
+      </if>
+      <if test="preBlNo != null" >
+        PRE_BL_NO,
+      </if>
+      <if test="preItm != null" >
+        PRE_ITM,
+      </if>
+      <if test="pakUnit != null" >
+        PAK_UNIT,
+      </if>
+      <if test="pakExc != null" >
+        PAK_EXC,
+      </if>
+      <if test="pakNw != null" >
+        PAK_NW,
+      </if>
+      <if test="pakWeightUnit != null" >
+        PAK_WEIGHT_UNIT,
+      </if>
+      <if test="pakGw != null" >
+        PAK_GW,
+      </if>
+      <if test="pakMeast != null" >
+        PAK_MEAST,
+      </if>
+      <if test="pakMeastUnit != null" >
+        PAK_MEAST_UNIT,
+      </if>
+      <if test="validDd != null" >
+        VALID_DD,
+      </if>
+      <if test="rem != null" >
+        REM,
+      </if>
+      <if test="amtnCom != null" >
+        AMTN_COM,
+      </if>
+      <if test="estDd != null" >
+        EST_DD,
+      </if>
+      <if test="cstStd != null" >
+        CST_STD,
+      </if>
+      <if test="upQty1 != null" >
+        UP_QTY1,
+      </if>
+      <if test="estItm != null" >
+        EST_ITM,
+      </if>
+      <if test="batNo != null" >
+        BAT_NO,
+      </if>
+      <if test="qtyCk != null" >
+        QTY_CK,
+      </if>
+      <if test="qtyCkUnsh != null" >
+        QTY_CK_UNSH,
+      </if>
+      <if test="supPrdNo != null" >
+        SUP_PRD_NO,
+      </if>
+      <if test="cnttNo != null" >
+        CNTT_NO,
+      </if>
+      <if test="idNo != null" >
+        ID_NO,
+      </if>
+      <if test="composeIdno != null" >
+        COMPOSE_IDNO,
+      </if>
+      <if test="tax != null" >
+        TAX,
+      </if>
+      <if test="amtFp != null" >
+        AMT_FP,
+      </if>
+      <if test="amtnNetFp != null" >
+        AMTN_NET_FP,
+      </if>
+      <if test="taxFp != null" >
+        TAX_FP,
+      </if>
+      <if test="qtyFp != null" >
+        QTY_FP,
+      </if>
+      <if test="rkNo != null" >
+        RK_NO,
+      </if>
+      <if test="ckNo != null" >
+        CK_NO,
+      </if>
+      <if test="tiItm != null" >
+        TI_ITM,
+      </if>
+      <if test="qcFlag != null" >
+        QC_FLAG,
+      </if>
+      <if test="qcItm != null" >
+        QC_ITM,
+      </if>
+      <if test="osId != null" >
+        OS_ID,
+      </if>
+      <if test="osNo != null" >
+        OS_NO,
+      </if>
+      <if test="osItm != null" >
+        OS_ITM,
+      </if>
+      <if test="taxRto != null" >
+        TAX_RTO,
+      </if>
+      <if test="rkDd != null" >
+        RK_DD,
+      </if>
+      <if test="depRk != null" >
+        DEP_RK,
+      </if>
+      <if test="trdId != null" >
+        TRD_ID,
+      </if>
+      <if test="trdNo != null" >
+        TRD_NO,
+      </if>
+      <if test="trdItm != null" >
+        TRD_ITM,
+      </if>
+      <if test="bzKnd != null" >
+        BZ_KND,
+      </if>
+      <if test="upMain != null" >
+        UP_MAIN,
+      </if>
+      <if test="disCnt != null" >
+        DIS_CNT,
+      </if>
+      <if test="upStd != null" >
+        UP_STD,
+      </if>
+      <if test="cstIfrs != null" >
+        CST_IFRS,
+      </if>
+      <if test="cstStdIfrs != null" >
+        CST_STD_IFRS,
+      </if>
+      <if test="amtnIfrs != null" >
+        AMTN_IFRS,
+      </if>
+      <if test="amtnNetIfrs != null" >
+        AMTN_NET_IFRS,
+      </if>
+      <if test="taxIfrs != null" >
+        TAX_IFRS,
+      </if>
+      <if test="upMainIfrs != null" >
+        UP_MAIN_IFRS,
+      </if>
+      <if test="upStdIfrs != null" >
+        UP_STD_IFRS,
+      </if>
+      <if test="supPrdMark != null" >
+        SUP_PRD_MARK,
+      </if>
+      <if test="cusOsNo != null" >
+        CUS_OS_NO,
+      </if>
+      <if test="qty1Fp != null" >
+        QTY1_FP,
+      </if>
+      <if test="isSp != null" >
+        IS_SP,
+      </if>
+      <if test="dzUsr != null" >
+        DZ_USR,
+      </if>
+      <if test="dzDate != null" >
+        DZ_DATE,
+      </if>
+      <if test="scDd != null" >
+        SC_DD,
+      </if>
+      <if test="xpmNo != null" >
+        XPM_NO,
+      </if>
+      <if test="xpmNo1 != null" >
+        XPM_NO1,
+      </if>
+      <if test="chkXzl != null" >
+        CHK_XZL,
+      </if>
+      <if test="qtyFa != null" >
+        QTY_FA,
+      </if>
+      <if test="qtyFaUnsh != null" >
+        QTY_FA_UNSH,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="blId != null" >
+        #{blId,jdbcType=VARCHAR},
+      </if>
+      <if test="blNo != null" >
+        #{blNo,jdbcType=VARCHAR},
+      </if>
+      <if test="itm != null" >
+        #{itm,jdbcType=INTEGER},
+      </if>
+      <if test="blDd != null" >
+        #{blDd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wh != null" >
+        #{wh,jdbcType=VARCHAR},
+      </if>
+      <if test="prdNo != null" >
+        #{prdNo,jdbcType=VARCHAR},
+      </if>
+      <if test="prdName != null" >
+        #{prdName,jdbcType=VARCHAR},
+      </if>
+      <if test="prdMark != null" >
+        #{prdMark,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="qty != null" >
+        #{qty,jdbcType=NUMERIC},
+      </if>
+      <if test="qty1 != null" >
+        #{qty1,jdbcType=NUMERIC},
+      </if>
+      <if test="cst != null" >
+        #{cst,jdbcType=NUMERIC},
+      </if>
+      <if test="amtRnt != null" >
+        #{amtRnt,jdbcType=NUMERIC},
+      </if>
+      <if test="amtnRntNet != null" >
+        #{amtnRntNet,jdbcType=NUMERIC},
+      </if>
+      <if test="taxRnt != null" >
+        #{taxRnt,jdbcType=NUMERIC},
+      </if>
+      <if test="up != null" >
+        #{up,jdbcType=NUMERIC},
+      </if>
+      <if test="amt != null" >
+        #{amt,jdbcType=NUMERIC},
+      </if>
+      <if test="amtn != null" >
+        #{amtn,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyRtn != null" >
+        #{qtyRtn,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyRtnUnsh != null" >
+        #{qtyRtnUnsh,jdbcType=NUMERIC},
+      </if>
+      <if test="qty1Rtn != null" >
+        #{qty1Rtn,jdbcType=NUMERIC},
+      </if>
+      <if test="qty1RtnUnsh != null" >
+        #{qty1RtnUnsh,jdbcType=NUMERIC},
+      </if>
+      <if test="preBlNo != null" >
+        #{preBlNo,jdbcType=VARCHAR},
+      </if>
+      <if test="preItm != null" >
+        #{preItm,jdbcType=INTEGER},
+      </if>
+      <if test="pakUnit != null" >
+        #{pakUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="pakExc != null" >
+        #{pakExc,jdbcType=NUMERIC},
+      </if>
+      <if test="pakNw != null" >
+        #{pakNw,jdbcType=NUMERIC},
+      </if>
+      <if test="pakWeightUnit != null" >
+        #{pakWeightUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="pakGw != null" >
+        #{pakGw,jdbcType=NUMERIC},
+      </if>
+      <if test="pakMeast != null" >
+        #{pakMeast,jdbcType=NUMERIC},
+      </if>
+      <if test="pakMeastUnit != null" >
+        #{pakMeastUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="validDd != null" >
+        #{validDd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rem != null" >
+        #{rem,jdbcType=VARCHAR},
+      </if>
+      <if test="amtnCom != null" >
+        #{amtnCom,jdbcType=NUMERIC},
+      </if>
+      <if test="estDd != null" >
+        #{estDd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cstStd != null" >
+        #{cstStd,jdbcType=NUMERIC},
+      </if>
+      <if test="upQty1 != null" >
+        #{upQty1,jdbcType=NUMERIC},
+      </if>
+      <if test="estItm != null" >
+        #{estItm,jdbcType=INTEGER},
+      </if>
+      <if test="batNo != null" >
+        #{batNo,jdbcType=VARCHAR},
+      </if>
+      <if test="qtyCk != null" >
+        #{qtyCk,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyCkUnsh != null" >
+        #{qtyCkUnsh,jdbcType=NUMERIC},
+      </if>
+      <if test="supPrdNo != null" >
+        #{supPrdNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cnttNo != null" >
+        #{cnttNo,jdbcType=VARCHAR},
+      </if>
+      <if test="idNo != null" >
+        #{idNo,jdbcType=VARCHAR},
+      </if>
+      <if test="composeIdno != null" >
+        #{composeIdno,jdbcType=VARCHAR},
+      </if>
+      <if test="tax != null" >
+        #{tax,jdbcType=NUMERIC},
+      </if>
+      <if test="amtFp != null" >
+        #{amtFp,jdbcType=NUMERIC},
+      </if>
+      <if test="amtnNetFp != null" >
+        #{amtnNetFp,jdbcType=NUMERIC},
+      </if>
+      <if test="taxFp != null" >
+        #{taxFp,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyFp != null" >
+        #{qtyFp,jdbcType=NUMERIC},
+      </if>
+      <if test="rkNo != null" >
+        #{rkNo,jdbcType=VARCHAR},
+      </if>
+      <if test="ckNo != null" >
+        #{ckNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tiItm != null" >
+        #{tiItm,jdbcType=INTEGER},
+      </if>
+      <if test="qcFlag != null" >
+        #{qcFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="qcItm != null" >
+        #{qcItm,jdbcType=INTEGER},
+      </if>
+      <if test="osId != null" >
+        #{osId,jdbcType=VARCHAR},
+      </if>
+      <if test="osNo != null" >
+        #{osNo,jdbcType=VARCHAR},
+      </if>
+      <if test="osItm != null" >
+        #{osItm,jdbcType=INTEGER},
+      </if>
+      <if test="taxRto != null" >
+        #{taxRto,jdbcType=NUMERIC},
+      </if>
+      <if test="rkDd != null" >
+        #{rkDd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="depRk != null" >
+        #{depRk,jdbcType=VARCHAR},
+      </if>
+      <if test="trdId != null" >
+        #{trdId,jdbcType=VARCHAR},
+      </if>
+      <if test="trdNo != null" >
+        #{trdNo,jdbcType=VARCHAR},
+      </if>
+      <if test="trdItm != null" >
+        #{trdItm,jdbcType=INTEGER},
+      </if>
+      <if test="bzKnd != null" >
+        #{bzKnd,jdbcType=VARCHAR},
+      </if>
+      <if test="upMain != null" >
+        #{upMain,jdbcType=NUMERIC},
+      </if>
+      <if test="disCnt != null" >
+        #{disCnt,jdbcType=NUMERIC},
+      </if>
+      <if test="upStd != null" >
+        #{upStd,jdbcType=NUMERIC},
+      </if>
+      <if test="cstIfrs != null" >
+        #{cstIfrs,jdbcType=NUMERIC},
+      </if>
+      <if test="cstStdIfrs != null" >
+        #{cstStdIfrs,jdbcType=NUMERIC},
+      </if>
+      <if test="amtnIfrs != null" >
+        #{amtnIfrs,jdbcType=NUMERIC},
+      </if>
+      <if test="amtnNetIfrs != null" >
+        #{amtnNetIfrs,jdbcType=NUMERIC},
+      </if>
+      <if test="taxIfrs != null" >
+        #{taxIfrs,jdbcType=NUMERIC},
+      </if>
+      <if test="upMainIfrs != null" >
+        #{upMainIfrs,jdbcType=NUMERIC},
+      </if>
+      <if test="upStdIfrs != null" >
+        #{upStdIfrs,jdbcType=NUMERIC},
+      </if>
+      <if test="supPrdMark != null" >
+        #{supPrdMark,jdbcType=VARCHAR},
+      </if>
+      <if test="cusOsNo != null" >
+        #{cusOsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="qty1Fp != null" >
+        #{qty1Fp,jdbcType=NUMERIC},
+      </if>
+      <if test="isSp != null" >
+        #{isSp,jdbcType=VARCHAR},
+      </if>
+      <if test="dzUsr != null" >
+        #{dzUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="dzDate != null" >
+        #{dzDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="scDd != null" >
+        #{scDd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="xpmNo != null" >
+        #{xpmNo,jdbcType=VARCHAR},
+      </if>
+      <if test="xpmNo1 != null" >
+        #{xpmNo1,jdbcType=VARCHAR},
+      </if>
+      <if test="chkXzl != null" >
+        #{chkXzl,jdbcType=VARCHAR},
+      </if>
+      <if test="qtyFa != null" >
+        #{qtyFa,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyFaUnsh != null" >
+        #{qtyFaUnsh,jdbcType=NUMERIC},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ipace.chaoJie.A004Dto.TfBlnExample" resultType="java.lang.Integer" >
+    select count(*) from TF_BLN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TF_BLN
+    <set >
+      <if test="record.blId != null" >
+        BL_ID = #{record.blId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.blNo != null" >
+        BL_NO = #{record.blNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itm != null" >
+        ITM = #{record.itm,jdbcType=INTEGER},
+      </if>
+      <if test="record.blDd != null" >
+        BL_DD = #{record.blDd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.wh != null" >
+        WH = #{record.wh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prdNo != null" >
+        PRD_NO = #{record.prdNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prdName != null" >
+        PRD_NAME = #{record.prdName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prdMark != null" >
+        PRD_MARK = #{record.prdMark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unit != null" >
+        UNIT = #{record.unit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qty != null" >
+        QTY = #{record.qty,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qty1 != null" >
+        QTY1 = #{record.qty1,jdbcType=NUMERIC},
+      </if>
+      <if test="record.cst != null" >
+        CST = #{record.cst,jdbcType=NUMERIC},
+      </if>
+      <if test="record.amtRnt != null" >
+        AMT_RNT = #{record.amtRnt,jdbcType=NUMERIC},
+      </if>
+      <if test="record.amtnRntNet != null" >
+        AMTN_RNT_NET = #{record.amtnRntNet,jdbcType=NUMERIC},
+      </if>
+      <if test="record.taxRnt != null" >
+        TAX_RNT = #{record.taxRnt,jdbcType=NUMERIC},
+      </if>
+      <if test="record.up != null" >
+        UP = #{record.up,jdbcType=NUMERIC},
+      </if>
+      <if test="record.amt != null" >
+        AMT = #{record.amt,jdbcType=NUMERIC},
+      </if>
+      <if test="record.amtn != null" >
+        AMTN = #{record.amtn,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qtyRtn != null" >
+        QTY_RTN = #{record.qtyRtn,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qtyRtnUnsh != null" >
+        QTY_RTN_UNSH = #{record.qtyRtnUnsh,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qty1Rtn != null" >
+        QTY1_RTN = #{record.qty1Rtn,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qty1RtnUnsh != null" >
+        QTY1_RTN_UNSH = #{record.qty1RtnUnsh,jdbcType=NUMERIC},
+      </if>
+      <if test="record.preBlNo != null" >
+        PRE_BL_NO = #{record.preBlNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.preItm != null" >
+        PRE_ITM = #{record.preItm,jdbcType=INTEGER},
+      </if>
+      <if test="record.pakUnit != null" >
+        PAK_UNIT = #{record.pakUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pakExc != null" >
+        PAK_EXC = #{record.pakExc,jdbcType=NUMERIC},
+      </if>
+      <if test="record.pakNw != null" >
+        PAK_NW = #{record.pakNw,jdbcType=NUMERIC},
+      </if>
+      <if test="record.pakWeightUnit != null" >
+        PAK_WEIGHT_UNIT = #{record.pakWeightUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pakGw != null" >
+        PAK_GW = #{record.pakGw,jdbcType=NUMERIC},
+      </if>
+      <if test="record.pakMeast != null" >
+        PAK_MEAST = #{record.pakMeast,jdbcType=NUMERIC},
+      </if>
+      <if test="record.pakMeastUnit != null" >
+        PAK_MEAST_UNIT = #{record.pakMeastUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.validDd != null" >
+        VALID_DD = #{record.validDd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.rem != null" >
+        REM = #{record.rem,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amtnCom != null" >
+        AMTN_COM = #{record.amtnCom,jdbcType=NUMERIC},
+      </if>
+      <if test="record.estDd != null" >
+        EST_DD = #{record.estDd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.cstStd != null" >
+        CST_STD = #{record.cstStd,jdbcType=NUMERIC},
+      </if>
+      <if test="record.upQty1 != null" >
+        UP_QTY1 = #{record.upQty1,jdbcType=NUMERIC},
+      </if>
+      <if test="record.estItm != null" >
+        EST_ITM = #{record.estItm,jdbcType=INTEGER},
+      </if>
+      <if test="record.batNo != null" >
+        BAT_NO = #{record.batNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qtyCk != null" >
+        QTY_CK = #{record.qtyCk,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qtyCkUnsh != null" >
+        QTY_CK_UNSH = #{record.qtyCkUnsh,jdbcType=NUMERIC},
+      </if>
+      <if test="record.supPrdNo != null" >
+        SUP_PRD_NO = #{record.supPrdNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cnttNo != null" >
+        CNTT_NO = #{record.cnttNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idNo != null" >
+        ID_NO = #{record.idNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.composeIdno != null" >
+        COMPOSE_IDNO = #{record.composeIdno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tax != null" >
+        TAX = #{record.tax,jdbcType=NUMERIC},
+      </if>
+      <if test="record.amtFp != null" >
+        AMT_FP = #{record.amtFp,jdbcType=NUMERIC},
+      </if>
+      <if test="record.amtnNetFp != null" >
+        AMTN_NET_FP = #{record.amtnNetFp,jdbcType=NUMERIC},
+      </if>
+      <if test="record.taxFp != null" >
+        TAX_FP = #{record.taxFp,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qtyFp != null" >
+        QTY_FP = #{record.qtyFp,jdbcType=NUMERIC},
+      </if>
+      <if test="record.rkNo != null" >
+        RK_NO = #{record.rkNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ckNo != null" >
+        CK_NO = #{record.ckNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tiItm != null" >
+        TI_ITM = #{record.tiItm,jdbcType=INTEGER},
+      </if>
+      <if test="record.qcFlag != null" >
+        QC_FLAG = #{record.qcFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qcItm != null" >
+        QC_ITM = #{record.qcItm,jdbcType=INTEGER},
+      </if>
+      <if test="record.osId != null" >
+        OS_ID = #{record.osId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.osNo != null" >
+        OS_NO = #{record.osNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.osItm != null" >
+        OS_ITM = #{record.osItm,jdbcType=INTEGER},
+      </if>
+      <if test="record.taxRto != null" >
+        TAX_RTO = #{record.taxRto,jdbcType=NUMERIC},
+      </if>
+      <if test="record.rkDd != null" >
+        RK_DD = #{record.rkDd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.depRk != null" >
+        DEP_RK = #{record.depRk,jdbcType=VARCHAR},
+      </if>
+      <if test="record.trdId != null" >
+        TRD_ID = #{record.trdId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.trdNo != null" >
+        TRD_NO = #{record.trdNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.trdItm != null" >
+        TRD_ITM = #{record.trdItm,jdbcType=INTEGER},
+      </if>
+      <if test="record.bzKnd != null" >
+        BZ_KND = #{record.bzKnd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.upMain != null" >
+        UP_MAIN = #{record.upMain,jdbcType=NUMERIC},
+      </if>
+      <if test="record.disCnt != null" >
+        DIS_CNT = #{record.disCnt,jdbcType=NUMERIC},
+      </if>
+      <if test="record.upStd != null" >
+        UP_STD = #{record.upStd,jdbcType=NUMERIC},
+      </if>
+      <if test="record.cstIfrs != null" >
+        CST_IFRS = #{record.cstIfrs,jdbcType=NUMERIC},
+      </if>
+      <if test="record.cstStdIfrs != null" >
+        CST_STD_IFRS = #{record.cstStdIfrs,jdbcType=NUMERIC},
+      </if>
+      <if test="record.amtnIfrs != null" >
+        AMTN_IFRS = #{record.amtnIfrs,jdbcType=NUMERIC},
+      </if>
+      <if test="record.amtnNetIfrs != null" >
+        AMTN_NET_IFRS = #{record.amtnNetIfrs,jdbcType=NUMERIC},
+      </if>
+      <if test="record.taxIfrs != null" >
+        TAX_IFRS = #{record.taxIfrs,jdbcType=NUMERIC},
+      </if>
+      <if test="record.upMainIfrs != null" >
+        UP_MAIN_IFRS = #{record.upMainIfrs,jdbcType=NUMERIC},
+      </if>
+      <if test="record.upStdIfrs != null" >
+        UP_STD_IFRS = #{record.upStdIfrs,jdbcType=NUMERIC},
+      </if>
+      <if test="record.supPrdMark != null" >
+        SUP_PRD_MARK = #{record.supPrdMark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cusOsNo != null" >
+        CUS_OS_NO = #{record.cusOsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qty1Fp != null" >
+        QTY1_FP = #{record.qty1Fp,jdbcType=NUMERIC},
+      </if>
+      <if test="record.isSp != null" >
+        IS_SP = #{record.isSp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dzUsr != null" >
+        DZ_USR = #{record.dzUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dzDate != null" >
+        DZ_DATE = #{record.dzDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.scDd != null" >
+        SC_DD = #{record.scDd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.xpmNo != null" >
+        XPM_NO = #{record.xpmNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xpmNo1 != null" >
+        XPM_NO1 = #{record.xpmNo1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chkXzl != null" >
+        CHK_XZL = #{record.chkXzl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qtyFa != null" >
+        QTY_FA = #{record.qtyFa,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qtyFaUnsh != null" >
+        QTY_FA_UNSH = #{record.qtyFaUnsh,jdbcType=NUMERIC},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TF_BLN
+    set BL_ID = #{record.blId,jdbcType=VARCHAR},
+      BL_NO = #{record.blNo,jdbcType=VARCHAR},
+      ITM = #{record.itm,jdbcType=INTEGER},
+      BL_DD = #{record.blDd,jdbcType=TIMESTAMP},
+      WH = #{record.wh,jdbcType=VARCHAR},
+      PRD_NO = #{record.prdNo,jdbcType=VARCHAR},
+      PRD_NAME = #{record.prdName,jdbcType=VARCHAR},
+      PRD_MARK = #{record.prdMark,jdbcType=VARCHAR},
+      UNIT = #{record.unit,jdbcType=VARCHAR},
+      QTY = #{record.qty,jdbcType=NUMERIC},
+      QTY1 = #{record.qty1,jdbcType=NUMERIC},
+      CST = #{record.cst,jdbcType=NUMERIC},
+      AMT_RNT = #{record.amtRnt,jdbcType=NUMERIC},
+      AMTN_RNT_NET = #{record.amtnRntNet,jdbcType=NUMERIC},
+      TAX_RNT = #{record.taxRnt,jdbcType=NUMERIC},
+      UP = #{record.up,jdbcType=NUMERIC},
+      AMT = #{record.amt,jdbcType=NUMERIC},
+      AMTN = #{record.amtn,jdbcType=NUMERIC},
+      QTY_RTN = #{record.qtyRtn,jdbcType=NUMERIC},
+      QTY_RTN_UNSH = #{record.qtyRtnUnsh,jdbcType=NUMERIC},
+      QTY1_RTN = #{record.qty1Rtn,jdbcType=NUMERIC},
+      QTY1_RTN_UNSH = #{record.qty1RtnUnsh,jdbcType=NUMERIC},
+      PRE_BL_NO = #{record.preBlNo,jdbcType=VARCHAR},
+      PRE_ITM = #{record.preItm,jdbcType=INTEGER},
+      PAK_UNIT = #{record.pakUnit,jdbcType=VARCHAR},
+      PAK_EXC = #{record.pakExc,jdbcType=NUMERIC},
+      PAK_NW = #{record.pakNw,jdbcType=NUMERIC},
+      PAK_WEIGHT_UNIT = #{record.pakWeightUnit,jdbcType=VARCHAR},
+      PAK_GW = #{record.pakGw,jdbcType=NUMERIC},
+      PAK_MEAST = #{record.pakMeast,jdbcType=NUMERIC},
+      PAK_MEAST_UNIT = #{record.pakMeastUnit,jdbcType=VARCHAR},
+      VALID_DD = #{record.validDd,jdbcType=TIMESTAMP},
+      REM = #{record.rem,jdbcType=VARCHAR},
+      AMTN_COM = #{record.amtnCom,jdbcType=NUMERIC},
+      EST_DD = #{record.estDd,jdbcType=TIMESTAMP},
+      CST_STD = #{record.cstStd,jdbcType=NUMERIC},
+      UP_QTY1 = #{record.upQty1,jdbcType=NUMERIC},
+      EST_ITM = #{record.estItm,jdbcType=INTEGER},
+      BAT_NO = #{record.batNo,jdbcType=VARCHAR},
+      QTY_CK = #{record.qtyCk,jdbcType=NUMERIC},
+      QTY_CK_UNSH = #{record.qtyCkUnsh,jdbcType=NUMERIC},
+      SUP_PRD_NO = #{record.supPrdNo,jdbcType=VARCHAR},
+      CNTT_NO = #{record.cnttNo,jdbcType=VARCHAR},
+      ID_NO = #{record.idNo,jdbcType=VARCHAR},
+      COMPOSE_IDNO = #{record.composeIdno,jdbcType=VARCHAR},
+      TAX = #{record.tax,jdbcType=NUMERIC},
+      AMT_FP = #{record.amtFp,jdbcType=NUMERIC},
+      AMTN_NET_FP = #{record.amtnNetFp,jdbcType=NUMERIC},
+      TAX_FP = #{record.taxFp,jdbcType=NUMERIC},
+      QTY_FP = #{record.qtyFp,jdbcType=NUMERIC},
+      RK_NO = #{record.rkNo,jdbcType=VARCHAR},
+      CK_NO = #{record.ckNo,jdbcType=VARCHAR},
+      TI_ITM = #{record.tiItm,jdbcType=INTEGER},
+      QC_FLAG = #{record.qcFlag,jdbcType=VARCHAR},
+      QC_ITM = #{record.qcItm,jdbcType=INTEGER},
+      OS_ID = #{record.osId,jdbcType=VARCHAR},
+      OS_NO = #{record.osNo,jdbcType=VARCHAR},
+      OS_ITM = #{record.osItm,jdbcType=INTEGER},
+      TAX_RTO = #{record.taxRto,jdbcType=NUMERIC},
+      RK_DD = #{record.rkDd,jdbcType=TIMESTAMP},
+      DEP_RK = #{record.depRk,jdbcType=VARCHAR},
+      TRD_ID = #{record.trdId,jdbcType=VARCHAR},
+      TRD_NO = #{record.trdNo,jdbcType=VARCHAR},
+      TRD_ITM = #{record.trdItm,jdbcType=INTEGER},
+      BZ_KND = #{record.bzKnd,jdbcType=VARCHAR},
+      UP_MAIN = #{record.upMain,jdbcType=NUMERIC},
+      DIS_CNT = #{record.disCnt,jdbcType=NUMERIC},
+      UP_STD = #{record.upStd,jdbcType=NUMERIC},
+      CST_IFRS = #{record.cstIfrs,jdbcType=NUMERIC},
+      CST_STD_IFRS = #{record.cstStdIfrs,jdbcType=NUMERIC},
+      AMTN_IFRS = #{record.amtnIfrs,jdbcType=NUMERIC},
+      AMTN_NET_IFRS = #{record.amtnNetIfrs,jdbcType=NUMERIC},
+      TAX_IFRS = #{record.taxIfrs,jdbcType=NUMERIC},
+      UP_MAIN_IFRS = #{record.upMainIfrs,jdbcType=NUMERIC},
+      UP_STD_IFRS = #{record.upStdIfrs,jdbcType=NUMERIC},
+      SUP_PRD_MARK = #{record.supPrdMark,jdbcType=VARCHAR},
+      CUS_OS_NO = #{record.cusOsNo,jdbcType=VARCHAR},
+      QTY1_FP = #{record.qty1Fp,jdbcType=NUMERIC},
+      IS_SP = #{record.isSp,jdbcType=VARCHAR},
+      DZ_USR = #{record.dzUsr,jdbcType=VARCHAR},
+      DZ_DATE = #{record.dzDate,jdbcType=TIMESTAMP},
+      SC_DD = #{record.scDd,jdbcType=TIMESTAMP},
+      XPM_NO = #{record.xpmNo,jdbcType=VARCHAR},
+      XPM_NO1 = #{record.xpmNo1,jdbcType=VARCHAR},
+      CHK_XZL = #{record.chkXzl,jdbcType=VARCHAR},
+      QTY_FA = #{record.qtyFa,jdbcType=NUMERIC},
+      QTY_FA_UNSH = #{record.qtyFaUnsh,jdbcType=NUMERIC}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ipace.chaoJie.A004Dto.TfBln" >
+    update TF_BLN
+    <set >
+      <if test="blDd != null" >
+        BL_DD = #{blDd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wh != null" >
+        WH = #{wh,jdbcType=VARCHAR},
+      </if>
+      <if test="prdNo != null" >
+        PRD_NO = #{prdNo,jdbcType=VARCHAR},
+      </if>
+      <if test="prdName != null" >
+        PRD_NAME = #{prdName,jdbcType=VARCHAR},
+      </if>
+      <if test="prdMark != null" >
+        PRD_MARK = #{prdMark,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        UNIT = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="qty != null" >
+        QTY = #{qty,jdbcType=NUMERIC},
+      </if>
+      <if test="qty1 != null" >
+        QTY1 = #{qty1,jdbcType=NUMERIC},
+      </if>
+      <if test="cst != null" >
+        CST = #{cst,jdbcType=NUMERIC},
+      </if>
+      <if test="amtRnt != null" >
+        AMT_RNT = #{amtRnt,jdbcType=NUMERIC},
+      </if>
+      <if test="amtnRntNet != null" >
+        AMTN_RNT_NET = #{amtnRntNet,jdbcType=NUMERIC},
+      </if>
+      <if test="taxRnt != null" >
+        TAX_RNT = #{taxRnt,jdbcType=NUMERIC},
+      </if>
+      <if test="up != null" >
+        UP = #{up,jdbcType=NUMERIC},
+      </if>
+      <if test="amt != null" >
+        AMT = #{amt,jdbcType=NUMERIC},
+      </if>
+      <if test="amtn != null" >
+        AMTN = #{amtn,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyRtn != null" >
+        QTY_RTN = #{qtyRtn,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyRtnUnsh != null" >
+        QTY_RTN_UNSH = #{qtyRtnUnsh,jdbcType=NUMERIC},
+      </if>
+      <if test="qty1Rtn != null" >
+        QTY1_RTN = #{qty1Rtn,jdbcType=NUMERIC},
+      </if>
+      <if test="qty1RtnUnsh != null" >
+        QTY1_RTN_UNSH = #{qty1RtnUnsh,jdbcType=NUMERIC},
+      </if>
+      <if test="preBlNo != null" >
+        PRE_BL_NO = #{preBlNo,jdbcType=VARCHAR},
+      </if>
+      <if test="preItm != null" >
+        PRE_ITM = #{preItm,jdbcType=INTEGER},
+      </if>
+      <if test="pakUnit != null" >
+        PAK_UNIT = #{pakUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="pakExc != null" >
+        PAK_EXC = #{pakExc,jdbcType=NUMERIC},
+      </if>
+      <if test="pakNw != null" >
+        PAK_NW = #{pakNw,jdbcType=NUMERIC},
+      </if>
+      <if test="pakWeightUnit != null" >
+        PAK_WEIGHT_UNIT = #{pakWeightUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="pakGw != null" >
+        PAK_GW = #{pakGw,jdbcType=NUMERIC},
+      </if>
+      <if test="pakMeast != null" >
+        PAK_MEAST = #{pakMeast,jdbcType=NUMERIC},
+      </if>
+      <if test="pakMeastUnit != null" >
+        PAK_MEAST_UNIT = #{pakMeastUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="validDd != null" >
+        VALID_DD = #{validDd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rem != null" >
+        REM = #{rem,jdbcType=VARCHAR},
+      </if>
+      <if test="amtnCom != null" >
+        AMTN_COM = #{amtnCom,jdbcType=NUMERIC},
+      </if>
+      <if test="estDd != null" >
+        EST_DD = #{estDd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cstStd != null" >
+        CST_STD = #{cstStd,jdbcType=NUMERIC},
+      </if>
+      <if test="upQty1 != null" >
+        UP_QTY1 = #{upQty1,jdbcType=NUMERIC},
+      </if>
+      <if test="estItm != null" >
+        EST_ITM = #{estItm,jdbcType=INTEGER},
+      </if>
+      <if test="batNo != null" >
+        BAT_NO = #{batNo,jdbcType=VARCHAR},
+      </if>
+      <if test="qtyCk != null" >
+        QTY_CK = #{qtyCk,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyCkUnsh != null" >
+        QTY_CK_UNSH = #{qtyCkUnsh,jdbcType=NUMERIC},
+      </if>
+      <if test="supPrdNo != null" >
+        SUP_PRD_NO = #{supPrdNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cnttNo != null" >
+        CNTT_NO = #{cnttNo,jdbcType=VARCHAR},
+      </if>
+      <if test="idNo != null" >
+        ID_NO = #{idNo,jdbcType=VARCHAR},
+      </if>
+      <if test="composeIdno != null" >
+        COMPOSE_IDNO = #{composeIdno,jdbcType=VARCHAR},
+      </if>
+      <if test="tax != null" >
+        TAX = #{tax,jdbcType=NUMERIC},
+      </if>
+      <if test="amtFp != null" >
+        AMT_FP = #{amtFp,jdbcType=NUMERIC},
+      </if>
+      <if test="amtnNetFp != null" >
+        AMTN_NET_FP = #{amtnNetFp,jdbcType=NUMERIC},
+      </if>
+      <if test="taxFp != null" >
+        TAX_FP = #{taxFp,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyFp != null" >
+        QTY_FP = #{qtyFp,jdbcType=NUMERIC},
+      </if>
+      <if test="rkNo != null" >
+        RK_NO = #{rkNo,jdbcType=VARCHAR},
+      </if>
+      <if test="ckNo != null" >
+        CK_NO = #{ckNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tiItm != null" >
+        TI_ITM = #{tiItm,jdbcType=INTEGER},
+      </if>
+      <if test="qcFlag != null" >
+        QC_FLAG = #{qcFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="qcItm != null" >
+        QC_ITM = #{qcItm,jdbcType=INTEGER},
+      </if>
+      <if test="osId != null" >
+        OS_ID = #{osId,jdbcType=VARCHAR},
+      </if>
+      <if test="osNo != null" >
+        OS_NO = #{osNo,jdbcType=VARCHAR},
+      </if>
+      <if test="osItm != null" >
+        OS_ITM = #{osItm,jdbcType=INTEGER},
+      </if>
+      <if test="taxRto != null" >
+        TAX_RTO = #{taxRto,jdbcType=NUMERIC},
+      </if>
+      <if test="rkDd != null" >
+        RK_DD = #{rkDd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="depRk != null" >
+        DEP_RK = #{depRk,jdbcType=VARCHAR},
+      </if>
+      <if test="trdId != null" >
+        TRD_ID = #{trdId,jdbcType=VARCHAR},
+      </if>
+      <if test="trdNo != null" >
+        TRD_NO = #{trdNo,jdbcType=VARCHAR},
+      </if>
+      <if test="trdItm != null" >
+        TRD_ITM = #{trdItm,jdbcType=INTEGER},
+      </if>
+      <if test="bzKnd != null" >
+        BZ_KND = #{bzKnd,jdbcType=VARCHAR},
+      </if>
+      <if test="upMain != null" >
+        UP_MAIN = #{upMain,jdbcType=NUMERIC},
+      </if>
+      <if test="disCnt != null" >
+        DIS_CNT = #{disCnt,jdbcType=NUMERIC},
+      </if>
+      <if test="upStd != null" >
+        UP_STD = #{upStd,jdbcType=NUMERIC},
+      </if>
+      <if test="cstIfrs != null" >
+        CST_IFRS = #{cstIfrs,jdbcType=NUMERIC},
+      </if>
+      <if test="cstStdIfrs != null" >
+        CST_STD_IFRS = #{cstStdIfrs,jdbcType=NUMERIC},
+      </if>
+      <if test="amtnIfrs != null" >
+        AMTN_IFRS = #{amtnIfrs,jdbcType=NUMERIC},
+      </if>
+      <if test="amtnNetIfrs != null" >
+        AMTN_NET_IFRS = #{amtnNetIfrs,jdbcType=NUMERIC},
+      </if>
+      <if test="taxIfrs != null" >
+        TAX_IFRS = #{taxIfrs,jdbcType=NUMERIC},
+      </if>
+      <if test="upMainIfrs != null" >
+        UP_MAIN_IFRS = #{upMainIfrs,jdbcType=NUMERIC},
+      </if>
+      <if test="upStdIfrs != null" >
+        UP_STD_IFRS = #{upStdIfrs,jdbcType=NUMERIC},
+      </if>
+      <if test="supPrdMark != null" >
+        SUP_PRD_MARK = #{supPrdMark,jdbcType=VARCHAR},
+      </if>
+      <if test="cusOsNo != null" >
+        CUS_OS_NO = #{cusOsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="qty1Fp != null" >
+        QTY1_FP = #{qty1Fp,jdbcType=NUMERIC},
+      </if>
+      <if test="isSp != null" >
+        IS_SP = #{isSp,jdbcType=VARCHAR},
+      </if>
+      <if test="dzUsr != null" >
+        DZ_USR = #{dzUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="dzDate != null" >
+        DZ_DATE = #{dzDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="scDd != null" >
+        SC_DD = #{scDd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="xpmNo != null" >
+        XPM_NO = #{xpmNo,jdbcType=VARCHAR},
+      </if>
+      <if test="xpmNo1 != null" >
+        XPM_NO1 = #{xpmNo1,jdbcType=VARCHAR},
+      </if>
+      <if test="chkXzl != null" >
+        CHK_XZL = #{chkXzl,jdbcType=VARCHAR},
+      </if>
+      <if test="qtyFa != null" >
+        QTY_FA = #{qtyFa,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyFaUnsh != null" >
+        QTY_FA_UNSH = #{qtyFaUnsh,jdbcType=NUMERIC},
+      </if>
+    </set>
+    where BL_ID = #{blId,jdbcType=VARCHAR}
+      and BL_NO = #{blNo,jdbcType=VARCHAR}
+      and ITM = #{itm,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ipace.chaoJie.A004Dto.TfBln" >
+    update TF_BLN
+    set BL_DD = #{blDd,jdbcType=TIMESTAMP},
+      WH = #{wh,jdbcType=VARCHAR},
+      PRD_NO = #{prdNo,jdbcType=VARCHAR},
+      PRD_NAME = #{prdName,jdbcType=VARCHAR},
+      PRD_MARK = #{prdMark,jdbcType=VARCHAR},
+      UNIT = #{unit,jdbcType=VARCHAR},
+      QTY = #{qty,jdbcType=NUMERIC},
+      QTY1 = #{qty1,jdbcType=NUMERIC},
+      CST = #{cst,jdbcType=NUMERIC},
+      AMT_RNT = #{amtRnt,jdbcType=NUMERIC},
+      AMTN_RNT_NET = #{amtnRntNet,jdbcType=NUMERIC},
+      TAX_RNT = #{taxRnt,jdbcType=NUMERIC},
+      UP = #{up,jdbcType=NUMERIC},
+      AMT = #{amt,jdbcType=NUMERIC},
+      AMTN = #{amtn,jdbcType=NUMERIC},
+      QTY_RTN = #{qtyRtn,jdbcType=NUMERIC},
+      QTY_RTN_UNSH = #{qtyRtnUnsh,jdbcType=NUMERIC},
+      QTY1_RTN = #{qty1Rtn,jdbcType=NUMERIC},
+      QTY1_RTN_UNSH = #{qty1RtnUnsh,jdbcType=NUMERIC},
+      PRE_BL_NO = #{preBlNo,jdbcType=VARCHAR},
+      PRE_ITM = #{preItm,jdbcType=INTEGER},
+      PAK_UNIT = #{pakUnit,jdbcType=VARCHAR},
+      PAK_EXC = #{pakExc,jdbcType=NUMERIC},
+      PAK_NW = #{pakNw,jdbcType=NUMERIC},
+      PAK_WEIGHT_UNIT = #{pakWeightUnit,jdbcType=VARCHAR},
+      PAK_GW = #{pakGw,jdbcType=NUMERIC},
+      PAK_MEAST = #{pakMeast,jdbcType=NUMERIC},
+      PAK_MEAST_UNIT = #{pakMeastUnit,jdbcType=VARCHAR},
+      VALID_DD = #{validDd,jdbcType=TIMESTAMP},
+      REM = #{rem,jdbcType=VARCHAR},
+      AMTN_COM = #{amtnCom,jdbcType=NUMERIC},
+      EST_DD = #{estDd,jdbcType=TIMESTAMP},
+      CST_STD = #{cstStd,jdbcType=NUMERIC},
+      UP_QTY1 = #{upQty1,jdbcType=NUMERIC},
+      EST_ITM = #{estItm,jdbcType=INTEGER},
+      BAT_NO = #{batNo,jdbcType=VARCHAR},
+      QTY_CK = #{qtyCk,jdbcType=NUMERIC},
+      QTY_CK_UNSH = #{qtyCkUnsh,jdbcType=NUMERIC},
+      SUP_PRD_NO = #{supPrdNo,jdbcType=VARCHAR},
+      CNTT_NO = #{cnttNo,jdbcType=VARCHAR},
+      ID_NO = #{idNo,jdbcType=VARCHAR},
+      COMPOSE_IDNO = #{composeIdno,jdbcType=VARCHAR},
+      TAX = #{tax,jdbcType=NUMERIC},
+      AMT_FP = #{amtFp,jdbcType=NUMERIC},
+      AMTN_NET_FP = #{amtnNetFp,jdbcType=NUMERIC},
+      TAX_FP = #{taxFp,jdbcType=NUMERIC},
+      QTY_FP = #{qtyFp,jdbcType=NUMERIC},
+      RK_NO = #{rkNo,jdbcType=VARCHAR},
+      CK_NO = #{ckNo,jdbcType=VARCHAR},
+      TI_ITM = #{tiItm,jdbcType=INTEGER},
+      QC_FLAG = #{qcFlag,jdbcType=VARCHAR},
+      QC_ITM = #{qcItm,jdbcType=INTEGER},
+      OS_ID = #{osId,jdbcType=VARCHAR},
+      OS_NO = #{osNo,jdbcType=VARCHAR},
+      OS_ITM = #{osItm,jdbcType=INTEGER},
+      TAX_RTO = #{taxRto,jdbcType=NUMERIC},
+      RK_DD = #{rkDd,jdbcType=TIMESTAMP},
+      DEP_RK = #{depRk,jdbcType=VARCHAR},
+      TRD_ID = #{trdId,jdbcType=VARCHAR},
+      TRD_NO = #{trdNo,jdbcType=VARCHAR},
+      TRD_ITM = #{trdItm,jdbcType=INTEGER},
+      BZ_KND = #{bzKnd,jdbcType=VARCHAR},
+      UP_MAIN = #{upMain,jdbcType=NUMERIC},
+      DIS_CNT = #{disCnt,jdbcType=NUMERIC},
+      UP_STD = #{upStd,jdbcType=NUMERIC},
+      CST_IFRS = #{cstIfrs,jdbcType=NUMERIC},
+      CST_STD_IFRS = #{cstStdIfrs,jdbcType=NUMERIC},
+      AMTN_IFRS = #{amtnIfrs,jdbcType=NUMERIC},
+      AMTN_NET_IFRS = #{amtnNetIfrs,jdbcType=NUMERIC},
+      TAX_IFRS = #{taxIfrs,jdbcType=NUMERIC},
+      UP_MAIN_IFRS = #{upMainIfrs,jdbcType=NUMERIC},
+      UP_STD_IFRS = #{upStdIfrs,jdbcType=NUMERIC},
+      SUP_PRD_MARK = #{supPrdMark,jdbcType=VARCHAR},
+      CUS_OS_NO = #{cusOsNo,jdbcType=VARCHAR},
+      QTY1_FP = #{qty1Fp,jdbcType=NUMERIC},
+      IS_SP = #{isSp,jdbcType=VARCHAR},
+      DZ_USR = #{dzUsr,jdbcType=VARCHAR},
+      DZ_DATE = #{dzDate,jdbcType=TIMESTAMP},
+      SC_DD = #{scDd,jdbcType=TIMESTAMP},
+      XPM_NO = #{xpmNo,jdbcType=VARCHAR},
+      XPM_NO1 = #{xpmNo1,jdbcType=VARCHAR},
+      CHK_XZL = #{chkXzl,jdbcType=VARCHAR},
+      QTY_FA = #{qtyFa,jdbcType=NUMERIC},
+      QTY_FA_UNSH = #{qtyFaUnsh,jdbcType=NUMERIC}
+    where BL_ID = #{blId,jdbcType=VARCHAR}
+      and BL_NO = #{blNo,jdbcType=VARCHAR}
+      and ITM = #{itm,jdbcType=INTEGER}
+  </update>
+</mapper>
