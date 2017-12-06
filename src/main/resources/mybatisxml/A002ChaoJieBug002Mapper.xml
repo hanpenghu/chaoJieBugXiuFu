@@ -295,7 +295,7 @@
             WHERE
                  ISNULL(QTY_IN,0)>0
                 AND ISNULL(QTY_IN,0)>ISNULL(QTY_OUT,0)
-               AND BAT_NO=#{batNo} AND PRD_NO=#{prdNo} AND WH=#{wh1}
+               AND BAT_NO=#{batNo} AND PRD_NO=#{prdNo} AND WH=#{wh1}----wh2是入货库位,wh1是出货库位
             ORDER BY RK_DD ASC
     </select>
 
@@ -305,8 +305,8 @@
              BAT_REC1_DAY
         WHERE
             ISNULL(QTY_IN,0)>0
-            AND ISNULL(QTY_IN,0)-ISNULL(QTY_OUT,0)>0
-            AND BAT_NO=#{batNo} AND PRD_NO=#{prdNo} AND WH=#{wh1}
+            AND ISNULL(QTY_IN,0)>ISNULL(QTY_OUT,0)
+            AND BAT_NO=#{batNo} AND PRD_NO=#{prdNo} AND WH=#{wh1}----wh2是入货库位,wh1是出货库位
         ---ORDER BY RK_DD ASC
     </select>
 <select id="getItmOfLastOfTfIcOfICLN" resultMap="BaseResultMap003">

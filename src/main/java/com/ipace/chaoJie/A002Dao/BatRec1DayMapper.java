@@ -3,6 +3,8 @@ package com.ipace.chaoJie.A002Dao;
 import com.ipace.chaoJie.A004Dto.BatRec1Day;
 import com.ipace.chaoJie.A004Dto.BatRec1DayExample;
 import com.ipace.chaoJie.A004Dto.BatRec1DayKey;
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -28,4 +30,5 @@ public interface BatRec1DayMapper {
     int updateByPrimaryKeySelective(BatRec1Day record);
 
     int updateByPrimaryKey(BatRec1Day record);
+
 }
