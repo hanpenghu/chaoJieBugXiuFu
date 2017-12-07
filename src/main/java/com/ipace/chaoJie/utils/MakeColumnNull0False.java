@@ -1,9 +1,12 @@
 package com.ipace.chaoJie.utils;
 
 import com.ipace.chaoJie.A004Dto.BatRec1;
-import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * 该方法
  *不能设置父类的字段为null
@@ -11,8 +14,19 @@ import java.lang.reflect.Field;
 public class MakeColumnNull0False<T> {
 
     public  T f(T o)  {
-        Field[] fs = o.getClass().getDeclaredFields();
-        for(Field field:fs){
+        /**
+         ******下面一直到while*会得到该类及其父类的所有字段*********************************************************************************
+         * */
+        List<Field> fieldList=new ArrayList<>();
+        Class<?> aClass = o.getClass();
+        while (aClass != null) {//用while得到所有超类的字段属性
+            fieldList.addAll(Arrays.asList(aClass.getDeclaredFields()));
+            aClass = aClass.getSuperclass(); //得到父类,然后赋给自己
+        }
+        /**
+         *****上面会得到该类及其父类的所有字段***********************************************************************************
+         * */
+        for(Field field:fieldList){
             field.setAccessible(true);
             Class<?> type = field.getType();
             if("int".equals(type.getName())){
@@ -64,6 +78,7 @@ public class MakeColumnNull0False<T> {
 
         return o;
     }
+
 
 
     public static void main(String[]args) {
