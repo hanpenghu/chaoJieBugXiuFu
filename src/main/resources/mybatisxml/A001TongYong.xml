@@ -7,9 +7,15 @@
 --     update a set a.rem=c.tgdw  from up_def a,tf_hj b,tf_hj_z c
 -- where a.price_id=3 and a.s_dd>'2017-11-18' and a.hj_no=b.hj_no and a.pre_itm=b.itm
 -- and b.hj_no=c.hj_no and b.itm=c.itm
-        update a set a.rem=c.tgdw  from up_def a,tf_hj b,tf_hj_z c
-        where a.price_id=3 and a.s_dd>'2017-11-18' and a.hj_no=b.hj_no and a.pre_itm=b.itm
-        and b.hj_no=c.hj_no and b.itm=c.itm
+
+--         update a set a.rem=c.tgdw  from up_def a,tf_hj b,tf_hj_z c
+--         where a.price_id=3 and a.s_dd>'2017-11-18' and a.hj_no=b.hj_no and a.pre_itm=b.itm
+--         and b.hj_no=c.hj_no and b.itm=c.itm
+
+update a set a.rem=c.tgdw  from up_def a,tf_hj b,tf_hj_z c
+where a.price_id=3 and a.s_dd>'2017-11-18' and a.hj_no=b.hj_no and a.pre_itm=b.pre_itm
+and b.hj_no=c.hj_no and b.itm=c.itm
+
 </update>
 
     <update id="chaoJieBug001_2">
@@ -22,23 +28,45 @@
 --         and b.cus_no=c.cus_no and a.prd_no=c.prd_no
 --         and a.tw_no=d.tw_no and c.bz_knd=d.zc_no and c.s_dd>='2017-11-18'
 --         and c.rem='01' and isnull(a.QTY,0)!=0
-            update a set a.COMPOSE_IDNO='SW004',a.UP_QTY1=c.up,a.UP=round(c.up*a.QTY1/a.QTY,6),
-            a.AMT=round(c.up*a.qty1,2),
-            a.TAX=round(round(c.up*a.qty1,2)/1.17*0.17,2),
-            a.AMTN_NET=(round(c.up*a.qty1,2)-round(round(c.up*a.qty1,2)/1.17*0.17,2))
-            from tf_tb a,mf_tb b,up_def c,mf_tw d
-            where (b.lock_man IS NULL OR b.lock_man='') and a.tb_no=b.tb_no
-            and b.cus_no=c.cus_no and a.prd_no=c.prd_no
-            and a.tw_no=d.tw_no and c.bz_knd=d.zc_no and c.s_dd>='2017-11-18'
-            and c.rem='01'
+
+
+--             update a set a.COMPOSE_IDNO='SW004',a.UP_QTY1=c.up,a.UP=round(c.up*a.QTY1/a.QTY,6),
+--             a.AMT=round(c.up*a.qty1,2),
+--             a.TAX=round(round(c.up*a.qty1,2)/1.17*0.17,2),
+--             a.AMTN_NET=(round(c.up*a.qty1,2)-round(round(c.up*a.qty1,2)/1.17*0.17,2))
+--             from tf_tb a,mf_tb b,up_def c,mf_tw d
+--             where (b.lock_man IS NULL OR b.lock_man='') and a.tb_no=b.tb_no
+--             and b.cus_no=c.cus_no and a.prd_no=c.prd_no
+--             and a.tw_no=d.tw_no and c.bz_knd=d.zc_no and c.s_dd>='2017-11-18'
+--             and c.rem='01'
+
+
+update a set a.COMPOSE_IDNO='SW004',a.UP_QTY1=c.up,a.UP=round(c.up*a.QTY1/a.QTY,6),
+a.AMT=round(c.up*a.qty1,2),
+a.TAX=round(round(c.up*a.qty1,2)/1.17*0.17,2),
+a.AMTN_NET=(round(c.up*a.qty1,2)-round(round(c.up*a.qty1,2)/1.17*0.17,2))
+from tf_tb a,mf_tb b,up_def c,mf_tw d
+where (b.lock_man IS NULL OR b.lock_man='') and a.tb_no=b.tb_no
+and b.cus_no=c.cus_no and a.prd_no=c.prd_no
+and a.tw_no=d.tw_no and c.bz_knd=d.zc_no and c.s_dd>='2017-11-18'
+and c.rem='01'
+
+
+
     </update>
 
     <update id="chaoJieBug001_3">
 --         update b set b.lock_man=a.COMPOSE_IDNO from tf_tb a,mf_tb b
 --         where a.tb_no=b.tb_no and (b.lock_man IS NULL OR b.lock_man='') and a.COMPOSE_IDNO='SW004'
-            update b set b.lock_man=a.COMPOSE_IDNO from tf_tb a,mf_tb b
-            where a.tb_no=b.tb_no and (b.lock_man IS NULL OR b.lock_man='') and a.COMPOSE_IDNO='SW004'
-    </update>
+--             update b set b.lock_man=a.COMPOSE_IDNO from tf_tb a,mf_tb b
+--             where a.tb_no=b.tb_no and (b.lock_man IS NULL OR b.lock_man='') and a.COMPOSE_IDNO='SW004'
+
+
+update b set b.lock_man=a.COMPOSE_IDNO from tf_tb a,mf_tb b
+where a.tb_no=b.tb_no and (b.lock_man IS NULL OR b.lock_man='') and a.COMPOSE_IDNO='SW004'
+
+
+</update>
     <update id="chaoJieBug001_4">
 --         update a set a.COMPOSE_IDNO='SW004',a.UP=c.up,a.UP_QTY1=round(c.up*a.QTY/a.QTY1,6),
 --         a.AMT=round(c.up*a.qty,2),
@@ -49,6 +77,19 @@
 --         and b.cus_no=c.cus_no and a.prd_no=c.prd_no
 --         and a.tw_no=d.tw_no and c.bz_knd=d.zc_no and c.s_dd>='2017-11-18'
 --         and c.rem='02'   and isnull(a.QTY1,0)!=0
+
+
+
+--         update a set a.COMPOSE_IDNO='SW004',a.UP=c.up,a.UP_QTY1=round(c.up*a.QTY/a.QTY1,6),
+--         a.AMT=round(c.up*a.qty,2),
+--         a.TAX=round(round(c.up*a.qty,2)/1.17*0.17,2),
+--         a.AMTN_NET=(round(c.up*a.qty,2)-round(round(c.up*a.qty,2)/1.17*0.17,2))
+--         from tf_tb a,mf_tb b,up_def c,mf_tw d
+--         where (b.lock_man IS NULL OR b.lock_man='') and a.tb_no=b.tb_no
+--         and b.cus_no=c.cus_no and a.prd_no=c.prd_no
+--         and a.tw_no=d.tw_no and c.bz_knd=d.zc_no and c.s_dd>='2017-11-18'
+--         and c.rem='02'  and isnull(a.QTY1,0)!=0
+
         update a set a.COMPOSE_IDNO='SW004',a.UP=c.up,a.UP_QTY1=round(c.up*a.QTY/a.QTY1,6),
         a.AMT=round(c.up*a.qty,2),
         a.TAX=round(round(c.up*a.qty,2)/1.17*0.17,2),
@@ -58,25 +99,54 @@
         and b.cus_no=c.cus_no and a.prd_no=c.prd_no
         and a.tw_no=d.tw_no and c.bz_knd=d.zc_no and c.s_dd>='2017-11-18'
         and c.rem='02'  and isnull(a.QTY1,0)!=0
+
+
+
     </update>
     <update id="chaoJieBug001_5">
-          update b set b.lock_man=a.COMPOSE_IDNO from tf_tb a,mf_tb b
-          where a.tb_no=b.tb_no and (b.lock_man IS NULL OR b.lock_man='') and a.COMPOSE_IDNO='SW004'
+--           update b set b.lock_man=a.COMPOSE_IDNO from tf_tb a,mf_tb b
+--           where a.tb_no=b.tb_no and (b.lock_man IS NULL OR b.lock_man='') and a.COMPOSE_IDNO='SW004'
+
+update b set b.lock_man=a.COMPOSE_IDNO from tf_tb a,mf_tb b
+where a.tb_no=b.tb_no and (b.lock_man IS NULL OR b.lock_man='') and a.COMPOSE_IDNO='SW004'
+
+
+
+
     </update>
 
     <update id="chaoJieBug001_6">
+--         update a set a.COMPOSE_IDNO='SW004',a.UP=c.up,
+--         a.AMT=round(c.up*a.qty,2),
+--         a.TAX=round(round(c.up*a.qty,2)/1.17*0.17,2),
+--         a.AMTN_NET=(round(c.up*a.qty,2)-round(round(c.up*a.qty,2)/1.17*0.17,2))
+--         from tf_tb a,mf_tb b,up_def c,mf_tw d
+--         where (b.lock_man IS NULL OR b.lock_man='') and a.tb_no=b.tb_no
+--         and b.cus_no=c.cus_no and a.prd_no=c.prd_no
+--         and a.tw_no=d.tw_no and c.bz_knd=d.zc_no and c.s_dd>='2017-11-18'
+--         and c.rem='02'  and isnull(a.QTY1,0)=0
+
         update a set a.COMPOSE_IDNO='SW004',a.UP=c.up,
-        a.AMT=round(c.up*a.qty,2),
-        a.TAX=round(round(c.up*a.qty,2)/1.17*0.17,2),
-        a.AMTN_NET=(round(c.up*a.qty,2)-round(round(c.up*a.qty,2)/1.17*0.17,2))
-        from tf_tb a,mf_tb b,up_def c,mf_tw d
-        where (b.lock_man IS NULL OR b.lock_man='') and a.tb_no=b.tb_no
-        and b.cus_no=c.cus_no and a.prd_no=c.prd_no
-        and a.tw_no=d.tw_no and c.bz_knd=d.zc_no and c.s_dd>='2017-11-18'
-        and c.rem='02'  and isnull(a.QTY1,0)=0
+a.AMT=round(c.up*a.qty,2),
+a.TAX=round(round(c.up*a.qty,2)/1.17*0.17,2),
+a.AMTN_NET=(round(c.up*a.qty,2)-round(round(c.up*a.qty,2)/1.17*0.17,2))
+from tf_tb a,mf_tb b,up_def c,mf_tw d
+where (b.lock_man IS NULL OR b.lock_man='') and a.tb_no=b.tb_no
+and b.cus_no=c.cus_no and a.prd_no=c.prd_no
+and a.tw_no=d.tw_no and c.bz_knd=d.zc_no and c.s_dd>='2017-11-18'
+and c.rem='02'  and isnull(a.QTY1,0)=0
+
+
+
     </update>
     <update id="chaoJieBug001_7">
-        update b set b.lock_man=a.COMPOSE_IDNO from tf_tb a,mf_tb b
-        where a.tb_no=b.tb_no and (b.lock_man IS NULL OR b.lock_man='') and a.COMPOSE_IDNO='SW004'
+--         update b set b.lock_man=a.COMPOSE_IDNO from tf_tb a,mf_tb b
+--         where a.tb_no=b.tb_no and (b.lock_man IS NULL OR b.lock_man='') and a.COMPOSE_IDNO='SW004'
+
+
+   update b set b.lock_man=a.COMPOSE_IDNO from tf_tb a,mf_tb b
+where a.tb_no=b.tb_no and (b.lock_man IS NULL OR b.lock_man='') and a.COMPOSE_IDNO='SW004'
+
+
     </update>
 </mapper>

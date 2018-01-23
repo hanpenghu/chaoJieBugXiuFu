@@ -1,6 +1,6 @@
 package com.ipace.chaoJie.utils;
 
-import com.ipace.chaoJie.A004Dto.BatRec1;
+
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -78,16 +78,6 @@ public class MakeColumnNull0False<T> {
 
         return o;
     }
-
-
-
-    public static void main(String[]args) {
-        BatRec1 a = new BatRec1();
-        System.out.println(a.getPass());
-        a= new MakeColumnNull0False<BatRec1>().f(a);
-        System.out.println(a.getPass());
-    }
-
 
 }
 

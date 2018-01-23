@@ -1,0 +1,35 @@
+package com.ipace.chaoJie.A003Services.testCreateTab;
+import com.ipace.chaoJie.A000Component.Cnst;
+import com.ipace.chaoJie.A000Component.ICnst;
+import com.ipace.chaoJie.utils.p;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Service;
+
+@Service
+public class TestCreateTab {
+    @Autowired
+    private Cnst cnst;
+
+
+    @Scheduled(fixedDelay=10*24*60*60)
+    public void test(){
+        p.p(cnst.a001TongYongMapper.tabCount());
+        try {
+            cnst.a001TongYongMapper.CreateTab();
+        } catch (Exception e) {
+            p.p(e.toString().contains("test3"));
+        }
+
+        p.p(p.gp().sad(p.dexhx).sad("chuang jian biao test3 success")
+                .sad(p.dexhx).gad());
+        p.p(p.gp().sad(p.dexhx).sad("程序执行完了,关闭").sad(p.dexhx).gad());
+        System.exit(0);
+    }
+
+
+    public static void main(String[]args){
+            p.p(p.gp().sad(null).sad("1").gad());
+    }
+
+}
