@@ -44,7 +44,7 @@ public class QianWeiChengBen {
                     m.get("a2").toString(),
                     m.get("a3").toString(),
                     m.get("a4").toString());
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
 
         }
         p.p(p.gp().sad(p.dexhx).sad("Q20180119计算结束").sad(p.dexhx).gad());
@@ -64,7 +64,7 @@ public class QianWeiChengBen {
                     m.get("a2").toString(),
                     m.get("a3").toString(),
                     m.get("a4").toString());
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
 
         }
         p.p(p.gp().sad(p.dexhx).sad("Q20180123计算结束").sad(p.dexhx).gad());
