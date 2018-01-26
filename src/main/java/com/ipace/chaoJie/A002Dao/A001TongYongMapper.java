@@ -130,7 +130,8 @@ public interface A001TongYongMapper {
             "A.PRD_NO,A.ID_NO,SUM(isnull(A.QTY_FIN,0))WR_QTY,\n" +
             "(SELECT DEP FROM MF_TZ WHERE TZ_NO=A.TZ_NO)DEP,\n" +
             "(SELECT ZC_NO FROM MF_TZ WHERE TZ_NO=A.TZ_NO)ZC_NO,\n" +
-            "(select UT_TIME from tf_zc where bom_no=A.id_no and ZC_NO=(SELECT ZC_NO FROM MF_TZ WHERE TZ_NO=A.TZ_NO)) UT_TIME,\n" +
+            "(select UT_TIME from tf_zc where bom_no=A.id_no " +
+            "and ZC_NO=(SELECT ZC_NO FROM MF_TZ WHERE TZ_NO=A.TZ_NO)) UT_TIME,\n" +
             "isnull((select RT_MAKE from dept where dep=(SELECT DEP FROM MF_TZ WHERE TZ_NO=A.TZ_NO)),0) ZJS,\n" +
             "isnull((select RT_MAN from dept where dep=(SELECT DEP FROM MF_TZ WHERE TZ_NO=A.TZ_NO)),0) RJS\n" +
             "FROM TF_WR A\n" +
@@ -156,7 +157,8 @@ public interface A001TongYongMapper {
             "RGL= RJE/(select SUM(isnull(RJE,0)) from A_CB4) \n" +
             "FROM A_CB4\n" +
             "where YY=#{a1} and MM=#{a2}")
-    Integer x8(@Param("a1") String a1, @Param("a2") String a2, @Param("a3") String a3, @Param("a4") String a4);
+    Integer x8(@Param("a1") String a1, @Param("a2") String a2,
+               @Param("a3") String a3, @Param("a4") String a4);
 
 
 
@@ -178,7 +180,8 @@ public interface A001TongYongMapper {
             "    QTF = ZZL * (select QTF from A_CB3 where yy=#{a1} and mm=#{a2}),\n" +
             "    RGF = RGL * (select RGF from A_CB3 where yy=#{a1} and mm=#{a2})    \n" +
             "from A_CB4 where YY=#{a1} and MM=#{a2}")
-    Integer x9(@Param("a1") String a1, @Param("a2") String a2, @Param("a3") String a3, @Param("a4") String a4);
+    Integer x9(@Param("a1") String a1, @Param("a2") String a2,
+               @Param("a3") String a3, @Param("a4") String a4);
 
     /**
      *a1 就是2016
@@ -190,7 +193,8 @@ public interface A001TongYongMapper {
             "set ZZF = ZJF+MJF+YSF+GJF+WHF+XLF+TXF+DF+QTF\n" +
             "from A_CB4\n" +
             "where yy=#{a1} and mm=#{a2}")
-    Integer x10(@Param("a1") String a1, @Param("a2") String a2, @Param("a3") String a3, @Param("a4") String a4);
+    Integer x10(@Param("a1") String a1, @Param("a2") String a2,
+                @Param("a3") String a3, @Param("a4") String a4);
 
     @Update("UPDATE A_A1\n" +
             "SET BZFY=(SELECT ISNULL(ZZF,0) FROM A_CB4 WHERE TZ_NO=A.TZ_NO and YY=#{a1} AND MM=#{a2}),\n" +
@@ -199,7 +203,8 @@ public interface A001TongYongMapper {
             "    BMM_QTY=(SELECT SUM(isnull(QTY,0)) FROM " +
             "TF_MM0 WHERE MO_NO=A.MO_NO and mm_dd>=#{a3} and mm_dd<=#{a4} GROUP BY MO_NO)\n" +
             "FROM A_A1 A WHERE A.TZ_NO IN (SELECT TZ_NO FROM A_CB4 WHERE YY=#{a1} AND MM=#{a2})\n")
-    Integer x11(@Param("a1") String a1, @Param("a2") String a2, @Param("a3") String a3, @Param("a4") String a4);
+    Integer x11(@Param("a1") String a1, @Param("a2") String a2,
+                @Param("a3") String a3, @Param("a4") String a4);
 
     @Update("CREATE TABLE A_CB6\n" +
             "(\n" +
@@ -218,7 +223,8 @@ public interface A001TongYongMapper {
             "\tQTFY numeric(22, 8) NULL,\n" +
             "\tZCB numeric(22, 8) NULL\n" +
             ")\n")
-    void x12(@Param("a1") String a1, @Param("a2") String a2, @Param("a3") String a3, @Param("a4") String a4);
+    void x12(@Param("a1") String a1, @Param("a2") String a2,
+             @Param("a3") String a3, @Param("a4") String a4);
 
 
     /**
@@ -229,8 +235,9 @@ public interface A001TongYongMapper {
      * */
     @Insert("insert into A_CB6(YY,MM,MM_NO,MM_DD,MO_NO,PRD_NO,iD_NO,QTY) select #{a1}," +
             "#{a2},MM_NO,MM_DD,MO_NO,PRD_NO,ID_NO,QTY from TF_MM0 where MM_DD>=#{a3} " +
-            "and MM_DD<=#{a4}\n")
-    void x13(@Param("a1") String a1, @Param("a2") String a2, @Param("a3") String a3, @Param("a4") String a4);
+            "and MM_DD<=#{a4}")
+    void x13(@Param("a1") String a1, @Param("a2") String a2,
+             @Param("a3") String a3, @Param("a4") String a4);
 
 
 
@@ -242,8 +249,14 @@ public interface A001TongYongMapper {
      * */
     @Update("update A_CB6\n" +
             "set zcb=((select dwcb from A_CB1 where mo_no=A.mo_no and mrp_no=A.prd_no)*A.QTY)\n" +
-            "from A_CB6 A where mo_no in (select mo_no from A_CB1) and yy=#{a1} and mm=#{a2}\n")
-    Integer x14(@Param("a1") String a1, @Param("a2") String a2, @Param("a3") String a3, @Param("a4") String a4);
+            "from A_CB6 A where mo_no in (select mo_no from A_CB1) and yy=#{a1} and mm=#{a2}")
+    Integer x14(@Param("a1") String a1, @Param("a2") String a2,
+                @Param("a3") String a3, @Param("a4") String a4);
+    /**
+     *update A_CB6
+     set zcb=((select dwcb from A_CB1 where mo_no=A.mo_no and mrp_no=A.prd_no)*A.QTY)
+     from A_CB6 A where mo_no in (select mo_no from A_CB1) and yy='2016' and mm='1'
+     * */
 
     /**
      *a1 就是2016
@@ -253,8 +266,10 @@ public interface A001TongYongMapper {
      * */
     @Update("UPDATE A_CB6\n" +
             "SET \n" +
-            "ZZFY=(SELECT ((SUM(ISNULL(ZZFY,0))-SUM(ISNULL(YTZF,0))+SUM(ISNULL(BZFY,0)))/(SUM(ISNULL(ZWR_QTY,0))-SUM(ISNULL(YWR_QTY,0))+SUM(ISNULL(BWR_QTY,0)))) FROM A_A1 WHERE (ISNULL(ZWR_QTY,0)-ISNULL(YWR_QTY,0)+ISNULL(BWR_QTY,0))!=0 AND MO_NO=A.MO_NO GROUP BY MO_NO)*A.QTY,\n" +
-            "RGFY=(SELECT ((SUM(ISNULL(ZRGF,0))-SUM(ISNULL(YTRG,0))+SUM(ISNULL(BRGF,0)))/(SUM(ISNULL(ZWR_QTY,0))-SUM(ISNULL(YWR_QTY,0))+SUM(ISNULL(BWR_QTY,0)))) FROM A_A1 WHERE (ISNULL(ZWR_QTY,0)-ISNULL(YWR_QTY,0)+ISNULL(BWR_QTY,0))!=0 AND MO_NO=A.MO_NO GROUP BY MO_NO)*A.QTY\n" +
+            "ZZFY=(SELECT ((SUM(ISNULL(ZZFY,0))-SUM(ISNULL(YTZF,0))+SUM(ISNULL(BZFY,0)))/(SUM(ISNULL(ZWR_QTY,0))-SUM(ISNULL(YWR_QTY,0))+SUM(ISNULL(BWR_QTY,0))))" +
+            " FROM A_A1 WHERE (ISNULL(ZWR_QTY,0)-ISNULL(YWR_QTY,0)+ISNULL(BWR_QTY,0))!=0 AND MO_NO=A.MO_NO GROUP BY MO_NO)*A.QTY,\n" +
+            "RGFY=(SELECT ((SUM(ISNULL(ZRGF,0))-SUM(ISNULL(YTRG,0))+SUM(ISNULL(BRGF,0)))/(SUM(ISNULL(ZWR_QTY,0))-SUM(ISNULL(YWR_QTY,0))+SUM(ISNULL(BWR_QTY,0)))) " +
+            "FROM A_A1 WHERE (ISNULL(ZWR_QTY,0)-ISNULL(YWR_QTY,0)+ISNULL(BWR_QTY,0))!=0 AND MO_NO=A.MO_NO GROUP BY MO_NO)*A.QTY\n" +
             "FROM A_CB6 A\n" +
             "WHERE A.MO_NO IN (SELECT MO_NO FROM A_CB4 WHERE YY=#{a1} AND MM=#{a2})")
     Integer x15(@Param("a1") String a1, @Param("a2") String a2, @Param("a3") String a3, @Param("a4") String a4);
@@ -283,20 +298,32 @@ public interface A001TongYongMapper {
 
 
     @Insert("insert into A_B1 SELECT #{a1},#{a2},* FROM A_A1")
-    void x17(@Param("a1") String a1, @Param("a2") String a2, @Param("a3") String a3, @Param("a4") String a4);
+    void x17(@Param("a1") String a1, @Param("a2") String a2,
+             @Param("a3") String a3, @Param("a4") String a4);
 
 
     @Update("UPDATE A_A1\n" +
-            "SET ZZFY=ISNULL(ZZFY,0)+ISNULL(BZFY,0),ZRGF=ISNULL(ZRGF,0)+ISNULL(BRGF,0),ZWR_QTY=ISNULL(ZWR_QTY,0)+ISNULL(BWR_QTY,0)\n" +
+            "SET ZZFY=ISNULL(ZZFY,0)+ISNULL(BZFY,0),ZRGF=ISNULL(ZRGF,0)+ISNULL(BRGF,0)," +
+            "ZWR_QTY=ISNULL(ZWR_QTY,0)+ISNULL(BWR_QTY,0)\n" +
             "FROM A_A1")
-    Integer x18(@Param("a1") String a1, @Param("a2") String a2, @Param("a3") String a3, @Param("a4") String a4);
+    Integer x18(@Param("a1") String a1, @Param("a2") String a2,
+                @Param("a3") String a3, @Param("a4") String a4);
 
+
+
+    /**
+     *a1 就是2016
+     * a2就是 1
+     * a3就是 2016-01-01
+     * a4 就是 2016-01-31
+     * */
     @Update("UPDATE A_A1\n" +
             "SET YTZF=A.BZFY,YTRG=A.BRGF\n" +
             "FROM A_A1 A WHERE (ISNULL(ZWR_QTY,0)-ISNULL(YWR_QTY,0))!=0 AND\n" +
-            "ZWR_QTY<=(SELECT SUM(isnull(QTY,0)) FROM TF_MM0 WHERE MM_DD<=#{a4} " +
-            "AND MO_NO=A.MO_NO GROUP BY MO_NO)")
-    Integer x19(@Param("a1") String a1, @Param("a2") String a2, @Param("a3") String a3, @Param("a4") String a4);
+            "ZWR_QTY<=(SELECT SUM(isnull(QTY,0)) FROM TF_MM0 " +
+            "WHERE MM_DD<=#{a4} AND MO_NO=A.MO_NO GROUP BY MO_NO)")
+    Integer x19(@Param("a1") String a1, @Param("a2") String a2,
+                @Param("a3") String a3, @Param("a4") String a4);
 
     @Update("UPDATE A_A1\n" +
             "SET \n" +
@@ -309,20 +336,24 @@ public interface A001TongYongMapper {
     @Update("UPDATE A_A1\n" +
             "SET YWR_QTY=ISNULL(YWR_QTY,0)+ISNULL(BWR_QTY,0)\n" +
             "FROM A_A1 A WHERE (ISNULL(ZWR_QTY,0)-ISNULL(YWR_QTY,0))!=0 AND\n" +
-            "ZWR_QTY<=(SELECT SUM(isnull(QTY,0)) FROM TF_MM0 WHERE MM_DD<=#{a4} AND MO_NO=A.MO_NO GROUP BY MO_NO)")
-    Integer x21(@Param("a1") String a1, @Param("a2") String a2, @Param("a3") String a3, @Param("a4") String a4);
+            "ZWR_QTY<=(SELECT SUM(isnull(QTY,0)) FROM TF_MM0" +
+            " WHERE MM_DD<=#{a4} AND MO_NO=A.MO_NO GROUP BY MO_NO)")
+    Integer x21(@Param("a1") String a1, @Param("a2") String a2,
+                @Param("a3") String a3, @Param("a4") String a4);
 
     @Update("UPDATE A_A1\n" +
             "SET YWR_QTY=ISNULL(YWR_QTY,0)+ISNULL(BMM_QTY,0)\n" +
             "FROM A_A1 A WHERE (ISNULL(ZWR_QTY,0)-ISNULL(YWR_QTY,0))!=0 AND\n" +
             "ZWR_QTY>(SELECT SUM(isnull(QTY,0)) FROM TF_MM0 " +
             "WHERE MM_DD<=#{a4} AND MO_NO=A.MO_NO GROUP BY MO_NO)")
-    Integer x22(@Param("a1") String a1, @Param("a2") String a2, @Param("a3") String a3, @Param("a4") String a4);
+    Integer x22(@Param("a1") String a1, @Param("a2") String a2,
+                @Param("a3") String a3, @Param("a4") String a4);
 
     @Update("UPDATE A_A1\n" +
             "SET BZFY=0,BRGF=0,BWR_QTY=0,BMM_QTY=0\n" +
             "FROM A_A1")
-    Integer x23(@Param("a1") String a1, @Param("a2") String a2, @Param("a3") String a3, @Param("a4") String a4);
+    Integer x23(@Param("a1") String a1, @Param("a2") String a2,
+                @Param("a3") String a3, @Param("a4") String a4);
 
     @Update("CREATE TABLE A_B4\n" +
             "(\n" +
@@ -358,7 +389,8 @@ public interface A001TongYongMapper {
             "PRD_NO IN (SELECT MRP_NO FROM A_B4 WHERE YY=#{a1} AND MM=#{a2}) " +
             "AND PRD_NO=A.MRP_NO GROUP BY PRD_NO)\n" +
             "FROM A_B4 A WHERE YY=#{a1} AND MM=#{a2}")
-    Integer x26(@Param("a1") String a1, @Param("a2") String a2, @Param("a3") String a3, @Param("a4") String a4);
+    Integer x26(@Param("a1") String a1, @Param("a2") String a2,
+                @Param("a3") String a3, @Param("a4") String a4);
 
     @Update("UPDATE A_CB6\n" +
             "SET QTFY =(SELECT DWCB FROM A_B4 WHERE YY=#{a1} AND MM=#{a2} AND MRP_NO=A.PRD_NO)*A.QTY\n" +
@@ -408,7 +440,8 @@ public interface A001TongYongMapper {
             "select A.MLID,A.TZ_NO,(select mo_no from mf_tz where tz_no=A.tz_no)MO_NO,\n" +
             "(SELECT MRP_NO FROM MF_MO WHERE MO_NO=(select mo_no from mf_tz where tz_no=A.tz_no))MRP_NO,\n" +
             "(SELECT QTY FROM MF_MO WHERE MO_NO=(select mo_no from mf_tz where tz_no=A.tz_no))MRP_BQTY,\n" +
-            "(SELECT SUM(QTY) FROM TF_MM0 WHERE MO_NO=(select mo_no from mf_tz where tz_no=A.tz_no) AND MM_DD>=#{a3} AND MM_DD<=#{a4})MM_BQTY,\n" +
+            "(SELECT SUM(QTY) FROM TF_MM0 WHERE MO_NO=(select mo_no from mf_tz where tz_no=A.tz_no)" +
+            " AND MM_DD>=#{a3} AND MM_DD<=#{a4})MM_BQTY,\n" +
             "(select FIN_DD from mf_mo where mo_no=(select mo_no from mf_tz where tz_no=A.tz_no))MO_FIN,\n" +
             "A.PRD_NO,(select knd from prdt where prd_no=A.prd_no)KND,\n" +
             "A.EST_ITM,(select qty from tf_tz where tz_no=A.tz_no and itm=A.est_itm)YL_QTY,\n" +
@@ -713,8 +746,9 @@ public interface A001TongYongMapper {
     /////////////////////Q20180123/////下面是钱伟第二个计算用的/////////////////////////////////////////
 
 
-    @Insert("insert into A_CB2(YY,MM,PRD_NO) SELECT #{a1},#{a2},PRD_NO FROM PRDT WHERE KND=#{a2} OR KND='3'")
-    void x62(@Param("a1") String a1, @Param("a2") String a2, @Param("a3") String a3, @Param("a4") String a4);
+    @Insert("insert into A_CB2(YY,MM,PRD_NO) SELECT #{a1},#{a2},PRD_NO FROM PRDT WHERE KND='2' OR KND='3'")
+    void x62(@Param("a1") String a1, @Param("a2") String a2,
+             @Param("a3") String a3, @Param("a4") String a4);
     @Insert("insert into A_A1(TZ_NO,MO_NO,TZ_QTY) \n" +
             "SELECT TZ_NO,MO_NO,QTY \n" +
             "FROM MF_TZ WHERE TZ_DD>=#{a3} and TZ_DD<=#{a4} and mo_no in (select mo_no from mf_mo)\n" +
@@ -903,7 +937,8 @@ public interface A001TongYongMapper {
             "(SELECT MRP_NO FROM MF_MO WHERE MO_NO=A.MO_NO)MRP_NO,\n" +
             "(SELECT ISNULL(QTY,0) FROM MF_MO WHERE MO_NO=A.MO_NO)MRP_QTY,\n" +
             "(select FIN_DD from mf_mo where mo_no=A.MO_NO)MO_FIN,\n" +
-            "A.PRD_NO,(select knd from prdt where prd_no=A.prd_no)KND,A.EST_ITM,(select QTY_RSV from tf_mo where mo_no=A.mo_no and itm=A.est_itm)YL_QTY\n" +
+            "A.PRD_NO,(select knd from prdt where prd_no=A.prd_no)KND,A.EST_ITM," +
+            "(select QTY_RSV from tf_mo where mo_no=A.mo_no and itm=A.est_itm)YL_QTY\n" +
             "INTO A_A2_B\n" +
             "from tf_ml A \n" +
             "where A.ml_dd>=#{a3} and A.ml_dd<=#{a4} and (tz_no is null or tz_no ='' or A.mlid='M4') \n" +
@@ -1042,11 +1077,26 @@ public interface A001TongYongMapper {
             "AND A.MO_NO IN (SELECT MO_NO FROM MF_MO WHERE MO_DD>=#{a3} AND MO_DD<=#{a4})\n")
     Integer x106(@Param("a1") String a1, @Param("a2") String a2, @Param("a3") String a3, @Param("a4") String a4);
 
+
+
+    /**
+     *a1 就是2016
+     * a2就是 1
+     * a3就是 2016-01-01
+     * a4 就是 2016-01-31
+     * */
     @Update("UPDATE A_A2\n" +
             "SET B_DWCB=\n" +
-            "(SELECT SUM(A.ZCB)/SUM(A.QTY) from A_CB6 A where A.YY=#{a1} AND A.MM=#{a2} AND (SELECT KND FROM PRDT WHERE PRD_NO=A.PRD_NO)='3' AND A.MO_NO IN (SELECT MO_NO FROM MF_MO WHERE MO_DD>=#{a3} AND MO_DD<=#{a4}) GROUP BY A.PRD_NO)\n" +
-            "FROM A_A2 B WHERE B.PRD_NO IN (SELECT A.PRD_NO from A_CB6 A where A.YY=#{a1} AND A.MM=#{a2} AND (SELECT KND FROM PRDT WHERE PRD_NO=A.PRD_NO)='3' AND A.MO_NO IN (SELECT MO_NO FROM MF_MO WHERE MO_DD>=#{a3} AND MO_DD<=#{a4}) GROUP BY A.PRD_NO)")
-    Integer x107(@Param("a1") String a1, @Param("a2") String a2, @Param("a3") String a3, @Param("a4") String a4);
+            "(SELECT SUM(A.ZCB)/SUM(A.QTY) from A_CB6 A where A.YY=#{a1} " +
+            "AND A.MM='4' AND (SELECT KND FROM PRDT WHERE PRD_NO=A.PRD_NO)='3'" +
+            " AND A.MO_NO IN (SELECT MO_NO FROM MF_MO WHERE MO_DD>=#{a3} " +
+            "AND MO_DD<=#{a4}) AND A.PRD_NO=B.PRD_NO GROUP BY A.PRD_NO)\n" +
+            "FROM A_A2 B WHERE B.PRD_NO IN (SELECT A.PRD_NO from A_CB6 A where A.YY=#{a1}" +
+            " AND A.MM='4' AND (SELECT KND FROM PRDT WHERE PRD_NO=A.PRD_NO)='3' " +
+            "AND A.MO_NO IN (SELECT MO_NO FROM MF_MO WHERE MO_DD>=#{a3} " +
+            "AND MO_DD<=#{a4}) GROUP BY A.PRD_NO)\n")
+    Integer x107(@Param("a1") String a1, @Param("a2") String a2,
+                 @Param("a3") String a3, @Param("a4") String a4);
 
     @Update("UPDATE A_A2\n" +
             "SET BCST=ISNULL(B_DWCB,0)*BQTY\n" +
