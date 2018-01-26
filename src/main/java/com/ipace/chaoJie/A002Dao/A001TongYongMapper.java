@@ -2,7 +2,6 @@ package com.ipace.chaoJie.A002Dao;
 import org.apache.ibatis.annotations.*;
 
 public interface A001TongYongMapper {
-/////////////////////////////////////////////////////////////////////////
     int chaoJieBug001_1();
     int chaoJieBug001_2();
     int chaoJieBug001_3();
@@ -22,13 +21,7 @@ public interface A001TongYongMapper {
     @Update({"drop table test1"})
     void droptab1();
 
-
-
-
-
-
-
-
+////////////////////钱伟11月份直接(或者其他)执行前清理//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 /////////////////////////////////////////////////////////////////////////
@@ -572,7 +565,7 @@ public interface A001TongYongMapper {
             "SET ZCB=(ISNULL(A.CLFY,0)+ISNULL(A.TGFY,0)+ISNULL(A.ZZFY,0)+ISNULL(A.RGFY,0))+isnull(A.QTFY,0)\n" +
             "from A_CB6 A \n" +
             "where A.YY=#{a1} AND A.MM=#{a2} AND (SELECT KND FROM PRDT WHERE PRD_NO=A.PRD_NO)='3' \n" +
-            "AND A.MO_NO IN (SELECT MO_NO FROM MF_MO WHERE MO_DD>=#{a3} AND MO_DD<=#{a4})")
+            "AND A.MO_NO IN (SELECT MO_NO FROM MF_MO WHERE  MO_DD<=#{a4})")
     Integer x44(@Param("a1") String a1, @Param("a2") String a2, @Param("a3") String a3, @Param("a4") String a4);
 
     @Update("UPDATE A_A2\n" +
@@ -610,7 +603,7 @@ public interface A001TongYongMapper {
             "set ZCB=(ISNULL(A.CLFY,0)+ISNULL(A.TGFY,0)+ISNULL(A.ZZFY,0)+ISNULL(A.RGFY,0))+ISNULL(QTFY,0)\n" +
             "from A_cb6 A \n" +
             "where A.yy=#{a1} and A.mm=#{a2} and A.mo_no in " +
-            "(select mo_no from mf_mo where mo_dd>=#{a3} and mo_dd<=#{a4})")
+            "(select mo_no from mf_mo where mo_dd<=#{a4})")
     Integer x48(@Param("a1") String a1, @Param("a2") String a2, @Param("a3") String a3, @Param("a4") String a4);
 
     @Update("CREATE TABLE A_B2\n" +
@@ -805,9 +798,11 @@ public interface A001TongYongMapper {
             "SET BZFY=(SELECT ISNULL(ZZF,0) FROM A_CB4 WHERE TZ_NO=A.TZ_NO and YY=#{a1} AND MM=#{a2}),\n" +
             "    BRGF=(SELECT ISNULL(RGF,0) FROM A_CB4 WHERE TZ_NO=A.TZ_NO and YY=#{a1} AND MM=#{a2}),\n" +
             "    BWR_QTY=(SELECT WR_QTY FROM A_CB4 WHERE TZ_NO=A.TZ_NO and YY=#{a1} AND MM=#{a2}),\n" +
-            "    BMM_QTY=(SELECT SUM(isnull(QTY,0)) FROM TF_MM0 WHERE MO_NO=A.MO_NO and mm_dd>=#{a3} and mm_dd<=#{a4} GROUP BY MO_NO)\n" +
+            "    BMM_QTY=(SELECT SUM(isnull(QTY,0)) FROM TF_MM0 WHERE MO_NO=A.MO_NO and mm_dd>=#{a3} " +
+            "and mm_dd<=#{a4} GROUP BY MO_NO)\n" +
             "FROM A_A1 A WHERE A.TZ_NO IN (SELECT TZ_NO FROM A_CB4 WHERE YY=#{a1} AND MM=#{a2})")
-    Integer x69(@Param("a1") String a1, @Param("a2") String a2, @Param("a3") String a3, @Param("a4") String a4);
+    Integer x69(@Param("a1") String a1, @Param("a2") String a2,
+                @Param("a3") String a3, @Param("a4") String a4);
 
     @Insert("\n" +
             "insert into A_CB6(YY,MM,MM_NO,MM_DD,MO_NO,PRD_NO,iD_NO,QTY) select #{a1},#{a2},MM_NO,MM_DD,MO_NO,PRD_NO,ID_NO,QTY from TF_MM0 where MM_DD>=#{a3} and MM_DD<=#{a4}\n" +
@@ -890,12 +885,19 @@ public interface A001TongYongMapper {
             "FROM A_B4 A WHERE YY=#{a1} AND MM=#{a2}")
     Integer x81(@Param("a1") String a1, @Param("a2") String a2, @Param("a3") String a3, @Param("a4") String a4);
 
+    /**
+     *a1 就是2016
+     * a2就是 1
+     * a3就是 2016-01-01
+     * a4 就是 2016-01-31
+     * */
     @Update("UPDATE A_CB6\n" +
-            "SET QTFY =(SELECT DWCB FROM A_B4 WHERE YY=#{a1} AND MM=#{a2} AND MRP_NO=A.PRD_NO)*A.QTY\n" +
+            "SET QTFY = (SELECT TOP 1 DWCB FROM A_B4 WHERE YY= #{a1} AND MM=#{a2} " +
+            "AND isnull(dwcb,0)!=0 AND MRP_NO=A.PRD_NO)*A.QTY\n" +
             "FROM A_CB6 A \n" +
             "WHERE A.YY=#{a1} AND A.MM=#{a2} \n" +
             "AND MO_NO NOT IN (SELECT MO_NO FROM MF_MO WHERE MO_DD<#{a3})\n" +
-            "AND PRD_NO IN (SELECT MRP_NO FROM A_B4 WHERE YY=#{a1} AND MM=#{a2})")
+            "AND PRD_NO IN (SELECT MRP_NO FROM A_B4 WHERE YY=#{a1} AND MM=#{a2}) ")
     Integer x82(@Param("a1") String a1, @Param("a2") String a2, @Param("a3") String a3, @Param("a4") String a4);
 
     @Update("UPDATE A_CB6\n" +
@@ -1074,7 +1076,7 @@ public interface A001TongYongMapper {
             "SET ZCB=(ISNULL(A.CLFY,0)+ISNULL(A.TGFY,0)+ISNULL(A.ZZFY,0)+ISNULL(A.RGFY,0))+isnull(A.QTFY,0)\n" +
             "from A_CB6 A \n" +
             "where A.YY=#{a1} AND A.MM=#{a2} AND (SELECT KND FROM PRDT WHERE PRD_NO=A.PRD_NO)='3' \n" +
-            "AND A.MO_NO IN (SELECT MO_NO FROM MF_MO WHERE MO_DD>=#{a3} AND MO_DD<=#{a4})\n")
+            "AND A.MO_NO IN (SELECT MO_NO FROM MF_MO WHERE MO_DD<=#{a4})\n")
     Integer x106(@Param("a1") String a1, @Param("a2") String a2, @Param("a3") String a3, @Param("a4") String a4);
 
 
@@ -1123,7 +1125,7 @@ public interface A001TongYongMapper {
             "set ZCB=(ISNULL(A.CLFY,0)+ISNULL(A.TGFY,0)+ISNULL(A.ZZFY,0)+ISNULL(A.RGFY,0))+ISNULL(QTFY,0)\n" +
             "from A_cb6 A \n" +
             "where A.yy=#{a1} and A.mm=#{a2} and A.mo_no in " +
-            "(select mo_no from mf_mo where mo_dd>=#{a3} and mo_dd<=#{a4})")
+            "(select mo_no from mf_mo where mo_dd<=#{a4})")
     Integer x110(@Param("a1") String a1, @Param("a2") String a2, @Param("a3") String a3, @Param("a4") String a4);
 
 
