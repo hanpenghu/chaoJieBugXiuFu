@@ -565,7 +565,7 @@ public interface A001TongYongMapper {
             "SET ZCB=(ISNULL(A.CLFY,0)+ISNULL(A.TGFY,0)+ISNULL(A.ZZFY,0)+ISNULL(A.RGFY,0))+isnull(A.QTFY,0)\n" +
             "from A_CB6 A \n" +
             "where A.YY=#{a1} AND A.MM=#{a2} AND (SELECT KND FROM PRDT WHERE PRD_NO=A.PRD_NO)='3' \n" +
-            "AND A.MO_NO IN (SELECT MO_NO FROM MF_MO WHERE  MO_DD<=#{a4})")
+            "AND A.MO_NO IN (SELECT MO_NO FROM MF_MO WHERE MO_DD>='2016-01-01' AND MO_DD<=#{a4})")
     Integer x44(@Param("a1") String a1, @Param("a2") String a2, @Param("a3") String a3, @Param("a4") String a4);
 
     @Update("UPDATE A_A2\n" +
@@ -603,7 +603,7 @@ public interface A001TongYongMapper {
             "set ZCB=(ISNULL(A.CLFY,0)+ISNULL(A.TGFY,0)+ISNULL(A.ZZFY,0)+ISNULL(A.RGFY,0))+ISNULL(QTFY,0)\n" +
             "from A_cb6 A \n" +
             "where A.yy=#{a1} and A.mm=#{a2} and A.mo_no in " +
-            "(select mo_no from mf_mo where mo_dd<=#{a4})")
+            "(select mo_no from mf_mo where MO_DD>='2016-01-01' AND mo_dd<=#{a4})")
     Integer x48(@Param("a1") String a1, @Param("a2") String a2, @Param("a3") String a3, @Param("a4") String a4);
 
     @Update("CREATE TABLE A_B2\n" +
@@ -1076,7 +1076,7 @@ public interface A001TongYongMapper {
             "SET ZCB=(ISNULL(A.CLFY,0)+ISNULL(A.TGFY,0)+ISNULL(A.ZZFY,0)+ISNULL(A.RGFY,0))+isnull(A.QTFY,0)\n" +
             "from A_CB6 A \n" +
             "where A.YY=#{a1} AND A.MM=#{a2} AND (SELECT KND FROM PRDT WHERE PRD_NO=A.PRD_NO)='3' \n" +
-            "AND A.MO_NO IN (SELECT MO_NO FROM MF_MO WHERE MO_DD<=#{a4})\n")
+            "AND A.MO_NO IN (SELECT MO_NO FROM MF_MO WHERE MO_DD>='2016-01-01' AND MO_DD<=#{a4})\n")
     Integer x106(@Param("a1") String a1, @Param("a2") String a2, @Param("a3") String a3, @Param("a4") String a4);
 
 
@@ -1125,7 +1125,7 @@ public interface A001TongYongMapper {
             "set ZCB=(ISNULL(A.CLFY,0)+ISNULL(A.TGFY,0)+ISNULL(A.ZZFY,0)+ISNULL(A.RGFY,0))+ISNULL(QTFY,0)\n" +
             "from A_cb6 A \n" +
             "where A.yy=#{a1} and A.mm=#{a2} and A.mo_no in " +
-            "(select mo_no from mf_mo where mo_dd<=#{a4})")
+            "(select mo_no from mf_mo where MO_DD>='2016-01-01' AND mo_dd<=#{a4})")
     Integer x110(@Param("a1") String a1, @Param("a2") String a2, @Param("a3") String a3, @Param("a4") String a4);
 
 

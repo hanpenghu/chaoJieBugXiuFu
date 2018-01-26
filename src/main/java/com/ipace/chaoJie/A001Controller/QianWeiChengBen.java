@@ -14,14 +14,14 @@ public class QianWeiChengBen {
     @Autowired
     private Cnst cnst;
 
-
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping(value="test",method = RequestMethod.GET)
     public @ResponseBody String test(){
         p.p("_____________________testSuccess_____________________");
         return "_____________________testSuccess_____________________";
     }
 
-
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping(value="q",method = RequestMethod.POST)
     public @ResponseBody Map qingChu(){
         p.p(p.gp().sad(p.dexhx).sad("清除开始").sad(p.dexhx).gad());
@@ -30,7 +30,7 @@ public class QianWeiChengBen {
         return p.gp().smp("id","清除完成").gmp();
     }
 
-
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping(value="Q1",method = RequestMethod.POST)
     public @ResponseBody Map Q20180119(@RequestBody Map m){
         p.p(p.gp().sad(p.dexhx).sad("Q20180119计算开始").sad(p.dexhx).gad());
@@ -50,7 +50,7 @@ public class QianWeiChengBen {
         p.p(p.gp().sad(p.dexhx).sad("Q20180119计算结束").sad(p.dexhx).gad());
         return p.gp().smp("id","Q20180119计算结束").gmp();
     }
-
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping(value="Q2",method = RequestMethod.POST)
     public @ResponseBody Map Q20180123(@RequestBody Map m){
         p.p(p.gp().sad(p.dexhx).sad("Q20180123计算开始").sad(p.dexhx).gad());
@@ -70,5 +70,75 @@ public class QianWeiChengBen {
         p.p(p.gp().sad(p.dexhx).sad("Q20180123计算结束").sad(p.dexhx).gad());
         return p.gp().smp("id","Q20180123计算结束").gmp();
     }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
