@@ -213,7 +213,7 @@ public class ChaoJieBug002 {
 
             }else{
 
-System.out.println();System.out.println();System.out.println();
+                System.out.println();System.out.println();System.out.println();
                 System.out.println("单号为:"+tfIc.getIcNo()+
                         "！批号为:"+tfIc.getBatNo()+"！货号为:"+tfIc.getPrdNo()+"特征为:"+tfIc.getPrdMark()+
                         "！itm为"+tfIc.getItm()+"的这条记录因为没有在表   bat_rec1_day  中匹配到相应的结果,而没有插入" +
