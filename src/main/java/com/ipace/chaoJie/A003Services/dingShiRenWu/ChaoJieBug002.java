@@ -1,8 +1,10 @@
 package com.ipace.chaoJie.A003Services.dingShiRenWu;
+import com.alibaba.fastjson.JSON;
 import com.ipace.chaoJie.A002Dao.*;
 import com.ipace.chaoJie.A004Dto.*;
 import com.ipace.chaoJie.utils.MakeColumnNull0False;
 import com.ipace.chaoJie.utils.NotEmpty;
+import com.ipace.chaoJie.utils.p;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -22,7 +24,7 @@ public class ChaoJieBug002 {
     private String 调拨单出货库位="";//wh1
 
     public final static long time1 = 2*60*1000;
-    public final static String time2="0 0 13 * * ?";//每天13点开始运行
+//    public final static String time2="0 0 13 * * ?";//每天13点开始运行
 
     @Autowired
     private MfIcMapper mfIcMapper;
@@ -49,7 +51,11 @@ public class ChaoJieBug002 {
          Date date1 = new Date();
          long time1 = date1.getTime();
          System.out.println("~~~~~~~~~~~~"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date1)+"~~~~~~~~~~~~超杰借出单转调拨单开始~~~~~~~~~~~~~~~~~~~~~~~~");
-         this.bln2Ic_jieChuDan2DiaoBoDan();
+         try {
+             this.bln2Ic_jieChuDan2DiaoBoDan();
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
          Date date2 = new Date();
          long time2 = date2.getTime();
          System.out.println("~~~~~~~~~~~~"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date2)+"~~~~~~~~~~~~超杰借出单转调拨单结束~~~~~~~耗时"+(time2-time1)/1000+"~秒~~~~~~相当于"+(time2-time1)/1000/60+"~分钟~~~~~~~~~");
@@ -81,25 +87,41 @@ public class ChaoJieBug002 {
         List<TfBlnListObjOfSameBlNo>genJuTfBlnNoFenWanLeiDeList=new ArrayList<>();
         mfBlnList.forEach(mfBln->{
             System.out.println(mfBln.getBlNo()+"！！！！！！！！！！！！！！！！！！！！！！！！");
+
             TfBlnExample tfBlnExample=new TfBlnExample();
             tfBlnExample.createCriteria().andBlNoEqualTo(mfBln.getBlNo()).andBlIdEqualTo("LN");
             List<TfBln> tfBlnList = tfBlnMapper.selectByExample(tfBlnExample);
+            p.p("----------JSON.toJSONString(tfBlnList)---------------------------------------------");
+            p.p(JSON.toJSONString(tfBlnList));
+            p.p("-------------------------------------------------------");
             TfBlnListObjOfSameBlNo tfBlnListObjOfSameBlNo=new TfBlnListObjOfSameBlNo();
             tfBlnListObjOfSameBlNo.setSameTfBlnNoList(tfBlnList);
             genJuTfBlnNoFenWanLeiDeList.add(tfBlnListObjOfSameBlNo);
         });
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~把入口得到的MfBln拿来得到一堆tfBln,并且按Blno相同分类好~~~结束~~~~~~~~~~~~~~~~~~~~~");
+        p.p("-------------------------------------------------------");
+        p.p("-----genJuTfBlnNoFenWanLeiDeList数量是"+genJuTfBlnNoFenWanLeiDeList.size()+"---------------");
+        p.p("-------------------------------------------------------");
+
         return genJuTfBlnNoFenWanLeiDeList;
     }
-//////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////是开始产生调拨单//////////////////////////////////////////////////////////////////
     public void chaRuMfIcAndTfIc(List<TfBlnListObjOfSameBlNo> genJuTfBlnNoFenWanLeiDeList){
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~循环得到的一堆的mfblen和tfbln(分类好的)并变化插入到mfIC和tfIC~~~开始~~~~~~~~~~~~~~~~~~~~~");
         for(TfBlnListObjOfSameBlNo tfBlnListObjOfSameBlNo:genJuTfBlnNoFenWanLeiDeList){
             List<TfBln> sameTfBlnNoList = tfBlnListObjOfSameBlNo.getSameTfBlnNoList();
             if(sameTfBlnNoList.size()>0){
-                String blNo = sameTfBlnNoList.get(0).getBlNo();//该数组里面存的都是blNo样的TfBlNo
+                String blNo = sameTfBlnNoList.get(0).getBlNo();//该数组里面存的都是blNo一样的TfBlNo
                 MfBln mfBln = this.getMfBlnListUseBlNo(blNo);
-                this.mfBlnToMfIcInsert(mfBln);//插入一条数据到Mf_Ic
+                try {
+                    //这里用try是因为避免下次再插入的时候产生问题,因为表头mf只能插入一次
+                    this.mfBlnToMfIcInsert(mfBln);//插入一条数据到Mf_Ic
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    p.p("-------------------------------------------------------");
+                    p.p("有可能是mfIc不能插入相同的单号了");
+                    p.p("-------------------------------------------------------");
+                }
                 for(TfBln tfBln: sameTfBlnNoList){//插入多条数据到tf_IC
                     this.tfBlnToTfIcInsert(tfBln);
                 }
@@ -171,11 +193,17 @@ public class ChaoJieBug002 {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~实验~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println(count);
         List<TfIc>listTfIc=new ArrayList<>();
+        //循环得到跟tfIC 的货号批号特征都一样的
         for(int i=0;i<count;i++){
             //得到批号 货号  仓库一样的//我用了top 1,所以,这个list里面其实最多只有一个
+            //得到的条件是   BAT_REC1_DAY里面
+//            ISNULL(QTY_IN,0)>0
+//            AND ISNULL(QTY_IN,0)>ISNULL(QTY_OUT,0)
+//            AND BAT_NO=#{batNo} AND PRD_NO=#{prdNo} AND WH=#{wh1}----wh2是入货库位,wh1是出货库位
             List<BatRec1Day>batRec1DayList=a002ChaoJieBug002Mapper.getSamePrdNoBatNoWh_bat_rec1_day(tfIc);
 
             if(batRec1DayList!=null && batRec1DayList.size()>0){
+                //其实这个list里面根据批号货号仓库匹配到唯一的
                 BatRec1Day batRec1Day = batRec1DayList.get(0);//得到唯一的一个
 //                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~实验删掉了分开加as的浪费~~~~~~~~~~~~~~~~~~~~~~~~");
 //                System.out.println(batRec1Day.getQtyIn());
@@ -185,8 +213,12 @@ public class ChaoJieBug002 {
 //                System.out.println(batRec1Day.getRkDd());
 //                System.out.println(batRec1Day.getWh());
 //                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~实验删掉了分开加as的浪费~~~~~~~~~~~~~~~~~~~~~~~~");
-                BigDecimal qtyInOut = batRec1Day.getQtyIn().subtract(batRec1Day.getQtyOut()) ;
+
+                //得到batRec1Day里面qtyin-qtyout
+                BigDecimal qtyInOut = batRec1Day.getQtyIn().subtract(batRec1Day.getQtyOut()==null? new BigDecimal(0):batRec1Day.getQtyOut()) ;
+                //得到调拨单表身的tfic的qty
                 BigDecimal tfIcQty = tfIc.getQty();
+                //如果调拨单表身的qty大于batRec1Day里面的qtyinout的话
                 if(tfIcQty.compareTo(qtyInOut)==1){//tfIcQty>qtyInOut
                     tfIc.setQty(tfIcQty.subtract(qtyInOut));//拆分后还剩余这么多用于下次拆分
                     //注意:tfIc是一个全局拆分对象(拆分数量,取数量和入库时间),所以此时搜集的是一个copy的tfIC对象(他使用的是qtyInOut)
@@ -303,7 +335,8 @@ public class ChaoJieBug002 {
             batRec1DayA00302.setWh(调拨单入货库位);
             batRec1DayA00302.setRkDd(batRec1Day.getRkDd());
             batRec1DayA00302.setQtyIn(tfIc.getQty());
-            batRec1DayMapper.insert(batRec1DayA00302);
+            batRec1DayA00302.setDep(batRec1Day.getDep());
+            batRec1DayMapper.insertSelective(batRec1DayA00302);
         }
 
 
@@ -439,6 +472,8 @@ public void dangTfIcDeQtyDaYubat_rec1_dayDeQty_huiXie_bat_rec1_dayAndbat_rec1(Ba
         batRec1DayA00301.setWh(调拨单入货库位);
         batRec1DayA00301.setRkDd(batRec1Day.getRkDd());
         batRec1DayA00301.setQtyIn(qtyInOut);
+        batRec1DayA00301.setDep(batRec1Day.getDep());
+        batRec1DayA00301.setPrdMark(batRec1Day.getPrdMark());
         batRec1DayMapper.insert(batRec1DayA00301);
     }
 /**
@@ -468,7 +503,11 @@ public void dangTfIcDeQtyDaYubat_rec1_dayDeQty_huiXie_bat_rec1_dayAndbat_rec1(Ba
         BigDecimal qtyOut = batRec1s.get(0).getQtyOut();
         if(qtyOut==null){qtyOut=new BigDecimal(0);}
         if(qtyInOut==null){qtyInOut=new BigDecimal(0);}
-        batRec1001.setQtyOut(batRec1Day.getQtyOut().add(qtyInOut));
+        BigDecimal qtyOut1 = batRec1Day.getQtyOut();
+        if(qtyOut1==null){
+            qtyOut1=new BigDecimal(0);
+        }
+        batRec1001.setQtyOut(qtyOut1.add(qtyInOut));
         batRec1Mapper.updateByExampleSelective(batRec1001,batRec1Example);
     }
 
@@ -497,7 +536,7 @@ public void dangTfIcDeQtyDaYubat_rec1_dayDeQty_huiXie_bat_rec1_dayAndbat_rec1(Ba
         batRec2.setPrdNo(batRec1Day.getPrdNo());
         batRec2.setBatNo(batRec1Day.getBatNo());
         batRec2.setQtyIn(qtyInOut);
-        batRec1Mapper.insert(batRec2);
+        batRec1Mapper.insertSelective(batRec2);
     }
 
 

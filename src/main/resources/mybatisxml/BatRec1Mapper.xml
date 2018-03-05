@@ -196,7 +196,7 @@
       QTY_Q3, CST_BX, QTY_SQR, 
       QTY_SQC, QTY_LOCK, SC_DD, 
       QTY_JH, LST_OTD_QC, LST_IND_QC, 
-      QTY1_LOCK, QTY_T3, UP_DD
+      QTY1_LOCK, QTY_T3--, UP_DD
       )
     values (#{batNo,jdbcType=VARCHAR}, #{prdNo,jdbcType=VARCHAR}, #{wh,jdbcType=VARCHAR}, 
       #{prdMark,jdbcType=VARCHAR}, #{qtyIn,jdbcType=NUMERIC}, #{qtyOut,jdbcType=NUMERIC}, 
@@ -214,7 +214,8 @@
       #{qtyQ3,jdbcType=NUMERIC}, #{cstBx,jdbcType=NUMERIC}, #{qtySqr,jdbcType=NUMERIC}, 
       #{qtySqc,jdbcType=NUMERIC}, #{qtyLock,jdbcType=NUMERIC}, #{scDd,jdbcType=TIMESTAMP}, 
       #{qtyJh,jdbcType=NUMERIC}, #{lstOtdQc,jdbcType=TIMESTAMP}, #{lstIndQc,jdbcType=TIMESTAMP}, 
-      #{qty1Lock,jdbcType=NUMERIC}, #{qtyT3,jdbcType=NUMERIC}, #{upDd,jdbcType=BINARY}
+      #{qty1Lock,jdbcType=NUMERIC}, #{qtyT3,jdbcType=NUMERIC}
+          ---, #{upDd,jdbcType=BINARY}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.ipace.chaoJie.A004Dto.BatRec1" >
