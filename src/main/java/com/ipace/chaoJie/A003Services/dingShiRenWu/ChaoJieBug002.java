@@ -112,7 +112,7 @@ public class ChaoJieBug002 {
                     //这里用try是因为避免下次再插入的时候产生问题,因为表头mf只能插入一次
                     this.mfBlnToMfIcInsert(mfBln);//插入一条数据到Mf_Ic
                 } catch (Exception e) {
-                    e.printStackTrace();
+//                    e.printStackTrace();
                     p.p("-------------------------------------------------------");
                     p.p("有可能是mfIc不能插入相同的单号了");
                     p.p("-------------------------------------------------------");
@@ -200,7 +200,8 @@ public class ChaoJieBug002 {
 //            AND ISNULL(QTY_IN,0)>ISNULL(QTY_OUT,0)
 //            AND BAT_NO=#{batNo} AND PRD_NO=#{prdNo} AND WH=#{wh1}----wh2是入货库位,wh1是出货库位
             //有多个
-            List<BatRec1Day> batRec1DayList = c.a002ChaoJieBug002Mapper
+            List<BatRec1Day> batRec1DayList =
+                    c.a002ChaoJieBug002Mapper
                     .getSamePrdNoBatNoWh_bat_rec1_day(tfIc);
 
             if (p.notEmpty(batRec1DayList)) {
@@ -217,10 +218,10 @@ public class ChaoJieBug002 {
 
                 //得到batRec1Day里面qtyin-qtyout
                 BigDecimal qtyInOut =
-                        (batRec1Day.getQtyIn()==null?p.b(0):batRec1Day.getQtyIn())
-                        .subtract(batRec1Day.getQtyOut() == null ? p.b(0): batRec1Day.getQtyOut());
+                        (p.empty(batRec1Day.getQtyIn())?p.b(0):batRec1Day.getQtyIn())
+                        .subtract(p.empty(batRec1Day.getQtyOut())? p.b(0): batRec1Day.getQtyOut());
                 //得到调拨单表身的tfic的qty
-                BigDecimal tfIcQty = tfIc.getQty();
+                BigDecimal tfIcQty = p.empty(tfIc.getQty())?p.b(0):tfIc.getQty();
                 //如果调拨单表身的qty大于batRec1Day里面的qtyinout的话
                 if (tfIcQty.compareTo(qtyInOut) == 1) {//tfIcQty>qtyInOut
                     tfIc.setQty(tfIcQty.subtract(qtyInOut));//拆分后还剩余这么多用于下次拆分
@@ -293,215 +294,21 @@ public class ChaoJieBug002 {
         return null;
 
     }
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    @Transactional
-    public  void 当TfIc的Qty小于bat_rec1_day的qty_回写_bat_rec1_day和bat_rec1(BatRec1Day batRec1Day, TfIc tfIc) {
-        String batNo = batRec1Day.getBatNo();
-        String prdNo = batRec1Day.getPrdNo();
-        String wh = batRec1Day.getWh();
-        BigDecimal tfIcQty = tfIc.getQty()==null?new BigDecimal(0):tfIc.getQty();
-
-
-        //不更新的字段全部设置为null
-        batRec1Day.setRem(null);
-        batRec1Day.setQtyOutUnsh(null);
-        batRec1Day.setProduDd(null);
-        batRec1Day.setLstOtd(null);
-        batRec1Day.setLockId(null);
-        batRec1Day.setValidDd(null);
-        batRec1Day.setQty1Out(null);
-        batRec1Day.setQty1OutUnsh(null);
-        batRec1Day.setQty1In(null);
-        batRec1Day.setQtyIn(null);//这个必须设置为0,否则,将来也会被更新
-        System.out.println("~~~~~~~~~~~~~~~~TfIc的QTy小于bat_rec1_day的(qtyin-qtyout),回写batRec1Day的qtyout=qtyout+tfIC.qty~~~~~~~~~开始 ~~~~~~~~~~~~~~~~~~~~~~~");
-        //数据库里面表bat_rec1_day 和表bat_rec1的qtyout回写成qtyin一样的
-        BatRec1DayExample batRec1DayExample = new BatRec1DayExample();
-        batRec1DayExample.createCriteria()
-                .andBatNoEqualTo(batRec1Day.getBatNo())
-                .andPrdNoEqualTo(batRec1Day.getPrdNo())
-                .andWhEqualTo(batRec1Day.getWh())
-                .andRkDdEqualTo(batRec1Day.getRkDd())
-                .andPrdMarkEqualTo(batRec1Day.getPrdMark())
-                .andDepEqualTo(batRec1Day.getDep());
-        //Selective的意思是,如果是null的字段,不更新到数据库
-        BatRec1Day batRec1Day001 = new BatRec1Day();
-        BeanUtils.copyProperties(batRec1Day, batRec1Day001);//copy一个新的对象,不要动原来的对象
-        //其实我们只要更新数量,所以其他的都还原成null,Selective会不更新null
-        batRec1Day001.setBatNo(null);
-        batRec1Day001.setPrdNo(null);//不更新的都要设置为null
-        batRec1Day001.setRkDd(null);
-        batRec1Day001.setQtyIn(null);
-        batRec1Day001.setWh(null);//注意,我们就是为了更新qty_out,所以out不能是null
-        BigDecimal qtyOut11 = batRec1Day.getQtyOut();
-        if (qtyOut11 == null) {
-            qtyOut11 = new BigDecimal(0);
-        }
-        batRec1Day001.setQtyOut(qtyOut11.add(tfIc.getQty()));//让out等于in,将来方便拆下一行
-        c.batRec1DayMapper.updateByExampleSelective(batRec1Day001, batRec1DayExample);
-
-        /**
-         *有day的A0003入货
-         * */
-
-        BatRec1DayExample batRec1DayExampleA003 = new BatRec1DayExample();
-        batRec1DayExampleA003.createCriteria()
-                .andBatNoEqualTo(batRec1Day.getBatNo())
-                .andPrdNoEqualTo(batRec1Day.getPrdNo())
-                .andWhEqualTo(调拨单入货库位)
-                .andRkDdEqualTo(batRec1Day.getRkDd());
-//                .andPrdMarkEqualTo(batRec1Day.getPrdMark())
-//                .andDepEqualTo(batRec1Day.getDep());
-        List<BatRec1Day> batRec1DayList = c.batRec1DayMapper.selectByExample(batRec1DayExampleA003);
-
-        if (NotEmpty.notEmpty(batRec1DayList)) {//此时更新qtyin
-            BatRec1Day batRec1Day1 = batRec1DayList.get(0);
-            BigDecimal qtyIn = batRec1Day1.getQtyIn();
-            //将不更新的字段设置为null,其实我们只更新qtyin
-            batRec1Day1 = new MakeColumnNull0False<BatRec1Day>().f(batRec1Day1);
-            batRec1Day1.setBatNo(null);
-            batRec1Day1.setWh(null);
-            batRec1Day1.setDep(null);
-            batRec1Day1.setPrdNo(null);
-            batRec1Day1.setPrdMark(null);
-            batRec1Day1.setRkDd(null);
-            batRec1Day1.setQtyIn(
-                    (qtyIn == null ? new BigDecimal(0) : qtyIn).add
-                            (tfIc.getQty() == null ? new BigDecimal(0) : tfIc.getQty())
-            );
-            c.batRec1DayMapper.updateByExampleSelective(batRec1Day1, batRec1DayExampleA003);
-        } else {//此时插入整条记录
-            BatRec1Day batRec1DayA00302 = new BatRec1Day();
-            batRec1DayA00302.setBatNo(batRec1Day.getBatNo());
-            batRec1DayA00302.setPrdNo(batRec1Day.getPrdNo());
-            batRec1DayA00302.setWh(调拨单入货库位);
-            batRec1DayA00302.setRkDd(batRec1Day.getRkDd());
-            batRec1DayA00302.setQtyIn(tfIc.getQty());
-            batRec1DayA00302.setDep(batRec1Day.getDep());
-            c.batRec1DayMapper.insertSelective(batRec1DayA00302);
-        }
-
-
-        System.out.println("~~~~~~~~~~~~~~~~TfIc的QTy小于bat_rec1_day的(qtyin-qtyout),回写batRec1Day的qtyout=qtyout+tfIC.qty~~~~~~~~~结束 ~~~~~~~~~~~~~~~~~~~~~~~");
-/**
- *无day的 qty_out  减去tfIcQty
- * */
-        System.out.println("~~~~~~~~~~~~~~~~TfIc的QTy大于bat_rec1的(qtyin-qtyout),回写batRec1的qtyout=qtyout+tfIC.qty~~~~~~~~~开始 ~~~~~~~~~~~~~~~~~~~~~~~");
-        //更新不带日期的仓库表
-        //更新不带日期的仓库表
-        BatRec1Example batRec1Example = new BatRec1Example();
-        batRec1Example.createCriteria()
-                .andBatNoEqualTo(batRec1Day.getBatNo())
-                .andPrdNoEqualTo(batRec1Day.getPrdNo())
-                .andWhEqualTo(batRec1Day.getWh());
-//                .andPrdMarkEqualTo(batRec1Day.getPrdMark());
-
-//        BeanUtils.copyProperties(batRec1Day001, batRec1001);//会把相同的字段复制过去
-
-        List<BatRec1> batRec1s = c.batRec1Mapper.selectByExample(batRec1Example);
-        if (p.notEmpty(batRec1s)) {
-            BigDecimal qtyZeng = tfIc.getQty();
-            BigDecimal qtyOut = batRec1s.get(0).getQtyOut();
-            if (p.notEmpty(qtyOut)) qtyOut = p.b(0);
-
-            if (p.notEmpty(qtyZeng))qtyZeng = p.b(0);
-
-            BatRec1 batRec1001 = new BatRec1();
-            batRec1001.setQtyOut(qtyOut.add(qtyZeng));//该对象只更新一个字段
-
-            c.batRec1Mapper.updateByExampleSelective(batRec1001,batRec1Example);
-        }else{
-            String ssss = stra.b()
-                    .a("bat_rec1 里面qty_out数量加上qtyInOut的时候出现异常,有可能匹配不到对应bat_rec1,此时的")
-                    .a("batRec1Day.getBatNo()=").a("《").a(batRec1Day.getBatNo()).a("》")
-                    .a("batRec1Day.getPrdNo()=").a("《").a(batRec1Day.getPrdNo()).a("》")
-                    .a("batRec1Day.getWh()=").a("《").a(batRec1Day.getWh()).a("》")
-                    .g();
-            p.throwE(ssss);
-            l.error(ssss);
-        }
-
-
-
-
-/**
- *无day的A0003入货
- * */
-
-
-        BatRec1Example batRec1Example01 = new BatRec1Example();
-        batRec1Example01.createCriteria()
-                .andBatNoEqualTo(batRec1Day.getBatNo())
-                .andPrdNoEqualTo(batRec1Day.getPrdNo())
-                .andWhEqualTo(调拨单入货库位);
-        //正常情况下下面集合只有一个元素
-        List<BatRec1> batRec1s1 = c.batRec1Mapper.selectByExample(batRec1Example01);
-        if (NotEmpty.notEmpty(batRec1s1)) {//符合条件就更新其in
-            BatRec1 batRec1 = batRec1s1.get(0);
-            BigDecimal qtyIn = batRec1.getQtyIn();
-            if (qtyIn == null) {
-                qtyIn = new BigDecimal(0);
-            }
-//        batRec1= this.make非必要字段为null来避免更新(batRec1);
-            batRec1 = new MakeColumnNull0False<BatRec1>().f(batRec1);
-            batRec1.setBatNo(null);
-            batRec1.setPrdNo(null);
-            batRec1.setWh(null);
-            batRec1.setPrdMark(null);
-            batRec1.setQtyIn(qtyIn.add(tfIc.getQty() == null ? new BigDecimal(0) : tfIc.getQty()));
-            c.batRec1Mapper.updateByExampleSelective(batRec1, batRec1Example01);
-        } else {//不存在就插入一条,
-            BatRec1 batRec2 = new BatRec1();
-            batRec2.setWh(调拨单入货库位);
-            batRec2.setPrdNo(batRec1Day.getPrdNo());
-            batRec2.setBatNo(batRec1Day.getBatNo());
-            batRec2.setQtyIn(tfIc.getQty());
-
-            Integer i = c.a002ChaoJieBug002Mapper.insertBatRec1(
-                    batRec1Day.getBatNo(),//bat_no
-                    batRec1Day.getPrdNo(),//prd_no
-                    调拨单入货库位,//wh
-                    String.valueOf(tfIc.getQty())//qtyin
-            );
-
-//            batRec1Mapper.insert(batRec2);
-        }
-
-
-        System.out.println("~~~~~~~~~~~~~~~~TfIc的QTy大于bat_rec1的(qtyin-qtyout),回写batRec1的qtyout=qtyout+tfIC.qty~~~~~~~~~结束 ~~~~~~~~~~~~~~~~~~~~~~~");
-
-
-    }
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    @Transactional
-    public void tficQty小的时候搜集TfIc(List<TfIc> listTfIc, TfIc tfIc, Date rk_DD) {
-        System.out.println("~~~~~TfIc的QTy小于bat_rec1_day的(qtyin-qtyout),用集合搜集一个拆过行的最后一个TfIc~~~~~~~~开始~~~~~~~~~~~~~~~·");
-        //将得到的新的tfIc入集合
-        TfIc tfIc001 = new TfIc();
-        BeanUtils.copyProperties(tfIc, tfIc001);//
-        tfIc001.setRkDd(rk_DD);
-//        tfIc001.setQty(qtyInOut);因为比qtyInOut大,所以用自己的
-        listTfIc.add(tfIc001);//使用copy过来的新的对象,避免下次循环的时候该对象变了
-        System.out.println("~~~~~TfIc的QTy小于bat_rec1_day的(qtyin-qtyout),用集合搜集一个拆过行的最后一个TfIc~~~~~~~~结束~~~~~~~~~~~~~~~·");
-
-    }
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Transactional
     public void 当TfIc的Qty大于bat_rec1_day的Qty_回写_bat_rec1_day和bat_rec1
-    (BatRec1Day batRec1Day, BigDecimal qtyInOut) {
+            (BatRec1Day batRec1Day, BigDecimal qtyInOut) {
         //不更新的字段全部设置为null
-        batRec1Day.setRem(null);
-        batRec1Day.setQtyOutUnsh(null);
-        batRec1Day.setProduDd(null);
-        batRec1Day.setLstOtd(null);
-        batRec1Day.setLockId(null);
-        batRec1Day.setValidDd(null);
-        batRec1Day.setQty1Out(null);
-        batRec1Day.setQty1OutUnsh(null);
-        batRec1Day.setQty1In(null);
-        batRec1Day.setQtyIn(null);//这个必须设置为0,否则,将来也会被更新
+//        batRec1Day.setRem(null);
+//        batRec1Day.setQtyOutUnsh(null);
+//        batRec1Day.setProduDd(null);
+//        batRec1Day.setLstOtd(null);
+//        batRec1Day.setLockId(null);
+//        batRec1Day.setValidDd(null);
+//        batRec1Day.setQty1Out(null);
+//        batRec1Day.setQty1OutUnsh(null);
+//        batRec1Day.setQty1In(null);
+//        batRec1Day.setQtyIn(null);//这个必须设置为0,否则,将来也会被更新
         System.out.println("~~~~~~~~~~~~~~~~TfIc的QTy大于bat_rec1_day的(qtyin-qtyout),回写batRec1Day的qtyout==qtyin~~~~~~~~~开始 ~~~~~~~~~~~~~~~~~~~~~~~");
         //数据库里面表bat_rec1_day 和表bat_rec1的qtyout回写成qtyin一样的
         BatRec1DayExample batRec1DayExample = new BatRec1DayExample();
@@ -513,18 +320,18 @@ public class ChaoJieBug002 {
                 .andPrdMarkEqualTo(batRec1Day.getPrdMark())
                 .andDepEqualTo(batRec1Day.getDep());
         //Selective的意思是,如果是null的字段,不更新到数据库
-        BatRec1Day batRec1Day001 = new BatRec1Day();
-        BeanUtils.copyProperties(batRec1Day, batRec1Day001);//copy一个新的对象,不要动原来的对象
+//        BatRec1Day batRec1Day001 = new BatRec1Day();
+//        BeanUtils.copyProperties(batRec1Day, batRec1Day001);//copy一个新的对象,不要动原来的对象
         //其实我们只要更新数量,所以其他的都还原成null,Selective会不更新null
-        batRec1Day001.setBatNo(null);
-        batRec1Day001.setPrdNo(null);//不更新的都要设置为null
-        batRec1Day001.setRkDd(null);
-        batRec1Day001.setQtyIn(null);
-        batRec1Day001.setWh(null);//注意,我们就是为了更新qty_out,所以out不能是null
+//        batRec1Day001.setBatNo(null);
+//        batRec1Day001.setPrdNo(null);//不更新的都要设置为null
+//        batRec1Day001.setRkDd(null);
+//        batRec1Day001.setQtyIn(null);
+//        batRec1Day001.setWh(null);//注意,我们就是为了更新qty_out,所以out不能是null
         BigDecimal qtyOut11 = batRec1Day.getQtyOut();
-        if (qtyOut11 == null) {
-            qtyOut11 = new BigDecimal(0);
-        }
+        if (p.empty(qtyOut11)) qtyOut11 = p.b(0);
+
+        BatRec1Day batRec1Day001 = new BatRec1Day();
         batRec1Day001.setQtyOut(qtyOut11.add(qtyInOut));//
         c.batRec1DayMapper.updateByExampleSelective(batRec1Day001, batRec1DayExample);
         System.out.println("~~~~~~~~~~~~~~~~TfIc的QTy大于bat_rec1_day的(qtyin-qtyout),回写batRec1Day的qtyout==qtyin~~~~~~~~~结束 ~~~~~~~~~~~~~~~~~~~~~~~");
@@ -548,13 +355,17 @@ public class ChaoJieBug002 {
         if (p.notEmpty(A003库位对应的BatRec1DayList其实应该只有一个)) {//非空就更新qty
             BatRec1Day batRec1DayA003 = A003库位对应的BatRec1DayList其实应该只有一个.get(0);
             BigDecimal qtyIn = batRec1DayA003.getQtyIn();
-            if (qtyIn == null) {
-                qtyIn = new BigDecimal(0);
-            }
-            batRec1DayA003.setQtyIn(qtyIn.add(qtyInOut));//入货库位增加
+            if (p.empty(qtyIn)) qtyIn = p.b(0);
+
+
+            BatRec1Day batRec1DayA004=new BatRec1Day();
+            batRec1DayA004.setQtyIn(qtyIn.add(qtyInOut));//入货库位增加
             //其实我们只更新qtyIn字段,其他字段都要设置为null以免更新
-            batRec1DayA003 = this.Make没有用的字段为null(batRec1DayA003);
-            c.batRec1DayMapper.updateByExampleSelective(batRec1DayA003, batRec1DayExampleA003);
+//            batRec1DayA003 = this.Make没有用的字段为null(batRec1DayA003);
+            c.batRec1DayMapper.updateByExampleSelective(batRec1DayA004, batRec1DayExampleA003);
+
+
+
         } else {//空的话就插入一条符合条件的记录
             BatRec1Day batRec1DayA00301 = new BatRec1Day();
             batRec1DayA00301.setBatNo(batRec1Day.getBatNo());
@@ -607,8 +418,9 @@ public class ChaoJieBug002 {
                     .a("batRec1Day.getPrdNo()=").a("《").a(batRec1Day.getPrdNo()).a("》")
                     .a("batRec1Day.getWh()=").a("《").a(batRec1Day.getWh()).a("》")
                     .g();
-            p.throwE(ssss);
             l.error(ssss);
+            p.throwE(ssss);
+
         }
 
 /**
@@ -651,6 +463,205 @@ public class ChaoJieBug002 {
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    @Transactional
+    public  void 当TfIc的Qty小于bat_rec1_day的qty_回写_bat_rec1_day和bat_rec1(BatRec1Day batRec1Day, TfIc tfIc) {
+//        String batNo = batRec1Day.getBatNo();
+//        String prdNo = batRec1Day.getPrdNo();
+//        String wh = batRec1Day.getWh();
+//        BigDecimal tfIcQty = tfIc.getQty()==null?new BigDecimal(0):tfIc.getQty();
+
+
+        //不更新的字段全部设置为null
+//        batRec1Day.setRem(null);
+//        batRec1Day.setQtyOutUnsh(null);
+//        batRec1Day.setProduDd(null);
+//        batRec1Day.setLstOtd(null);
+//        batRec1Day.setLockId(null);
+//        batRec1Day.setValidDd(null);
+//        batRec1Day.setQty1Out(null);
+//        batRec1Day.setQty1OutUnsh(null);
+//        batRec1Day.setQty1In(null);
+//        batRec1Day.setQtyIn(null);//这个必须设置为0,否则,将来也会被更新
+        /**
+         *有day  明细出货  qtyout加
+         * */
+        System.out.println("~~~~~~~~~~~~~~~~TfIc的QTy小于bat_rec1_day的(qtyin-qtyout),回写batRec1Day的qtyout=qtyout+tfIC.qty~~~~~~~~~开始 ~~~~~~~~~~~~~~~~~~~~~~~");
+        //数据库里面表bat_rec1_day 和表bat_rec1的qtyout回写成qtyin一样的
+        BatRec1DayExample batRec1DayExample = new BatRec1DayExample();
+        batRec1DayExample.createCriteria()
+                .andBatNoEqualTo(batRec1Day.getBatNo())
+                .andPrdNoEqualTo(batRec1Day.getPrdNo())
+                .andWhEqualTo(batRec1Day.getWh())
+                .andRkDdEqualTo(batRec1Day.getRkDd())
+                .andPrdMarkEqualTo(batRec1Day.getPrdMark())
+                .andDepEqualTo(batRec1Day.getDep());
+        //Selective的意思是,如果是null的字段,不更新到数据库
+
+//        BeanUtils.copyProperties(batRec1Day, batRec1Day001);//copy一个新的对象,不要动原来的对象
+        //其实我们只要更新数量,所以其他的都还原成null,Selective会不更新null
+//        batRec1Day001.setBatNo(null);
+//        batRec1Day001.setPrdNo(null);//不更新的都要设置为null
+//        batRec1Day001.setRkDd(null);
+//        batRec1Day001.setQtyIn(null);
+//        batRec1Day001.setWh(null);//注意,我们就是为了更新qty_out,所以out不能是null
+        BatRec1Day batRec1Day001 = new BatRec1Day();
+        BigDecimal qtyOut11 = batRec1Day.getQtyOut();
+        if (p.empty(qtyOut11)) qtyOut11 = p.b(0);
+
+        batRec1Day001.setQtyOut(qtyOut11.add(tfIc.getQty()));
+        c.batRec1DayMapper.updateByExampleSelective(batRec1Day001, batRec1DayExample);
+
+        /**
+         *有day的A0003入货
+         * */
+
+        BatRec1DayExample batRec1DayExampleA003 = new BatRec1DayExample();
+        batRec1DayExampleA003.createCriteria()
+                .andBatNoEqualTo(batRec1Day.getBatNo())
+                .andPrdNoEqualTo(batRec1Day.getPrdNo())
+                .andWhEqualTo(调拨单入货库位)
+                .andRkDdEqualTo(batRec1Day.getRkDd());
+//                .andPrdMarkEqualTo(batRec1Day.getPrdMark())
+//                .andDepEqualTo(batRec1Day.getDep());
+        List<BatRec1Day> batRec1DayList = c.batRec1DayMapper.selectByExample(batRec1DayExampleA003);
+
+        if (p.notEmpty(batRec1DayList)) {//此时更新qtyin
+            BatRec1Day batRec1Day1 = batRec1DayList.get(0);
+            BigDecimal qtyIn = batRec1Day1.getQtyIn();
+            //将不更新的字段设置为null,其实我们只更新qtyin
+//            batRec1Day1 = new MakeColumnNull0False<BatRec1Day>().f(batRec1Day1);
+//            batRec1Day1.setBatNo(null);
+//            batRec1Day1.setWh(null);
+//            batRec1Day1.setDep(null);
+//            batRec1Day1.setPrdNo(null);
+//            batRec1Day1.setPrdMark(null);
+//            batRec1Day1.setRkDd(null);
+            BatRec1Day batRec1Day11=new BatRec1Day();
+            batRec1Day11.setQtyIn(
+                    (  p.empty(qtyIn)? p.b(0) : qtyIn  )
+                            .add(   p.empty(tfIc.getQty())?p.b(0):tfIc.getQty()   )
+            );
+            c.batRec1DayMapper.updateByExampleSelective(batRec1Day11, batRec1DayExampleA003);
+        } else {//此时插入整条记录
+            BatRec1Day batRec1DayA00302 = new BatRec1Day();
+            batRec1DayA00302.setBatNo(batRec1Day.getBatNo());
+            batRec1DayA00302.setPrdNo(batRec1Day.getPrdNo());
+            batRec1DayA00302.setWh(调拨单入货库位);
+            batRec1DayA00302.setRkDd(batRec1Day.getRkDd());
+            batRec1DayA00302.setQtyIn(tfIc.getQty());
+            batRec1DayA00302.setDep(batRec1Day.getDep());
+            c.batRec1DayMapper.insertSelective(batRec1DayA00302);
+        }
+
+
+        System.out.println("~~~~~~~~~~~~~~~~TfIc的QTy小于bat_rec1_day的(qtyin-qtyout),回写batRec1Day的qtyout=qtyout+tfIC.qty~~~~~~~~~结束 ~~~~~~~~~~~~~~~~~~~~~~~");
+/**
+ *无day的 qty_out  减去tfIcQty
+ * */
+        System.out.println("~~~~~~~~~~~~~~~~TfIc的QTy大于bat_rec1的(qtyin-qtyout),回写batRec1的qtyout=qtyout+tfIC.qty~~~~~~~~~开始 ~~~~~~~~~~~~~~~~~~~~~~~");
+        //更新不带日期的仓库表
+        //更新不带日期的仓库表
+        BatRec1Example batRec1Example = new BatRec1Example();
+        batRec1Example.createCriteria()
+                .andBatNoEqualTo(batRec1Day.getBatNo())
+                .andPrdNoEqualTo(batRec1Day.getPrdNo())
+                .andWhEqualTo(batRec1Day.getWh());
+//                .andPrdMarkEqualTo(batRec1Day.getPrdMark());
+
+//        BeanUtils.copyProperties(batRec1Day001, batRec1001);//会把相同的字段复制过去
+
+        List<BatRec1> batRec1s = c.batRec1Mapper.selectByExample(batRec1Example);
+        if (p.notEmpty(batRec1s)) {
+            BigDecimal qtyZeng = tfIc.getQty();
+            BigDecimal qtyOut = batRec1s.get(0).getQtyOut();
+            if (p.empty(qtyOut)) qtyOut = p.b(0);
+
+            if (p.empty(qtyZeng))qtyZeng = p.b(0);
+
+            BatRec1 batRec1001 = new BatRec1();
+            batRec1001.setQtyOut(qtyOut.add(qtyZeng));//该对象只更新一个字段
+
+            c.batRec1Mapper.updateByExampleSelective(batRec1001,batRec1Example);
+        }else{
+            String ssss = stra.b()
+                    .a("bat_rec1 里面qty_out数量加上qtyInOut的时候出现异常,有可能匹配不到对应bat_rec1,此时的")
+                    .a("batRec1Day.getBatNo()=").a("《").a(batRec1Day.getBatNo()).a("》")
+                    .a("batRec1Day.getPrdNo()=").a("《").a(batRec1Day.getPrdNo()).a("》")
+                    .a("batRec1Day.getWh()=").a("《").a(batRec1Day.getWh()).a("》")
+                    .g();
+            p.throwE(ssss);
+            l.error(ssss);
+        }
+
+
+
+
+/**
+ *无day的A0003入货
+ * */
+
+
+        BatRec1Example batRec1Example01 = new BatRec1Example();
+        batRec1Example01.createCriteria()
+                .andBatNoEqualTo(batRec1Day.getBatNo())
+                .andPrdNoEqualTo(batRec1Day.getPrdNo())
+                .andWhEqualTo(调拨单入货库位);
+        //正常情况下下面集合只有一个元素
+        List<BatRec1> batRec1s1 = c.batRec1Mapper.selectByExample(batRec1Example01);
+        if (p.notEmpty(batRec1s1)) {//符合条件就更新其in
+            BatRec1 batRec1 = batRec1s1.get(0);
+            BigDecimal qtyIn = batRec1.getQtyIn();
+            if (p.empty(qtyIn)) qtyIn = p.b(0);
+
+//        batRec1= this.make非必要字段为null来避免更新(batRec1);
+//            batRec1 = new MakeColumnNull0False<BatRec1>().f(batRec1);
+//            batRec1.setBatNo(null);
+//            batRec1.setPrdNo(null);
+//            batRec1.setWh(null);
+//            batRec1.setPrdMark(null);
+            BatRec1 batRec11=new BatRec1();
+            batRec11.setQtyIn(qtyIn.add  (   p.empty(tfIc.getQty())? p.b(0) : tfIc.getQty()  )   );
+            c.batRec1Mapper.updateByExampleSelective(batRec11, batRec1Example01);
+        } else {//不存在就插入一条,
+            BatRec1 batRec2 = new BatRec1();
+            batRec2.setWh(调拨单入货库位);
+            batRec2.setPrdNo(batRec1Day.getPrdNo());
+            batRec2.setBatNo(batRec1Day.getBatNo());
+            batRec2.setQtyIn(tfIc.getQty());
+
+            Integer i = c.a002ChaoJieBug002Mapper.insertBatRec1(
+                    batRec1Day.getBatNo(),//bat_no
+                    batRec1Day.getPrdNo(),//prd_no
+                    调拨单入货库位,//wh
+                    String.valueOf(tfIc.getQty())//qtyin
+            );
+
+//            batRec1Mapper.insert(batRec2);
+        }
+
+
+        System.out.println("~~~~~~~~~~~~~~~~TfIc的QTy大于bat_rec1的(qtyin-qtyout),回写batRec1的qtyout=qtyout+tfIC.qty~~~~~~~~~结束 ~~~~~~~~~~~~~~~~~~~~~~~");
+
+
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    @Transactional
+    public void tficQty小的时候搜集TfIc(List<TfIc> listTfIc, TfIc tfIc, Date rk_DD) {
+        System.out.println("~~~~~TfIc的QTy小于bat_rec1_day的(qtyin-qtyout),用集合搜集一个拆过行的最后一个TfIc~~~~~~~~开始~~~~~~~~~~~~~~~·");
+        //将得到的新的tfIc入集合
+        TfIc tfIc001 = new TfIc();
+        BeanUtils.copyProperties(tfIc, tfIc001);//
+        tfIc001.setRkDd(rk_DD);
+//        tfIc001.setQty(qtyInOut);因为比qtyInOut大,所以用自己的
+        listTfIc.add(tfIc001);//使用copy过来的新的对象,避免下次循环的时候该对象变了
+        System.out.println("~~~~~TfIc的QTy小于bat_rec1_day的(qtyin-qtyout),用集合搜集一个拆过行的最后一个TfIc~~~~~~~~结束~~~~~~~~~~~~~~~·");
+
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     @Transactional
     public void 当TfIc的Qty大于bat_rec1_day的Qty拆行收集多个ListTfIc
     (List<TfIc> listTfIc, TfIc tfIc, BigDecimal qtyInOut, Date rkDd) {
