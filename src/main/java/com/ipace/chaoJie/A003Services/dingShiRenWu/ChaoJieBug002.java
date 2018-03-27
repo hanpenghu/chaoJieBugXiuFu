@@ -411,21 +411,21 @@ public class ChaoJieBug002 {
                 .andPrdNoEqualTo(batRec1Day.getPrdNo())
                 .andWhEqualTo(batRec1Day.getWh());
 //                .andPrdMarkEqualTo(batRec1Day.getPrdMark());
-        BatRec1 batRec1001 = new BatRec1();
-        BeanUtils.copyProperties(batRec1Day001, batRec1001);//会把相同的字段复制过去
+
+//        BeanUtils.copyProperties(batRec1Day001, batRec1001);//会把相同的字段复制过去
 
         List<BatRec1> batRec1s = batRec1Mapper.selectByExample(batRec1Example);
-        if (batRec1s.size() > 0) {
+        if (p.notEmpty(batRec1s)) {
             BigDecimal qtyZeng = tfIc.getQty();
             BigDecimal qtyOut = batRec1s.get(0).getQtyOut();
-            if (qtyOut == null) {
-                qtyOut = new BigDecimal(0);
-            }
-            if (qtyZeng == null) {
-                qtyZeng = new BigDecimal(0);
-            }
-            batRec1001.setQtyOut(qtyOut.add(qtyZeng));
-            batRec1Mapper.updateByExampleSelective(batRec1001, batRec1Example);
+            if (p.notEmpty(qtyOut)) qtyOut = p.b(0);
+
+            if (p.notEmpty(qtyZeng))qtyZeng = p.b(0);
+
+            BatRec1 batRec1001 = new BatRec1();
+            batRec1001.setQtyOut(qtyOut.add(qtyZeng));//该对象只更新一个字段
+
+            batRec1Mapper.updateByExampleSelective(batRec1001,batRec1Example);
         }else{
             String ssss = stra.b()
                     .a("bat_rec1 里面qty_out数量加上qtyInOut的时候出现异常,有可能匹配不到对应bat_rec1,此时的")
@@ -602,7 +602,7 @@ public class ChaoJieBug002 {
 
 
         List<BatRec1> batRec1s = batRec1Mapper.selectByExample(batRec1Example);
-        if (batRec1s.size() > 0) {//当存在的时候更新qtyout
+        if (p.notEmpty(batRec1s)) {//当存在的时候更新qtyout
             BigDecimal qtyOut = batRec1s.get(0).getQtyOut();
             if (p.empty(qtyOut))qtyOut = p.b(0);
 
