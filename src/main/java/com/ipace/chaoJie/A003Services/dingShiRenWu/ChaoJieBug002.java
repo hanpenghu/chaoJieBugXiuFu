@@ -37,7 +37,7 @@ public class ChaoJieBug002 {
         long time1 = date1.getTime();
         System.out.println("~~~~~~~~~~~~" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date1) + "~~~~~~~~~~~~超杰借出单转调拨单开始~~~~~~~~~~~~~~~~~~~~~~~~");
         try {
-            this.bln2Ic_jieChuDan2DiaoBoDan();
+            this.bln2Ic_借出单转调拨单();
         } catch (Exception e) {
             e.printStackTrace();
             l.error(e.getMessage(),e);
@@ -50,13 +50,13 @@ public class ChaoJieBug002 {
 
     ///////////////////////////////////////////////////////////////////////////////////////////////
     @Transactional
-    public void bln2Ic_jieChuDan2DiaoBoDan() {
+    public void bln2Ic_借出单转调拨单() {
         List<MfBln> ruKouDeFuHeTiaoJianDeMfBlnList01 =
                 this.getRuKouDeFuHeTiaoJianDeMfBlnList01();
 
 
         List<TfBlnListObjOfSameBlNo> fuHeTiaoJianFenLeiHouDeDeTfBlnList02 =
-                this.getFuHeTiaoJianDeBingGenJuBlNoFenLeiGuoDeTfBlnList02(ruKouDeFuHeTiaoJianDeMfBlnList01);
+                this.get符合条件并根据BlNo分类过的TfBlnList02(ruKouDeFuHeTiaoJianDeMfBlnList01);
 
 
         this.chaRuMfIcAndTfIc(fuHeTiaoJianFenLeiHouDeDeTfBlnList02);
@@ -77,7 +77,7 @@ public class ChaoJieBug002 {
      * 注意  得到了根据bl_no一样   分类后的list集合
      *//*
     @Transactional
-    public List<TfBlnListObjOfSameBlNo> getFuHeTiaoJianDeBingGenJuBlNoFenLeiGuoDeTfBlnList02(List<MfBln> mfBlnList) {
+    public List<TfBlnListObjOfSameBlNo> get符合条件并根据BlNo分类过的TfBlnList02(List<MfBln> mfBlnList) {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~把入口得到的MfBln拿来得到一堆tfBln,并且按Blno相同分类好~~~开始~~~~~~~~~~~~~~~~~~~~~");
         List<TfBlnListObjOfSameBlNo> genJuTfBlnNoFenWanLeiDeList = new ArrayList<>();
         mfBlnList.forEach(mfBln -> {
@@ -161,6 +161,31 @@ public class ChaoJieBug002 {
         tfIc.setUp(tfBln.getUp());
         tfIc.setUpStd(tfBln.getUpStd());
         tfIc.setValidDd(tfBln.getValidDd());
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /**
+         *根据tfIc 的  wh1和货号和批号找到对应的多个bat_rec1_day
+         * ,如果tfIc的qty大于多个bat_rec1_day的qty_out之和,
+         * 那么就没有必要进行这个单子的转单了,因为拆行拆不完
+         * 那么久接着另一个单子拆
+         * */
+
+        List<BatRec1Day> batRec1DayList =
+                c.a002ChaoJieBug002Mapper
+                        .getSamePrdNoBatNoWh_bat_rec1_day(tfIc);
+
+
+        BigDecimal sumQtyOut=p.b(p.n0);
+        for(BatRec1Day batRec1Day:batRec1DayList){
+            sumQtyOut=sumQtyOut.add(p.bNull0(batRec1Day.getQtyOut()));
+        }
+
+
+        //此时拆行拆不完,不在进行下面步骤处理该单子,  继续处理下一个单子
+        if(p.isFirstBigBigdecimal(tfIc.getQty(),sumQtyOut))return;
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
         //入库日期要拆行
 //        tfIc.setRkDd(tfBln.getRkDd());

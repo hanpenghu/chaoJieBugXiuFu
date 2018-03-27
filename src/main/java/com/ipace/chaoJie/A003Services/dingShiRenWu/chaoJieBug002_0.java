@@ -34,7 +34,7 @@ private  org.apache.log4j.Logger l = org.apache.log4j.LogManager.getLogger(this.
         long time1 = date1.getTime();
         System.out.println("~~~~~~~~~~~~" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date1) + "~~~~~~~~~~~~超杰借出单转调拨单开始~~~~~~~~~~~~~~~~~~~~~~~~");
         try {
-            this.bln2Ic_jieChuDan2DiaoBoDan();
+            this.bln2Ic_借出单转调拨单();
         } catch (Exception e) {
             e.printStackTrace();
             l.error(e.getMessage(),e);
@@ -47,16 +47,16 @@ private  org.apache.log4j.Logger l = org.apache.log4j.LogManager.getLogger(this.
 
     ///////////////////////////////////////////////////////////////////////////////////////////////
 //    @Transactional
-    public void bln2Ic_jieChuDan2DiaoBoDan() {
-        List<MfBln> ruKouDeFuHeTiaoJianDeMfBlnList01 =
+    public void bln2Ic_借出单转调拨单() {
+        List<MfBln> 入口的符合条件的MfBlnList01 =
                 this.getRuKouDeFuHeTiaoJianDeMfBlnList01();
 
 
-        List<TfBlnListObjOfSameBlNo> fuHeTiaoJianFenLeiHouDeDeTfBlnList02 =
-                this.getFuHeTiaoJianDeBingGenJuBlNoFenLeiGuoDeTfBlnList02(ruKouDeFuHeTiaoJianDeMfBlnList01);
+        List<TfBlnListObjOfSameBlNo> 符合条件分类后的TfBlnList02 =
+                this.get符合条件并根据BlNo分类过的TfBlnList02(入口的符合条件的MfBlnList01);
 
 
-        this.chaRuMfIcAndTfIc(fuHeTiaoJianFenLeiHouDeDeTfBlnList02);
+        this.chaRuMfIcAndTfIc(符合条件分类后的TfBlnList02);
     }
 
 
@@ -108,7 +108,7 @@ private  org.apache.log4j.Logger l = org.apache.log4j.LogManager.getLogger(this.
      * 注意  得到了根据bl_no一样   分类后的list集合
      */
 //    @Transactional
-    public List<TfBlnListObjOfSameBlNo> getFuHeTiaoJianDeBingGenJuBlNoFenLeiGuoDeTfBlnList02(List<MfBln> mfBlnList) {
+    public List<TfBlnListObjOfSameBlNo> get符合条件并根据BlNo分类过的TfBlnList02(List<MfBln> mfBlnList) {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~把入口得到的MfBln拿来得到一堆tfBln,并且按Blno相同分类好~~~开始~~~~~~~~~~~~~~~~~~~~~");
         List<TfBlnListObjOfSameBlNo> genJuTfBlnNoFenWanLeiDeList = new ArrayList<>();
         mfBlnList.forEach(mfBln -> {
