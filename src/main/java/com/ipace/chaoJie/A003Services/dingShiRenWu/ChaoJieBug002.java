@@ -61,6 +61,7 @@ public class ChaoJieBug002 {
         } catch (Exception e) {
             e.printStackTrace();
             l.error(e.getMessage(),e);
+            p.throwE(e);
         }
         Date date2 = new Date();
         long time2 = date2.getTime();
@@ -233,8 +234,9 @@ public class ChaoJieBug002 {
 //                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~实验删掉了分开加as的浪费~~~~~~~~~~~~~~~~~~~~~~~~");
 
                 //得到batRec1Day里面qtyin-qtyout
-                BigDecimal qtyInOut = (batRec1Day.getQtyIn()==null?new BigDecimal(0):batRec1Day.getQtyIn())
-                        .subtract(batRec1Day.getQtyOut() == null ? new BigDecimal(0) : batRec1Day.getQtyOut());
+                BigDecimal qtyInOut =
+                        (batRec1Day.getQtyIn()==null?p.b(0):batRec1Day.getQtyIn())
+                        .subtract(batRec1Day.getQtyOut() == null ? p.b(0): batRec1Day.getQtyOut());
                 //得到调拨单表身的tfic的qty
                 BigDecimal tfIcQty = tfIc.getQty();
                 //如果调拨单表身的qty大于batRec1Day里面的qtyinout的话
