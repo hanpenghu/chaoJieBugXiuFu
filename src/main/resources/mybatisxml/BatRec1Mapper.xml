@@ -690,7 +690,7 @@
       <if test="record.qtyT3 != null" >
         QTY_T3 = #{record.qtyT3,jdbcType=NUMERIC},
       </if>
-      <if test="qtyT3 ==null" >
+      <if test="record.qtyT3 == null" >
         QTY_T3 = QTY_T3,
       </if>
       <if test="record.upDd != null" >
