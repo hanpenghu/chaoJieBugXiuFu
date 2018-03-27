@@ -279,7 +279,7 @@
                 ,
                 PRD_MARK--
                 ,
-                BAT_NO --AS 'batNo'--
+                BAT_NO --AS 'batNo' --
                 ,
                 PRD_NO --AS 'prdNo'--
                 ,
