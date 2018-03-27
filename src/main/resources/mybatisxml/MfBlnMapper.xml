@@ -1300,6 +1300,9 @@
       <if test="record.rem != null" >
         REM = #{record.rem,jdbcType=LONGVARCHAR},
       </if>
+      <if test="record.rem == null" >
+        REM = REM,
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -1851,6 +1854,9 @@
       </if>
       <if test="rem != null" >
         REM = #{rem,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="rem == null" >
+        REM = REM,
       </if>
     </set>
     where BL_ID = #{blId,jdbcType=VARCHAR}

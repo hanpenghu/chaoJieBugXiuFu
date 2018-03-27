@@ -1324,6 +1324,9 @@
       <if test="record.lstInd2 != null">
         LST_IND2 = #{record.lstInd2,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.lstInd2 == null">
+        LST_IND2 = LST_IND2,
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -1776,6 +1779,9 @@
       </if>
       <if test="lstInd2 != null">
         LST_IND2 = #{lstInd2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lstInd2 == null">
+        LST_IND2 = LST_IND2,
       </if>
     </set>
     where IC_ID = #{icId,jdbcType=VARCHAR}

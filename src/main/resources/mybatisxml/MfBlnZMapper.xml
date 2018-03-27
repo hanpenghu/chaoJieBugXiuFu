@@ -148,6 +148,9 @@
       <if test="record.csdb != null" >
         CSDB = #{record.csdb,jdbcType=CHAR},
       </if>
+      <if test="record.csdb == null" >
+        CSDB = CSDB,
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -167,6 +170,9 @@
     <set >
       <if test="csdb != null" >
         CSDB = #{csdb,jdbcType=CHAR},
+      </if>
+      <if test="csdb == null" >
+        CSDB = CSDB,
       </if>
     </set>
     where BL_ID = #{blId,jdbcType=VARCHAR}

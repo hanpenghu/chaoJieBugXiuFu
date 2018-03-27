@@ -133,7 +133,7 @@ public class ChaoJieBug002 {
                     p.p("-------------------------------------------------------");
                     p.p("有可能是mfIc不能插入相同的单号了");
                     p.p("-------------------------------------------------------");
-                    p.throwE(e.getMessage());
+
                 }
                 for (TfBln tfBln : sameTfBlnNoList) {//插入多条数据到tf_IC
                     this.tfBlnToTfIcInsert(tfBln);
@@ -558,7 +558,8 @@ public class ChaoJieBug002 {
 //            .andPrdMarkEqualTo(batRec1Day.getPrdMark())
 //            .andDepEqualTo(batRec1Day.getDep());
 
-        List<BatRec1Day> A003库位对应的BatRec1DayList其实应该只有一个 = batRec1DayMapper.selectByExample(batRec1DayExampleA003);
+        List<BatRec1Day> A003库位对应的BatRec1DayList其实应该只有一个 =
+                batRec1DayMapper.selectByExample(batRec1DayExampleA003);
 
         if (p.notEmpty(A003库位对应的BatRec1DayList其实应该只有一个)) {//非空就更新qty
             BatRec1Day batRec1DayA003 = A003库位对应的BatRec1DayList其实应该只有一个.get(0);
@@ -594,26 +595,26 @@ public class ChaoJieBug002 {
                 .andWhEqualTo(batRec1Day.getWh());
 //             .andPrdMarkEqualTo(batRec1Day.getPrdMark());
 
-        BatRec1 batRec1001 = new BatRec1();
-        BeanUtils.copyProperties(batRec1Day001, batRec1001);//会把相同的字段复制过去
-        batRec1001.setQtyIn(null);//不更新这个,主要是更新qtyout,该qtyout属于累加型号
-        batRec1001.setQtyOut(null);//清空值,给下面用
+
+//        BeanUtils.copyProperties(batRec1Day001, batRec1001);//会把相同的字段复制过去
+//        batRec1001.setQtyIn(null);//不更新这个,主要是更新qtyout,该qtyout属于累加型号
+//        batRec1001.setQtyOut(null);//清空值,给下面用
 
 
         List<BatRec1> batRec1s = batRec1Mapper.selectByExample(batRec1Example);
         if (batRec1s.size() > 0) {//当存在的时候更新qtyout
             BigDecimal qtyOut = batRec1s.get(0).getQtyOut();
-            if (qtyOut == null) {
-                qtyOut = new BigDecimal(0);
-            }
-            if (qtyInOut == null) {
-                qtyInOut = new BigDecimal(0);
-            }
-            BigDecimal qtyOut1 = batRec1Day.getQtyOut();
-            if (qtyOut1 == null) {
-                qtyOut1 = new BigDecimal(0);
-            }
-            batRec1001.setQtyOut(qtyOut1.add(qtyInOut));
+            if (p.empty(qtyOut))qtyOut = p.b(0);
+
+            if (p.empty(qtyInOut))qtyInOut = p.b(0);
+//            BigDecimal qtyOut1 = batRec1Day.getQtyOut();
+//            if (qtyOut1 == null) {
+//                qtyOut1 = new BigDecimal(0);
+//            }
+//            batRec1001.setQtyOut(qtyOut1.add(qtyInOut));
+            BatRec1 batRec1001 = new BatRec1();
+            batRec1001.setQtyOut(qtyOut.add(qtyInOut));//只更新这一个字段
+
             batRec1Mapper.updateByExampleSelective(batRec1001, batRec1Example);
         }else{
             String ssss = stra.b()
