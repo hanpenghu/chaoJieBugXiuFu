@@ -9,12 +9,10 @@ import com.ipace.chaoJie.utils.NotEmpty;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,7 +29,7 @@ public class ChaoJieBug002 {
     @Autowired
     private C c;
 
-
+/*
     @Scheduled(fixedDelay = 2 * 60 * 1000)
     @Transactional
     public void f() {
@@ -55,8 +53,12 @@ public class ChaoJieBug002 {
     public void bln2Ic_jieChuDan2DiaoBoDan() {
         List<MfBln> ruKouDeFuHeTiaoJianDeMfBlnList01 =
                 this.getRuKouDeFuHeTiaoJianDeMfBlnList01();
+
+
         List<TfBlnListObjOfSameBlNo> fuHeTiaoJianFenLeiHouDeDeTfBlnList02 =
                 this.getFuHeTiaoJianDeBingGenJuBlNoFenLeiGuoDeTfBlnList02(ruKouDeFuHeTiaoJianDeMfBlnList01);
+
+
         this.chaRuMfIcAndTfIc(fuHeTiaoJianFenLeiHouDeDeTfBlnList02);
     }
 
@@ -71,9 +73,9 @@ public class ChaoJieBug002 {
     }
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
-    /**
+    *//**
      * 注意  得到了根据bl_no一样   分类后的list集合
-     */
+     *//*
     @Transactional
     public List<TfBlnListObjOfSameBlNo> getFuHeTiaoJianDeBingGenJuBlNoFenLeiGuoDeTfBlnList02(List<MfBln> mfBlnList) {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~把入口得到的MfBln拿来得到一堆tfBln,并且按Blno相同分类好~~~开始~~~~~~~~~~~~~~~~~~~~~");
@@ -97,10 +99,10 @@ public class ChaoJieBug002 {
         p.p("-------------------------------------------------------");
 
         return genJuTfBlnNoFenWanLeiDeList;
-    }
+    }*/
 
     //////////////////////////////是开始产生调拨单//////////////////////////////////////////////////////////////////
-    @Transactional
+   /* @Transactional
     public void chaRuMfIcAndTfIc(List<TfBlnListObjOfSameBlNo> genJuTfBlnNoFenWanLeiDeList) {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~循环得到的一堆的mfblen和tfbln(分类好的)并变化插入到mfIC和tfIC~~~开始~~~~~~~~~~~~~~~~~~~~~");
         for (TfBlnListObjOfSameBlNo tfBlnListObjOfSameBlNo : genJuTfBlnNoFenWanLeiDeList) {
@@ -124,7 +126,7 @@ public class ChaoJieBug002 {
             }
         }
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~循环得到的一堆的mfblen和tfbln(分类好的)并变化插入到mfIC和tfIC~~~结束~~~~~~~~~~~~~~~~~~~~~");
-    }
+    }*/
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Transactional
@@ -176,6 +178,16 @@ public class ChaoJieBug002 {
 
                 c.tfIcMapper.insert(tfIc1);
             });
+        }else{
+            //手动抛出异常
+            //抛出异常,让程序回滚,因为前面可能已经将bat_rec1_day 或者bat_rec1动了库存了
+            String sssss=stra.b()
+                    .a("tfIc拆行,根据bat_rec1_day")
+                    .a("里面的多个wh库存拆行一直无法拆完,")
+                    .a("此时为了前面写到bat_rec1_day里面的数据能够回滚")
+                    .a(",专门在这里抛出异常,让所有的数据都无法转单").g();
+            l.error(sssss);
+            p.throwE(sssss);
         }
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~变化tfbln为tfic并插入数据库~~~结束~~~~~~~~~~~~~~~~~~~~~");
     }
@@ -253,7 +265,8 @@ public class ChaoJieBug002 {
                     //此时用tfIcQty自己的数量
                     this.tficQty小的时候搜集TfIc(listTfIc, tfIc, batRec1Day.getRkDd());//这个小于的可以用于等于
                     //数据库里面表bat_rec1_day 和表bat_rec1的qtyout回写成qtyin一样的
-                    this.当TfIc的Qty大于bat_rec1_day的Qty_回写_bat_rec1_day和bat_rec1(batRec1Day, qtyInOut);//这个大于的可以用于等于
+                    this.当TfIc的Qty大于bat_rec1_day的Qty_回写_bat_rec1_day和bat_rec1
+                            (batRec1Day, qtyInOut);//这个大于的可以用于等于
                     return listTfIc;
                 }
 
@@ -465,7 +478,8 @@ public class ChaoJieBug002 {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Transactional
-    public  void 当TfIc的Qty小于bat_rec1_day的qty_回写_bat_rec1_day和bat_rec1(BatRec1Day batRec1Day, TfIc tfIc) {
+    public  void 当TfIc的Qty小于bat_rec1_day的qty_回写_bat_rec1_day和bat_rec1
+            (BatRec1Day batRec1Day, TfIc tfIc) {
 //        String batNo = batRec1Day.getBatNo();
 //        String prdNo = batRec1Day.getPrdNo();
 //        String wh = batRec1Day.getWh();
@@ -721,7 +735,7 @@ public class ChaoJieBug002 {
 /////////////////////////////////////////////////
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
-    @Transactional
+  /*  @Transactional
     public class TfBlnListObjOfSameBlNo {
         List<TfBln> sameTfBlnNoList = new ArrayList<>();
 
@@ -734,7 +748,7 @@ public class ChaoJieBug002 {
             return this;
         }
     }
-
+*/
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
 //    public static void main(String[] args) {
@@ -764,7 +778,7 @@ public class ChaoJieBug002 {
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    private BatRec1Day Make没有用的字段为null(BatRec1Day batRec1DayA003) {
+    /*private BatRec1Day Make没有用的字段为null(BatRec1Day batRec1DayA003) {
 //        private BigDecimal qtyIn;
 //         batRec1DayA003.setQtyIn(null);
 //         private BigDecimal qtyInUnsh;
@@ -804,7 +818,7 @@ public class ChaoJieBug002 {
 //         private Date rkDd;
         batRec1DayA003.setRkDd(null);
         return batRec1DayA003;
-    }
+    }*/
 
 
 //    private BatRec1 make非必要字段为null来避免更新(BatRec1 batRec1) {

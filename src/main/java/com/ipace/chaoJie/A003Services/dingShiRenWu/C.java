@@ -11,6 +11,9 @@ import org.springframework.stereotype.Component;
 public class C {
 
     @Autowired
+    public ChaoJieBug002 chaoJieBug002;
+
+    @Autowired
     public MfIcMapper mfIcMapper;
 
     @Autowired
