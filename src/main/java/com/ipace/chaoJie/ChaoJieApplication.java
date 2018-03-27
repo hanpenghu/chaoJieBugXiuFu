@@ -4,7 +4,13 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+
+
+
+
+@EnableTransactionManagement
 @EnableScheduling//使用定时任务
 @MapperScan(ICnst.daoP)//扫描mybatis  dao层
 @SpringBootApplication//开启所有基础配置
