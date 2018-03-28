@@ -174,14 +174,19 @@ public class ChaoJieBug002 {
                         .getSamePrdNoBatNoWh_bat_rec1_day(tfIc);
 
 
-        BigDecimal sumQtyOut=p.b(p.n0);
+        BigDecimal sumQtyInOut=p.b(p.n0);
         for(BatRec1Day batRec1Day:batRec1DayList){
-            sumQtyOut=sumQtyOut.add(p.bNull0(batRec1Day.getQtyOut()));
+            sumQtyInOut=sumQtyInOut.add(
+                    p.b1_b2(
+                            p.bNull0(batRec1Day.getQtyIn())
+                            ,p.bNull0(batRec1Day.getQtyOut())
+                    )
+            );
         }
 
 
         //此时拆行拆不完,不在进行下面步骤处理该单子,  继续处理下一个单子
-        if(p.isFirstBigBigdecimal(tfIc.getQty(),sumQtyOut))return;
+        if(p.isFirstBigBigdecimal(tfIc.getQty(),sumQtyInOut))return;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

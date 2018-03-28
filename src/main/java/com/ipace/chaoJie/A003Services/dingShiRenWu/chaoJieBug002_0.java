@@ -73,12 +73,13 @@ private  org.apache.log4j.Logger l = org.apache.log4j.LogManager.getLogger(this.
                     String blNo = sameTfBlnNoList.get(0).getBlNo();//该数组里面存的都是blNo一样的TfBlNo
                     MfBln mfBln = c.chaoJieBug002.getMfBlnListUseBlNo(blNo);
                     try {
+                        //这个try会导致可能只有表头没有表身,因为表身回滚了,表头没有回滚
                         //这里用try是因为避免下次再插入的时候产生问题,因为表头mf只能插入一次
                         c.chaoJieBug002.mfBlnToMfIcInsert(mfBln);//插入一条数据到Mf_Ic
                     } catch (Exception e) {
     //                    e.printStackTrace();
                         p.p("-------------------------------------------------------");
-                        p.p("有可能是mfIc不能插入相同的单号了");
+                        p.p("有可能是mfIc不能插入相同的单号了,但是表头确实只插入一次就行了");
                         p.p("-------------------------------------------------------");
 
                     }
