@@ -27,7 +27,8 @@ private  org.apache.log4j.Logger l = org.apache.log4j.LogManager.getLogger(this.
     private C c;
 
 
-    @Scheduled(fixedDelay = 2 * 60 * 1000)
+//    @Scheduled(fixedDelay = 2 * 60 * 1000)//超杰
+    @Scheduled(fixedDelay = 1 * 60 * 1000,initialDelay = 4000)
 //    @Transactional
     public void f() {
         Date date1 = new Date();
